@@ -1,7 +1,7 @@
 services:
   api:
-    container_name: turbo-server
-    image: khizer30/turbo-server:latest
+    container_name: sharkscale-server
+    image: khizer30/sharkscale-server:latest
     build:
       context: .
       dockerfile: Dockerfile
