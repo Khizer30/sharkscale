@@ -38,6 +38,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
+      id="home"
       className={cn("relative flex min-h-screen w-full items-center justify-center overflow-hidden", "bg-tertiary text-tertiary-foreground")}
     >
       <div className="relative mx-auto flex w-full max-w-7xl items-center justify-center px-6">
