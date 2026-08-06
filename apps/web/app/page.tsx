@@ -1,5 +1,5 @@
-"use client";
+import Hero from "@features/landing/components/Hero";
 
 export default function Home() {
-  return <h1> Hello World </h1>;
+  return <Hero />;
 }
