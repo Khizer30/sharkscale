@@ -54,7 +54,10 @@ export default function Hero() {
         </video>
 
         <div className="relative z-10 flex max-w-4xl flex-col items-center gap-6 text-center">
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl lg:text-7xl">Turning emails into revenue</h1>
+          <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl lg:text-7xl">
+            Turning emails into{" "}
+            <span className="bg-gradient-to-r from-amber-600 via-yellow-300 to-amber-200 bg-clip-text text-transparent">revenue</span>
+          </h1>
 
           <p className="max-w-2xl text-base text-tertiary-foreground/80 sm:text-lg">
             We create high-converting Klaviyo campaigns that engage, retain, and scale your brand. From strategy to execution, SharkScale helps your emails make

@@ -27,7 +27,7 @@ export default function Navbar() {
       >
         <div className="grid w-full grid-cols-[auto_1fr_auto] items-center gap-6 px-6 py-3">
           <Link href={homeHref} className="flex items-center">
-            <Image src={logo} alt="SharkScale" priority draggable={false} className="h-16 w-auto" />
+            <Image src={logo} alt="SharkScale" priority draggable={false} className="h-28 w-auto" />
           </Link>
 
           <ul className="hidden items-center justify-center gap-8 lg:flex">
