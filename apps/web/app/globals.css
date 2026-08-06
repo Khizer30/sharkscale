@@ -134,3 +134,14 @@
     @apply font-sans;
   }
 }
+
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+html.custom-cursor-active,
+html.custom-cursor-active * {
+  cursor: none !important;
+}

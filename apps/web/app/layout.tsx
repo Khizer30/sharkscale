@@ -1,3 +1,4 @@
+import CustomCursor from "@shared/components/ui/CustomCursor";
 import I18nProvider from "@shared/providers/I18nProvider";
 import QueryProvider from "@shared/providers/QueryClientProvider";
 import ThemeProvider from "@shared/providers/ThemeProvider";
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: Children) {
           <I18nProvider>
             <QueryProvider>
               {children}
+              <CustomCursor />
               <ToastProvider position="top-right" />
             </QueryProvider>
           </I18nProvider>
