@@ -2,6 +2,7 @@ import I18nProvider from "@shared/providers/I18nProvider";
 import QueryProvider from "@shared/providers/QueryClientProvider";
 import ThemeProvider from "@shared/providers/ThemeProvider";
 import ToastProvider from "@shared/providers/ToastProvider";
+import "@fontsource-variable/inter/wght.css";
 import type { Children } from "@shared/types/children.types";
 import type { Metadata } from "next";
 import "./globals.css";

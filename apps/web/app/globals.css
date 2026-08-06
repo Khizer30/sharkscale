@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "Arial", sans-serif;
-  --font-heading: "Arial", sans-serif;
+  --font-sans: "Inter Variable", sans-serif;
+  --font-heading: "Inter Variable", sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -34,6 +34,8 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-tertiary-foreground: var(--tertiary-foreground);
+  --color-tertiary: var(--tertiary);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -54,10 +56,12 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
+  --primary: #170149;
+  --primary-foreground: #ffffff;
+  --secondary: #ffd21f;
+  --secondary-foreground: #170149;
+  --tertiary: #12003a;
+  --tertiary-foreground: #ffffff;
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
@@ -89,10 +93,12 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
+  --primary: #170149;
+  --primary-foreground: #ffffff;
+  --secondary: #ffd21f;
+  --secondary-foreground: #170149;
+  --tertiary: #12003a;
+  --tertiary-foreground: #ffffff;
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
   --accent: oklch(0.269 0 0);
@@ -122,6 +128,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "Inter Variable", sans-serif;
   }
   html {
     @apply font-sans;
