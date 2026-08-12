@@ -1,5 +1,5 @@
 import Hero from "@features/landing/components/Hero";
-import ServicesShowcase from "@features/landing/components/ServicesShowcase";
+import ServicesShowcaseLazy from "@features/landing/components/ServicesShowcaseLazy";
 import FooterLazy from "@shared/components/layout/FooterLazy";
 import Navbar from "@shared/components/layout/Navbar";
 
@@ -8,7 +8,7 @@ export default function Home() {
     <main className="relative">
       <Navbar />
       <Hero />
-      <ServicesShowcase />
+      <ServicesShowcaseLazy />
       <FooterLazy />
     </main>
   );
