@@ -1,246 +1,247 @@
 "use client";
-
-import { cn } from "@shared/lib/utils";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+const CREAM = "#f5f0e8";
+const WHITE = "#ffffff";
 
 const services = [
   {
     id: "01",
+    tag: "#service_01",
     eyebrow: "Strategy",
     title: "Email Strategy",
     description: "We design data-driven campaigns that maximize opens, clicks, and sales.",
-    accent: "Campaign architecture, audience targeting, testing roadmap"
+    bg: "radial-gradient(ellipse 120% 90% at 70% 110%, #ffd21f28 0%, transparent 55%), linear-gradient(160deg, #0d0030 0%, #1e0060 45%, #170149 100%)",
+    accent: "#ffd21f"
   },
   {
     id: "02",
+    tag: "#service_02",
     eyebrow: "Creative",
     title: "Content Creation",
     description: "Compelling copy and visuals that resonate with your audience and drive action.",
-    accent: "Brand voice, persuasive messaging, high-converting creative"
+    bg: "radial-gradient(ellipse 100% 80% at 20% 80%, #00e5ff20 0%, transparent 50%), linear-gradient(150deg, #020010 0%, #06003a 40%, #100050 100%)",
+    accent: "#00e5ff"
   },
   {
     id: "03",
+    tag: "#service_03",
     eyebrow: "Design",
     title: "Design & Templates",
     description: "Beautiful, on-brand email templates optimized for Klaviyo and conversions.",
-    accent: "Responsive layouts, modular sections, polished brand systems"
+    bg: "radial-gradient(ellipse 110% 80% at 80% 20%, #ffd21f22 0%, transparent 50%), linear-gradient(145deg, #170149 0%, #38008a 55%, #1a0060 100%)",
+    accent: "#ffd21f"
   },
   {
     id: "04",
+    tag: "#service_04",
     eyebrow: "Retention",
     title: "Automation & Flows",
     description: "Smart workflows that nurture leads, recover carts, and boost lifetime value.",
-    accent: "Lifecycle journeys, triggered sequences, revenue recovery"
+    bg: "radial-gradient(ellipse 100% 90% at 30% 90%, #a78bfa25 0%, transparent 55%), linear-gradient(155deg, #05001a 0%, #170149 50%, #2a0070 100%)",
+    accent: "#a78bfa"
   }
 ] as const;
 
-gsap.registerPlugin(ScrollTrigger);
+type Service = (typeof services)[number];
 
-export default function ServicesShowcase() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
-  const progressFillRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const activeService = services[activeIndex] ?? services[0];
-  const serviceCount = services.length;
-  const progressLabel = useMemo(() => `${String(activeIndex + 1).padStart(2, "0")}/${String(serviceCount).padStart(2, "0")}`, [activeIndex, serviceCount]);
+function ServiceSlide({ service, index }: { service: Service; index: number }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const panel = panelRef.current;
-    const progressFill = progressFillRef.current;
-    const cards = cardRefs.current.filter(Boolean) as HTMLButtonElement[];
-
-    if (!section || !panel || !progressFill || cards.length === 0) {
+    const container = containerRef.current;
+    const bg = bgRef.current;
+    if (!container || !bg) {
       return;
     }
 
-    const ctx = gsap.context(() => {
-      gsap.set(panel, { yPercent: 35, opacity: 0.45, scale: 0.94 });
-      gsap.set(progressFill, { scaleY: 0.25, transformOrigin: "top center" });
+    const trigger = ScrollTrigger.create({
+      trigger: container,
+      start: "top bottom",
+      end: "bottom top",
+      onUpdate: (self) => {
+        gsap.set(bg, { yPercent: self.progress * 12 });
+      }
+    });
 
-      cards.forEach((card, index) => {
-        gsap.set(card, {
-          opacity: index === 0 ? 1 : 0.38,
-          y: index === 0 ? 0 : 24
-        });
-      });
-
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "+=2400",
-          pin: true,
-          scrub: 0.6
-        }
-      });
-
-      timeline.to(panel, { yPercent: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" });
-
-      services.forEach((_, index) => {
-        const stepStart = 0.85 + index * 0.7;
-
-        timeline.call(
-          () => {
-            setActiveIndex(index);
-          },
-          undefined,
-          stepStart
-        );
-
-        timeline.to(
-          progressFill,
-          {
-            scaleY: (index + 1) / serviceCount,
-            duration: 0.3,
-            ease: "power2.out"
-          },
-          stepStart
-        );
-
-        cards.forEach((card, cardIndex) => {
-          timeline.to(
-            card,
-            {
-              opacity: cardIndex === index ? 1 : 0.38,
-              y: cardIndex === index ? 0 : 24,
-              duration: 0.3,
-              ease: "power2.out"
-            },
-            stepStart
-          );
-        });
-      });
-    }, section);
-
-    return () => {
-      ctx.revert();
-    };
-  }, [serviceCount]);
+    return () => trigger.kill();
+  }, []);
 
   return (
-    <section ref={sectionRef} id="services" className="relative overflow-hidden bg-tertiary px-6 py-24 text-tertiary-foreground sm:px-8 lg:px-12">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,210,31,0.18),_transparent_30%),linear-gradient(180deg,_rgba(255,255,255,0.04),_rgba(255,255,255,0))]" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-black/30 to-transparent" />
+    <div
+      ref={containerRef}
+      style={{
+        position: "sticky",
+        top: index * 24,
+        height: "100vh",
+        overflow: "hidden",
+        clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)"
+      }}
+    >
+      <div
+        ref={bgRef}
+        style={{
+          position: "absolute",
+          top: "-10%",
+          left: 0,
+          width: "100%",
+          height: "120%",
+          background: service.bg,
+          zIndex: 0
+        }}
+      />
 
-      <div className="relative mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col justify-center gap-16">
-        <div className="max-w-3xl space-y-6">
-          <span className="inline-flex rounded-full border border-white/12 bg-white/6 px-4 py-1 text-xs font-semibold tracking-[0.28em] uppercase text-white/72">
-            How can we help?
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse 80% 60% at 60% 40%, " + service.accent + "18 0%, transparent 65%)",
+          zIndex: 1,
+          pointerEvents: "none"
+        }}
+      />
+
+      <div
+        style={{
+          position: "relative",
+          zIndex: 2,
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          padding: "clamp(2rem, 5vw, 5rem)",
+          paddingBottom: "clamp(3rem, 6vw, 6rem)"
+        }}
+      >
+        <span
+          style={{
+            position: "absolute",
+            top: "clamp(2rem, 4vw, 3.5rem)",
+            left: "clamp(2rem, 5vw, 5rem)",
+            fontFamily: "Inter Variable, sans-serif",
+            fontSize: "0.78rem",
+            fontWeight: 600,
+            letterSpacing: "0.18em",
+            color: CREAM + "50",
+            textTransform: "uppercase"
+          }}
+        >
+          {service.tag}
+        </span>
+
+        <span
+          style={{
+            position: "absolute",
+            top: "clamp(2rem, 4vw, 3.5rem)",
+            right: "clamp(2rem, 5vw, 5rem)",
+            fontFamily: "Inter Variable, sans-serif",
+            fontSize: "0.78rem",
+            fontWeight: 600,
+            letterSpacing: "0.18em",
+            color: CREAM + "35",
+            textTransform: "uppercase"
+          }}
+        >
+          {service.id} / {String(services.length).padStart(2, "0")}
+        </span>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: "56rem" }}>
+          <span
+            style={{
+              display: "inline-flex",
+              padding: "0.3rem 0.9rem",
+              borderRadius: "9999px",
+              border: "1px solid " + service.accent + "35",
+              background: service.accent + "12",
+              fontFamily: "Inter Variable, sans-serif",
+              fontSize: "0.72rem",
+              fontWeight: 700,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: service.accent,
+              width: "fit-content"
+            }}
+          >
+            {service.eyebrow}
           </span>
 
-          <div className="space-y-4">
-            <h2 className="max-w-5xl text-5xl font-semibold tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl">
-              Services that rise into focus as your visitors scroll.
-            </h2>
-            <p className="max-w-2xl text-base leading-7 text-white/72 sm:text-lg">
-              From strategy to execution, we craft digital solutions that move your business forward.
+          <h2
+            style={{
+              fontFamily: "Inter Variable, sans-serif",
+              fontWeight: 800,
+              fontSize: "clamp(3rem, 9vw, 8rem)",
+              lineHeight: 0.9,
+              letterSpacing: "-0.04em",
+              color: WHITE,
+              margin: 0
+            }}
+          >
+            {service.title}
+          </h2>
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+              gap: "2rem",
+              flexWrap: "wrap"
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "Inter Variable, sans-serif",
+                fontSize: "clamp(0.9rem, 1.4vw, 1.15rem)",
+                lineHeight: 1.7,
+                color: CREAM + "70",
+                maxWidth: "36rem",
+                margin: 0
+              }}
+            >
+              {service.description}
             </p>
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
 
-        <div
-          ref={panelRef}
-          className={cn(
-            "relative grid gap-8 overflow-hidden rounded-[2rem] border border-white/10 bg-white/8 p-6 shadow-[0_40px_140px_rgba(0,0,0,0.42)] backdrop-blur-xl",
-            "lg:grid-cols-[120px_minmax(0,1.25fr)_minmax(320px,0.95fr)] lg:items-center lg:p-10"
-          )}
-        >
-          <div className="flex items-center gap-4 lg:flex-col lg:items-start lg:justify-between lg:self-stretch">
-            <span className="text-sm font-semibold tracking-[0.2em] text-white/60 uppercase">#service_{activeService.id}</span>
-            <div className="flex items-center gap-3 lg:flex-col lg:items-start">
-              <div className="relative h-20 w-1 overflow-hidden rounded-full bg-white/10 lg:h-36">
-                <div ref={progressFillRef} className="absolute inset-x-0 top-0 h-full rounded-full bg-secondary" />
-              </div>
-              <span className="text-sm font-medium text-white/60">{progressLabel}</span>
-            </div>
-          </div>
+export default function ServicesShowcase() {
+  return (
+    <section id="services" style={{ background: "#08001e" }}>
+      <h1
+        style={{
+          position: "sticky",
+          top: 10,
+          zIndex: 10,
+          fontFamily: "Inter Variable, sans-serif",
+          fontWeight: 800,
+          fontSize: "clamp(4rem, 14vw, 13rem)",
+          lineHeight: 1,
+          letterSpacing: "-0.04em",
+          textAlign: "center",
+          textTransform: "uppercase",
+          color: WHITE,
+          margin: 0,
+          padding: "clamp(1.5rem, 3vw, 2.5rem) 0",
+          pointerEvents: "none"
+        }}
+      >
+        Services
+      </h1>
 
-          <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(135deg,rgba(255,210,31,0.16),rgba(255,255,255,0.04)_36%,rgba(23,1,73,0.55)_100%)] p-6 sm:p-8 lg:min-h-[30rem]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,210,31,0.3),_transparent_30%),radial-gradient(circle_at_bottom_left,_rgba(255,255,255,0.14),_transparent_28%)]" />
-            <div className="relative flex h-full flex-col justify-between gap-10">
-              <div className="space-y-4">
-                <span className="inline-flex rounded-full border border-secondary/25 bg-secondary/12 px-3 py-1 text-xs font-semibold tracking-[0.2em] uppercase text-secondary">
-                  {activeService.eyebrow}
-                </span>
-                <div className="space-y-4">
-                  <h3 className="text-4xl font-semibold tracking-[-0.04em] text-white sm:text-5xl">{activeService.title}</h3>
-                  <p className="max-w-xl text-base leading-7 text-white/78 sm:text-lg">{activeService.description}</p>
-                </div>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-3xl border border-white/10 bg-black/18 p-5">
-                  <span className="text-xs font-semibold tracking-[0.2em] uppercase text-white/52">Focus</span>
-                  <p className="mt-3 text-lg font-medium text-white">{activeService.accent}</p>
-                </div>
-                <div className="rounded-3xl border border-white/10 bg-white/8 p-5">
-                  <span className="text-xs font-semibold tracking-[0.2em] uppercase text-white/52">Outcome</span>
-                  <p className="mt-3 text-lg font-medium text-white">Clearer campaigns, stronger retention, and more revenue from every send.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            {services.map((service, index) => {
-              const isActive = index === activeIndex;
-
-              return (
-                <button
-                  key={service.id}
-                  type="button"
-                  ref={(element) => {
-                    cardRefs.current[index] = element;
-                  }}
-                  onClick={() => setActiveIndex(index)}
-                  className={cn(
-                    "group rounded-[1.5rem] border p-5 text-left transition-all duration-300",
-                    isActive
-                      ? "border-secondary/45 bg-white/12 shadow-[0_20px_60px_rgba(0,0,0,0.22)]"
-                      : "border-white/8 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.06]"
-                  )}
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="space-y-3">
-                      <span className={cn("text-xs font-semibold tracking-[0.2em] uppercase", isActive ? "text-secondary" : "text-white/46")}>
-                        {service.eyebrow}
-                      </span>
-                      <div>
-                        <h4 className="text-xl font-semibold text-white">{service.title}</h4>
-                        <p className="mt-2 text-sm leading-6 text-white/68">{service.description}</p>
-                      </div>
-                    </div>
-                    <span
-                      className={cn(
-                        "flex size-10 shrink-0 items-center justify-center rounded-full border transition-all duration-300",
-                        isActive
-                          ? "border-secondary/45 bg-secondary text-secondary-foreground"
-                          : "border-white/10 bg-white/4 text-white/60 group-hover:border-white/20 group-hover:text-white"
-                      )}
-                    >
-                      <ArrowRight className={cn("size-4 transition-transform duration-300", isActive ? "-rotate-45" : "group-hover:translate-x-0.5")} />
-                    </span>
-                  </div>
-                </button>
-              );
-            })}
-
-            <a
-              href="#contact-us"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-secondary/90"
-            >
-              Let&apos;s build your flows
-              <ArrowRight className="size-4" />
-            </a>
-          </div>
-        </div>
+      <div style={{ marginTop: "30%" }}>
+        {services.map((service, index) => (
+          <ServiceSlide key={service.id} service={service} index={index} />
+        ))}
       </div>
     </section>
   );
