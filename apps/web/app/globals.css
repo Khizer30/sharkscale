@@ -145,3 +145,23 @@ html.custom-cursor-active,
 html.custom-cursor-active * {
   cursor: none !important;
 }
+
+@keyframes footer-breathe {
+  from {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.7;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
