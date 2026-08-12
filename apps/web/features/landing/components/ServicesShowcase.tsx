@@ -220,7 +220,7 @@ export default function ServicesShowcase() {
       <h1
         style={{
           position: "sticky",
-          top: 10,
+          top: 160,
           zIndex: 10,
           fontFamily: "Inter Variable, sans-serif",
           fontWeight: 800,
@@ -232,7 +232,8 @@ export default function ServicesShowcase() {
           color: WHITE,
           margin: 0,
           padding: "clamp(1.5rem, 3vw, 2.5rem) 0",
-          pointerEvents: "none"
+          pointerEvents: "none",
+          background: "#08001e",
         }}
       >
         Services
