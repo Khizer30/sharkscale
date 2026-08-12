@@ -42,7 +42,6 @@ export default function FooterCredits() {
           >
             {footerContent.copyright}
           </span>
-
         </div>
 
         <button
