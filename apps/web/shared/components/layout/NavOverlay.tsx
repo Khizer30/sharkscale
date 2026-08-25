@@ -1,8 +1,8 @@
 "use client";
+import RollingText from "@shared/components/layout/RollingText";
 import { colors } from "@shared/constants/colors";
 import { navLinks } from "@shared/lib/navLinks";
 import gsap from "gsap";
-import { X } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -10,12 +10,9 @@ interface NavOverlayProps {
   onClose: () => void;
 }
 
-const overlayLinks = [...navLinks, { label: "Book a Call", href: "#contact-us" }];
-
 export default function NavOverlay({ onClose }: NavOverlayProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const [isExiting, setIsExiting] = useState(false);
 
   const handleClose = useCallback(() => {
@@ -24,83 +21,73 @@ export default function NavOverlay({ onClose }: NavOverlayProps) {
     }
     setIsExiting(true);
 
-    const container = containerRef.current;
-    const content = contentRef.current;
+    const card = cardRef.current;
     const backdrop = backdropRef.current;
 
-    if (!container || !content) {
+    if (!card) {
       onClose();
       return;
     }
 
-    gsap.killTweensOf([container, content, backdrop]);
+    gsap.killTweensOf([card, backdrop]);
     gsap
-      .timeline({ defaults: { ease: "power3.inOut" }, onComplete: onClose })
-      .to(content, { opacity: 0, y: -20, scale: 0.97, duration: 0.5, ease: "power2.inOut" }, 0)
-      .to(container, { y: "-100%", opacity: 0, duration: 0.7 }, 0.1)
-      .to(backdrop, { opacity: 0, duration: 0.4, ease: "power2.inOut" }, 0.2);
+      .timeline({ defaults: { ease: "power3.in" }, onComplete: onClose })
+      .to(card, { opacity: 0, scale: 0.92, y: -12, duration: 0.3 }, 0)
+      .to(backdrop, { opacity: 0, duration: 0.3 }, 0);
   }, [isExiting, onClose]);
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
-
-    const container = containerRef.current;
-    const content = contentRef.current;
+    const card = cardRef.current;
     const backdrop = backdropRef.current;
 
-    if (container && content) {
-      gsap.killTweensOf([container, content, backdrop]);
-      gsap.set(container, { y: "-100%", opacity: 1 });
-      gsap.set(content, { opacity: 0, y: 30, scale: 0.98 });
+    if (card) {
+      gsap.killTweensOf([card, backdrop]);
+      gsap.set(card, { opacity: 0, scale: 0.92, y: -12, transformOrigin: "top right" });
       gsap.set(backdrop, { opacity: 0 });
 
       gsap
         .timeline({ defaults: { ease: "power3.out" } })
-        .to(backdrop, { opacity: 1, duration: 0.8, ease: "power2.out" }, 0)
-        .to(container, { y: "0%", duration: 0.9, ease: "back.out(1.2)" }, 0.1)
-        .to(content, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "elastic.out(1, 0.6)" }, 0.3);
+        .to(backdrop, { opacity: 1, duration: 0.3 }, 0)
+        .to(card, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(1.4)" }, 0.05);
     }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
   }, []);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        handleClose();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [handleClose]);
 
   return (
     <>
+      <div ref={backdropRef} className="fixed inset-0 z-[998]" style={{ opacity: 0 }} onClick={handleClose} />
+
       <div
-        ref={backdropRef}
-        className="fixed inset-0 z-[998] backdrop-blur-sm"
-        style={{ backgroundColor: `${colors.black}E6`, opacity: 0 }}
-        onClick={handleClose}
-      />
+        ref={cardRef}
+        className="fixed right-4 top-24 z-[999] w-72 max-w-[calc(100vw-2rem)] rounded-2xl p-5 shadow-2xl"
+        style={{ backgroundColor: colors.cream }}
+      >
+        <p className="mb-3 text-xs font-medium uppercase tracking-widest" style={{ color: `${colors.tertiary}80` }}>
+          Menu
+        </p>
 
-      <div ref={containerRef} className="fixed inset-0 z-[999] overflow-y-auto" style={{ backgroundColor: colors.tertiary, transform: "translateY(-100%)" }}>
-        <div ref={contentRef} className="flex min-h-screen flex-col p-6">
-          <div className="flex justify-end">
-            <button
-              type="button"
-              aria-label="Close menu"
+        <nav className="flex flex-col gap-1">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
               onClick={handleClose}
-              className="inline-flex size-11 items-center justify-center rounded-full text-tertiary-foreground transition-colors hover:bg-tertiary-foreground/10"
+              className="group inline-flex w-fit py-1 text-2xl font-semibold tracking-tight"
+              style={{ color: colors.tertiary }}
             >
-              <X className="size-6" />
-            </button>
-          </div>
-
-          <nav className="flex flex-1 flex-col justify-center gap-2">
-            {overlayLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={handleClose}
-                className="text-4xl font-semibold tracking-tight text-tertiary-foreground/70 transition-colors hover:text-tertiary-foreground sm:text-6xl"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
+              <RollingText text={link.label} />
+            </Link>
+          ))}
+        </nav>
       </div>
     </>
   );
