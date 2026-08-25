@@ -52,7 +52,14 @@ function buildColumns(): Member[][] {
 function TeamCard({ member, cardRef }: { member: Member; cardRef: (el: HTMLDivElement | null) => void }) {
   return (
     <div ref={cardRef} className="relative overflow-hidden rounded-2xl" style={{ aspectRatio: "456 / 560", willChange: "transform, opacity" }}>
-      <Image src={member.image} alt={member.name} fill sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw" style={{ objectFit: "cover" }} />
+      <Image
+        src={member.image}
+        alt={member.name}
+        fill
+        draggable="false"
+        sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw"
+        style={{ objectFit: "cover" }}
+      />
       <div className="absolute inset-x-3 bottom-3 flex flex-col rounded-xl bg-white/90 px-4 py-2.5 backdrop-blur-sm">
         <span className="text-sm font-semibold text-tertiary sm:text-base">{member.name}</span>
         <span className="text-xs text-tertiary/60 sm:text-sm">{member.role}</span>
@@ -142,7 +149,11 @@ export default function Team() {
   let cardIndex = 0;
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden px-6 pt-24 pb-40 sm:px-10 lg:px-16 lg:pb-48" style={{ background: "linear-gradient(180deg, #f5f0e8 0%, #f5f0e8 82%, #ffffff 100%)" }}>
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden px-6 pt-24 pb-40 sm:px-10 lg:px-16 lg:pb-48"
+      style={{ background: "linear-gradient(180deg, #f5f0e8 0%, #f5f0e8 82%, #ffffff 100%)" }}
+    >
       <div ref={headingRef} className="mx-auto mb-16 max-w-3xl text-center">
         <span className="text-xs font-bold uppercase tracking-[0.22em] text-tertiary/50">Our People</span>
         <h2 className="mt-4 text-4xl font-extrabold uppercase tracking-tight text-tertiary sm:text-5xl lg:text-6xl">Meet the Team</h2>
