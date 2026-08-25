@@ -1,11 +1,11 @@
 export const colors = {
-  primary: "#170149",
+  primary: "#271168",
   secondary: "#ffd21f",
-  tertiary: "#12003a",
+  tertiary: "#1b0a50",
   white: "#ffffff",
   black: "#000000",
   cream: "#f5f0e8",
-  bgFooter: "#0a0020"
+  bgFooter: "#170941"
 } as const;
 
 export type ColorName = keyof typeof colors;

@@ -142,7 +142,7 @@ export default function Team() {
   let cardIndex = 0;
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden px-6 pt-24 pb-40 sm:px-10 lg:px-16 lg:pb-48" style={{ background: "#f5f0e8" }}>
+    <section ref={sectionRef} className="relative overflow-hidden px-6 pt-24 pb-40 sm:px-10 lg:px-16 lg:pb-48" style={{ background: "linear-gradient(180deg, #f5f0e8 0%, #f5f0e8 82%, #ffffff 100%)" }}>
       <div ref={headingRef} className="mx-auto mb-16 max-w-3xl text-center">
         <span className="text-xs font-bold uppercase tracking-[0.22em] text-tertiary/50">Our People</span>
         <h2 className="mt-4 text-4xl font-extrabold uppercase tracking-tight text-tertiary sm:text-5xl lg:text-6xl">Meet the Team</h2>

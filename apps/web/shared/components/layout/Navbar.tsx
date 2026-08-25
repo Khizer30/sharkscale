@@ -55,7 +55,7 @@ export default function Navbar() {
         style={{
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
-          backgroundColor: `${colors.tertiary}CC`,
+          backgroundColor: "#12013b",
           left: `${horizontalInset}px`,
           right: `${horizontalInset}px`,
           width: `calc(100% - ${horizontalInset * 2}px)`,

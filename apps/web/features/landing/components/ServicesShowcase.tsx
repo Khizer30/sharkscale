@@ -23,7 +23,7 @@ const services = [
     eyebrow: "Strategy",
     title: "Email Strategy",
     description: "We design data-driven campaigns that maximize opens, clicks, and sales.",
-    bg: "radial-gradient(ellipse 120% 90% at 70% 110%, #ffd21f28 0%, transparent 55%), linear-gradient(160deg, #0d0030 0%, #1e0060 45%, #170149 100%)",
+    bg: "radial-gradient(ellipse 120% 90% at 70% 110%, #ffd21f28 0%, transparent 55%), linear-gradient(160deg, #1b0a50 0%, #2e1478 45%, #24106a 100%)",
     accent: "#ffd21f"
   },
   {
@@ -33,7 +33,7 @@ const services = [
     eyebrow: "Creative",
     title: "Content Creation",
     description: "Compelling copy and visuals that resonate with your audience and drive action.",
-    bg: "radial-gradient(ellipse 100% 80% at 20% 80%, #00e5ff20 0%, transparent 50%), linear-gradient(150deg, #020010 0%, #06003a 40%, #100050 100%)",
+    bg: "radial-gradient(ellipse 100% 80% at 20% 80%, #00e5ff20 0%, transparent 50%), linear-gradient(150deg, #170842 0%, #241064 40%, #2c1680 100%)",
     accent: "#00e5ff"
   },
   {
@@ -43,7 +43,7 @@ const services = [
     eyebrow: "Design",
     title: "Design & Templates",
     description: "Beautiful, on-brand email templates optimized for Klaviyo and conversions.",
-    bg: "radial-gradient(ellipse 110% 80% at 80% 20%, #ffd21f22 0%, transparent 50%), linear-gradient(145deg, #170149 0%, #38008a 55%, #1a0060 100%)",
+    bg: "radial-gradient(ellipse 110% 80% at 80% 20%, #ffd21f22 0%, transparent 50%), linear-gradient(145deg, #24106a 0%, #4a1aa5 55%, #2a1275 100%)",
     accent: "#ffd21f"
   },
   {
@@ -53,7 +53,7 @@ const services = [
     eyebrow: "Retention",
     title: "Automation & Flows",
     description: "Smart workflows that nurture leads, recover carts, and boost lifetime value.",
-    bg: "radial-gradient(ellipse 100% 90% at 30% 90%, #a78bfa25 0%, transparent 55%), linear-gradient(155deg, #05001a 0%, #170149 50%, #2a0070 100%)",
+    bg: "radial-gradient(ellipse 100% 90% at 30% 90%, #a78bfa25 0%, transparent 55%), linear-gradient(155deg, #170842 0%, #2b1470 50%, #3a1a90 100%)",
     accent: "#a78bfa"
   }
 ] as const;
@@ -294,7 +294,7 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
 
 export default function ServicesShowcase() {
   return (
-    <section id="services" style={{ background: "#08001e" }}>
+    <section id="services" style={{ background: "#1b0a50" }}>
       <h1
         style={{
           position: "relative",
@@ -310,7 +310,7 @@ export default function ServicesShowcase() {
           margin: 0,
           padding: "clamp(1.5rem, 3vw, 2.5rem) 0",
           pointerEvents: "none",
-          background: "#08001e"
+          background: "#1b0a50"
         }}
       >
         Services
