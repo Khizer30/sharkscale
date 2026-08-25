@@ -1,4 +1,5 @@
 import Hero from "@features/landing/components/Hero";
+import BookACallLazy from "@features/landing/components/BookACallLazy";
 import LatestWorksLazy from "@features/landing/components/LatestWorksLazy";
 import ServicesShowcaseLazy from "@features/landing/components/ServicesShowcaseLazy";
 import TeamLazy from "@features/landing/components/TeamLazy";
@@ -16,6 +17,7 @@ export default function Home() {
       <TeamLazy />
       <ToolsLazy />
       <LatestWorksLazy />
+      <BookACallLazy />
       <div aria-hidden style={{ height: "16rem", background: "linear-gradient(180deg, #ffffff 0%, #efe9e0 20%, #d9c3b4 38%, #b48d86 54%, #7d5378 68%, #4a2a72 82%, #29135a 92%, #170941 100%)" }} />
       <FooterLazy />
     </main>
