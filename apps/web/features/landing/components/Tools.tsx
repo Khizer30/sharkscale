@@ -1,3 +1,4 @@
+"use client";
 import googleAnalytics from "@shared/assets/google_analytics.webp";
 import hubspot from "@shared/assets/hubspot.webp";
 import klaviyo from "@shared/assets/klaviyo.webp";
@@ -7,7 +8,14 @@ import omnisend from "@shared/assets/omnisend.webp";
 import shopify from "@shared/assets/shopify.webp";
 import wooCommerce from "@shared/assets/woo_commerce.webp";
 import zapier from "@shared/assets/zapier.webp";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image, { StaticImageData } from "next/image";
+import { useEffect, useRef } from "react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const tools: { name: string; src: StaticImageData; x: number; y: number; w: string; h: string; seed: number }[] = [
   { name: "Klaviyo", src: klaviyo, x: 4, y: 8, w: "clamp(80px,8vw,128px)", h: "clamp(80px,8vw,128px)", seed: 0 },
@@ -34,8 +42,74 @@ function floatStyle(seed: number): React.CSSProperties {
 }
 
 export default function Tools() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const layerRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const paraRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const layer = layerRef.current;
+    const items = itemRefs.current.filter((el): el is HTMLDivElement => el !== null);
+    if (!section || !layer || items.length === 0) {
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      const layerRect = layer.getBoundingClientRect();
+      const cx = layerRect.left + layerRect.width / 2;
+      const cy = layerRect.top + layerRect.height / 2;
+
+      // Start each icon collapsed at the center of the section.
+      items.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        gsap.set(el, {
+          x: cx - (r.left + r.width / 2),
+          y: cy - (r.top + r.height / 2),
+          scale: 0,
+          opacity: 0,
+          rotate: gsap.utils.random(-45, 45)
+        });
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 68%",
+          once: true
+        }
+      });
+
+      tl.to(items, {
+        x: 0,
+        y: 0,
+        scale: 1,
+        opacity: 1,
+        rotate: 0,
+        duration: 0.9,
+        ease: "back.out(1.4)",
+        stagger: { each: 0.06, from: "random" }
+      });
+
+      tl.from(
+        [headingRef.current, paraRef.current],
+        {
+          y: 32,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "power3.out"
+        },
+        "-=0.35"
+      );
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="relative overflow-hidden" style={{ height: "80vh", minHeight: 560, background: "#08001e" }}>
+    <section ref={sectionRef} className="relative overflow-hidden" style={{ height: "80vh", minHeight: 560, background: "#08001e" }}>
       <style>{`
         @keyframes tools-float-0 {
           0%,100% { transform: translate(0,0) rotate(0deg); }
@@ -59,30 +133,39 @@ export default function Tools() {
       `}</style>
 
       {/* Scattered icons — absolutely positioned */}
-      {tools.map((tool) => (
-        <div
-          key={tool.name}
-          className="absolute"
-          style={{
-            left: `${tool.x}%`,
-            top: `${tool.y}%`,
-            width: tool.w,
-            height: tool.h,
-            ...floatStyle(tool.seed)
-          }}
-        >
-          <div className="flex size-full items-center justify-center rounded-xl bg-white p-3 shadow-md">
-            <Image src={tool.src} alt={tool.name} className="size-full object-contain opacity-80" draggable={false} />
+      <div ref={layerRef} className="absolute inset-0">
+        {tools.map((tool, index) => (
+          <div
+            key={tool.name}
+            ref={(el) => {
+              itemRefs.current[index] = el;
+            }}
+            className="absolute"
+            style={{
+              left: `${tool.x}%`,
+              top: `${tool.y}%`,
+              width: tool.w,
+              height: tool.h,
+              willChange: "transform"
+            }}
+          >
+            <div style={floatStyle(tool.seed)} className="size-full">
+              <div className="flex size-full items-center justify-center rounded-xl bg-white p-3 shadow-md">
+                <Image src={tool.src} alt={tool.name} className="size-full object-contain opacity-80" draggable={false} />
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
       {/* Center text */}
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
-        <h2 className="text-4xl font-extrabold uppercase tracking-tight sm:text-5xl lg:text-6xl">
+        <h2 ref={headingRef} className="text-4xl font-extrabold uppercase tracking-tight sm:text-5xl lg:text-6xl">
           <span className="bg-gradient-to-r from-amber-600 via-yellow-300 to-amber-200 bg-clip-text text-transparent">Tools We Work With</span>
         </h2>
-        <p className="max-w-md text-lg text-tertiary-foreground/60 sm:text-xl">We integrate seamlessly with the platforms that power your business.</p>
+        <p ref={paraRef} className="max-w-md text-lg text-tertiary-foreground/60 sm:text-xl">
+          We integrate seamlessly with the platforms that power your business.
+        </p>
       </div>
     </section>
   );
