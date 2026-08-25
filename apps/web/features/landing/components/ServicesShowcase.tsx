@@ -63,6 +63,7 @@ type Service = (typeof services)[number];
 function ServiceSlide({ service, index }: { service: Service; index: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
+  const tiltRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -82,6 +83,42 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
 
     return () => trigger.kill();
   }, []);
+
+  const handleTiltMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const tilt = tiltRef.current;
+    if (!tilt) {
+      return;
+    }
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const px = (event.clientX - rect.left) / rect.width - 0.5;
+    const py = (event.clientY - rect.top) / rect.height - 0.5;
+
+    gsap.to(tilt, {
+      rotateY: px * 16,
+      rotateX: -py * 16,
+      scale: 1.05,
+      transformPerspective: 1000,
+      transformOrigin: "center",
+      duration: 0.4,
+      ease: "power2.out"
+    });
+  };
+
+  const handleTiltLeave = () => {
+    const tilt = tiltRef.current;
+    if (!tilt) {
+      return;
+    }
+
+    gsap.to(tilt, {
+      rotateY: 0,
+      rotateX: 0,
+      scale: 1,
+      duration: 0.7,
+      ease: "power3.out"
+    });
+  };
 
   return (
     <div
@@ -118,6 +155,8 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
       />
 
       <div
+        onMouseMove={handleTiltMove}
+        onMouseLeave={handleTiltLeave}
         style={{
           position: "absolute",
           top: "50%",
@@ -125,14 +164,25 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
           transform: "translateY(-50%)",
           width: "clamp(180px, 30vw, 360px)",
           height: "clamp(180px, 30vw, 360px)",
-          borderRadius: "1.25rem",
-          overflow: "hidden",
-          border: "1px solid " + service.accent + "40",
-          boxShadow: "0 30px 80px -20px " + service.accent + "55",
+          perspective: "1000px",
           zIndex: 2
         }}
       >
-        <Image src={service.image} alt={service.title} fill placeholder="blur" style={{ objectFit: "cover" }} sizes="(max-width: 768px) 30vw, 360px" />
+        <div
+          ref={tiltRef}
+          style={{
+            position: "relative",
+            width: "100%",
+            height: "100%",
+            borderRadius: "1.25rem",
+            overflow: "hidden",
+            border: "1px solid " + service.accent + "40",
+            boxShadow: "0 30px 80px -20px " + service.accent + "55",
+            willChange: "transform"
+          }}
+        >
+          <Image src={service.image} alt={service.title} fill placeholder="blur" style={{ objectFit: "cover" }} sizes="(max-width: 768px) 30vw, 360px" />
+        </div>
       </div>
 
       <div
@@ -144,7 +194,8 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
           flexDirection: "column",
           justifyContent: "flex-end",
           padding: "clamp(2rem, 5vw, 5rem)",
-          paddingBottom: "clamp(3rem, 6vw, 6rem)"
+          paddingBottom: "clamp(3rem, 6vw, 6rem)",
+          pointerEvents: "none"
         }}
       >
         <span
