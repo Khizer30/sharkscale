@@ -1,7 +1,11 @@
 "use client";
+import services1 from "@shared/assets/services_1.webp";
+import services2 from "@shared/assets/services_2.webp";
+import services3 from "@shared/assets/services_3.webp";
+import services4 from "@shared/assets/services_4.webp";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { useEffect, useRef } from "react";
 
 if (typeof window !== "undefined") {
@@ -15,7 +19,7 @@ const services = [
   {
     id: "01",
     tag: "#service_01",
-    image: "/images/service-01.svg",
+    image: services1 as StaticImageData,
     eyebrow: "Strategy",
     title: "Email Strategy",
     description: "We design data-driven campaigns that maximize opens, clicks, and sales.",
@@ -25,7 +29,7 @@ const services = [
   {
     id: "02",
     tag: "#service_02",
-    image: "/images/service-02.svg",
+    image: services2 as StaticImageData,
     eyebrow: "Creative",
     title: "Content Creation",
     description: "Compelling copy and visuals that resonate with your audience and drive action.",
@@ -35,7 +39,7 @@ const services = [
   {
     id: "03",
     tag: "#service_03",
-    image: "/images/service-03.svg",
+    image: services3 as StaticImageData,
     eyebrow: "Design",
     title: "Design & Templates",
     description: "Beautiful, on-brand email templates optimized for Klaviyo and conversions.",
@@ -45,7 +49,7 @@ const services = [
   {
     id: "04",
     tag: "#service_04",
-    image: "/images/service-04.svg",
+    image: services4 as StaticImageData,
     eyebrow: "Retention",
     title: "Automation & Flows",
     description: "Smart workflows that nurture leads, recover carts, and boost lifetime value.",
@@ -128,7 +132,7 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
           zIndex: 2
         }}
       >
-        <Image src={service.image} alt={service.title} fill unoptimized style={{ objectFit: "cover" }} sizes="(max-width: 768px) 30vw, 360px" />
+        <Image src={service.image} alt={service.title} fill placeholder="blur" style={{ objectFit: "cover" }} sizes="(max-width: 768px) 30vw, 360px" />
       </div>
 
       <div
