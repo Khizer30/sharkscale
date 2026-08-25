@@ -109,7 +109,7 @@ export default function Tools() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden" style={{ height: "80vh", minHeight: 560, background: "#08001e" }}>
+    <section ref={sectionRef} className="relative overflow-hidden" style={{ height: "80vh", minHeight: 560, background: "#ffffff" }}>
       <style>{`
         @keyframes tools-float-0 {
           0%,100% { transform: translate(0,0) rotate(0deg); }
@@ -150,8 +150,8 @@ export default function Tools() {
             }}
           >
             <div style={floatStyle(tool.seed)} className="size-full">
-              <div className="flex size-full items-center justify-center rounded-xl bg-white p-3 shadow-md">
-                <Image src={tool.src} alt={tool.name} className="size-full object-contain opacity-80" draggable={false} />
+              <div className="flex size-full items-center justify-center p-3">
+                <Image src={tool.src} alt={tool.name} className="size-full object-contain" draggable={false} />
               </div>
             </div>
           </div>
@@ -161,9 +161,9 @@ export default function Tools() {
       {/* Center text */}
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
         <h2 ref={headingRef} className="text-4xl font-extrabold uppercase tracking-tight sm:text-5xl lg:text-6xl">
-          <span className="bg-gradient-to-r from-amber-600 via-yellow-300 to-amber-200 bg-clip-text text-transparent">Tools We Work With</span>
+          <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent">Tools We Work With</span>
         </h2>
-        <p ref={paraRef} className="max-w-md text-lg text-tertiary-foreground/60 sm:text-xl">
+        <p ref={paraRef} className="max-w-md text-lg text-tertiary/60 sm:text-xl">
           We integrate seamlessly with the platforms that power your business.
         </p>
       </div>
