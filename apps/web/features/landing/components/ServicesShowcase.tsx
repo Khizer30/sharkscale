@@ -1,6 +1,7 @@
 "use client";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 if (typeof window !== "undefined") {
@@ -14,6 +15,7 @@ const services = [
   {
     id: "01",
     tag: "#service_01",
+    image: "/images/service-01.svg",
     eyebrow: "Strategy",
     title: "Email Strategy",
     description: "We design data-driven campaigns that maximize opens, clicks, and sales.",
@@ -23,6 +25,7 @@ const services = [
   {
     id: "02",
     tag: "#service_02",
+    image: "/images/service-02.svg",
     eyebrow: "Creative",
     title: "Content Creation",
     description: "Compelling copy and visuals that resonate with your audience and drive action.",
@@ -32,6 +35,7 @@ const services = [
   {
     id: "03",
     tag: "#service_03",
+    image: "/images/service-03.svg",
     eyebrow: "Design",
     title: "Design & Templates",
     description: "Beautiful, on-brand email templates optimized for Klaviyo and conversions.",
@@ -41,6 +45,7 @@ const services = [
   {
     id: "04",
     tag: "#service_04",
+    image: "/images/service-04.svg",
     eyebrow: "Retention",
     title: "Automation & Flows",
     description: "Smart workflows that nurture leads, recover carts, and boost lifetime value.",
@@ -107,6 +112,24 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
           pointerEvents: "none"
         }}
       />
+
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          right: "clamp(2rem, 5vw, 5rem)",
+          transform: "translateY(-50%)",
+          width: "clamp(180px, 30vw, 360px)",
+          height: "clamp(180px, 30vw, 360px)",
+          borderRadius: "1.25rem",
+          overflow: "hidden",
+          border: "1px solid " + service.accent + "40",
+          boxShadow: "0 30px 80px -20px " + service.accent + "55",
+          zIndex: 2
+        }}
+      >
+        <Image src={service.image} alt={service.title} fill unoptimized style={{ objectFit: "cover" }} sizes="(max-width: 768px) 30vw, 360px" />
+      </div>
 
       <div
         style={{
@@ -219,8 +242,7 @@ export default function ServicesShowcase() {
     <section id="services" style={{ background: "#08001e" }}>
       <h1
         style={{
-          position: "sticky",
-          top: 160,
+          position: "relative",
           zIndex: 10,
           fontFamily: "Inter Variable, sans-serif",
           fontWeight: 800,
@@ -233,7 +255,7 @@ export default function ServicesShowcase() {
           margin: 0,
           padding: "clamp(1.5rem, 3vw, 2.5rem) 0",
           pointerEvents: "none",
-          background: "#08001e",
+          background: "#08001e"
         }}
       >
         Services
