@@ -29,6 +29,7 @@ export default function BookACall() {
   return (
     <section
       id="contactUs"
+      data-nav-theme="light"
       className="flex flex-col items-center px-4 pt-24 pb-28 text-tertiary sm:px-12 lg:px-24 xl:px-40"
       style={{ background: "#ffffff" }}
     >

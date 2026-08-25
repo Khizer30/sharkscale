@@ -7,9 +7,10 @@ import { useEffect, useRef, useState } from "react";
 interface DotsToPlusIconProps {
   onClick?: () => void;
   className?: string;
+  color?: string;
 }
 
-export default function DotsToPlusIcon({ onClick, className }: DotsToPlusIconProps) {
+export default function DotsToPlusIcon({ onClick, className, color = colors.white }: DotsToPlusIconProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const verticalDotsRef = useRef<HTMLDivElement>(null);
   const horizontalDotsRef = useRef<HTMLDivElement>(null);
@@ -56,20 +57,20 @@ export default function DotsToPlusIcon({ onClick, className }: DotsToPlusIconPro
       onClick={handleClick}
     >
       <div ref={centerThreeDotsRef} className="absolute flex items-center gap-1">
-        <span className="size-1 rounded-full" style={{ backgroundColor: colors.white }} />
-        <span className="size-1 rounded-full" style={{ backgroundColor: colors.white }} />
-        <span className="size-1 rounded-full" style={{ backgroundColor: colors.white }} />
+        <span className="size-1 rounded-full" style={{ backgroundColor: color }} />
+        <span className="size-1 rounded-full" style={{ backgroundColor: color }} />
+        <span className="size-1 rounded-full" style={{ backgroundColor: color }} />
       </div>
 
       <div ref={verticalDotsRef} className="absolute flex flex-col items-center gap-0.5 opacity-0" style={{ transform: "scale(0.5)" }}>
         {Array.from({ length: 5 }).map((_, i) => (
-          <span key={`v-${i}`} className="size-[3px] rounded-full" style={{ backgroundColor: colors.white }} />
+          <span key={`v-${i}`} className="size-[3px] rounded-full" style={{ backgroundColor: color }} />
         ))}
       </div>
 
       <div ref={horizontalDotsRef} className="absolute flex items-center gap-0.5 opacity-0" style={{ transform: "scale(0.5)" }}>
         {Array.from({ length: 5 }).map((_, i) => (
-          <span key={`h-${i}`} className="size-[3px] rounded-full" style={{ backgroundColor: colors.white }} />
+          <span key={`h-${i}`} className="size-[3px] rounded-full" style={{ backgroundColor: color }} />
         ))}
       </div>
     </div>

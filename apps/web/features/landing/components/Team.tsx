@@ -151,6 +151,7 @@ export default function Team() {
   return (
     <section
       ref={sectionRef}
+      data-nav-theme="light"
       className="relative overflow-hidden px-6 pt-24 pb-40 sm:px-10 lg:px-16 lg:pb-48"
       style={{ background: "linear-gradient(180deg, #f5f0e8 0%, #f5f0e8 82%, #ffffff 100%)" }}
     >

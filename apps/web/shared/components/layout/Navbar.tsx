@@ -15,6 +15,7 @@ export default function Navbar() {
 
   const [showOverlay, setShowOverlay] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isLight, setIsLight] = useState(false);
 
   useEffect(() => {
     let ticking = false;
@@ -24,6 +25,18 @@ export default function Navbar() {
       const scrollThreshold = 100;
       const progress = Math.min(scrollTop / scrollThreshold, 1);
       setScrollProgress(progress);
+
+      const probeY = 16 + (maxHeight - (maxHeight - minHeight) * progress) / 2;
+      const lightSections = document.querySelectorAll<HTMLElement>('[data-nav-theme="light"]');
+      let overLight = false;
+      lightSections.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= probeY && rect.bottom >= probeY) {
+          overLight = true;
+        }
+      });
+      setIsLight(overLight);
+
       ticking = false;
     };
 
@@ -34,8 +47,13 @@ export default function Navbar() {
       }
     };
 
+    update();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
   const minHeight = 60;
@@ -48,6 +66,11 @@ export default function Navbar() {
   const logoHeight = maxLogoHeight - (maxLogoHeight - minLogoHeight) * scrollProgress;
   const gapScale = 1 - scrollProgress * 0.3;
 
+  const accent = isLight ? colors.tertiary : colors.white;
+  const linkClass = isLight
+    ? "text-sm font-medium text-tertiary/70 transition-colors hover:text-tertiary whitespace-nowrap"
+    : "text-sm font-medium text-white/80 transition-colors hover:text-white whitespace-nowrap";
+
   return (
     <>
       <header
@@ -55,7 +78,9 @@ export default function Navbar() {
         style={{
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
-          backgroundColor: "#12013b",
+          backgroundColor: isLight ? `${colors.white}B3` : "transparent",
+          boxShadow: isLight ? "0 8px 24px rgba(27, 10, 80, 0.08)" : "none",
+          transition: "background-color 0.3s ease, box-shadow 0.3s ease",
           left: `${horizontalInset}px`,
           right: `${horizontalInset}px`,
           width: `calc(100% - ${horizontalInset * 2}px)`,
@@ -73,7 +98,7 @@ export default function Navbar() {
           <ul className="hidden items-center justify-center lg:flex flex-shrink-0" style={{ gap: `${32 * gapScale}px` }}>
             {navLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="text-sm font-medium text-white/80 transition-colors hover:text-white whitespace-nowrap">
+                <Link href={link.href} className={linkClass}>
                   {link.label}
                 </Link>
               </li>
@@ -83,11 +108,11 @@ export default function Navbar() {
           <div className="flex items-center justify-end gap-3 flex-shrink-0">
             <Link
               href={contactHref}
-              className="hidden items-center gap-2.5 rounded-full py-1.5 pl-4 pr-1.5 text-sm font-semibold text-white transition-colors hover:bg-primary lg:inline-flex"
-              style={{ backgroundColor: `${colors.white}1A` }}
+              className="hidden items-center gap-2.5 rounded-full py-1.5 pl-4 pr-1.5 text-sm font-semibold transition-colors hover:bg-primary hover:text-white lg:inline-flex"
+              style={{ backgroundColor: `${accent}1A`, color: accent }}
             >
               <span style={{ display: scrollProgress > 0.7 ? "none" : "inline" }}>Book a Call</span>
-              <span className="flex size-7 items-center justify-center rounded-full text-white flex-shrink-0" style={{ backgroundColor: `${colors.white}1F` }}>
+              <span className="flex size-7 items-center justify-center rounded-full flex-shrink-0" style={{ backgroundColor: `${accent}1F`, color: accent }}>
                 <ArrowRight className="size-3.5" />
               </span>
             </Link>
@@ -97,9 +122,9 @@ export default function Navbar() {
               aria-label="Open menu"
               onClick={() => setShowOverlay(true)}
               className="flex size-10 items-center justify-center rounded-full transition-colors hover:bg-primary flex-shrink-0"
-              style={{ backgroundColor: `${colors.white}1A` }}
+              style={{ backgroundColor: `${accent}1A` }}
             >
-              <DotsToPlusIcon />
+              <DotsToPlusIcon color={accent} />
             </button>
           </div>
         </div>

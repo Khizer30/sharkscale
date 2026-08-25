@@ -61,7 +61,7 @@ export default function LatestWorks() {
   };
 
   return (
-    <section style={{ background: "#ffffff", padding: "clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5rem)" }}>
+    <section data-nav-theme="light" style={{ background: "#ffffff", padding: "clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5rem)" }}>
       <div style={{ margin: "0 auto", maxWidth: "72rem" }}>
         <div style={{ marginBottom: "clamp(2rem, 4vw, 3.5rem)" }}>
           <span

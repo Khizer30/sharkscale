@@ -109,7 +109,7 @@ export default function Tools() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden" style={{ height: "80vh", minHeight: 560, background: "#ffffff" }}>
+    <section ref={sectionRef} data-nav-theme="light" className="relative overflow-hidden" style={{ height: "80vh", minHeight: 560, background: "#ffffff" }}>
       <style>{`
         @keyframes tools-float-0 {
           0%,100% { transform: translate(0,0) rotate(0deg); }
