@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const homeHref = navLinks.find((link) => link.label === "Home")?.href ?? "#";
-  const contactHref = navLinks.find((link) => link.label === "Contact Us")?.href ?? "#";
+  const contactHref = "#contactUs";
 
   const [showOverlay, setShowOverlay] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);

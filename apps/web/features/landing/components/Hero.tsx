@@ -41,7 +41,7 @@ export default function Hero() {
       id="home"
       className={cn("relative flex min-h-screen w-full items-center justify-center overflow-hidden", "bg-tertiary text-tertiary-foreground")}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_70%_110%,rgba(255,210,31,0.15)_0%,transparent_55%),radial-gradient(ellipse_120%_50%_at_50%_0%,rgba(18,0,58,0.95)_0%,transparent_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_120%_at_-10%_50%,rgba(255,210,31,0.15)_0%,transparent_55%),radial-gradient(ellipse_120%_50%_at_50%_0%,rgba(18,0,58,0.95)_0%,transparent_100%)]" />
       <div className="relative mx-auto flex w-full max-w-7xl items-center justify-center px-6">
         <video
           autoPlay
