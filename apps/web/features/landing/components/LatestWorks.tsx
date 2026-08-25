@@ -16,12 +16,9 @@ type Project = {
 };
 
 const projects: Project[] = [
-  { title: "Glow Skincare", tagline: "Welcome Flow Rebuild", image: work1, accent: "#7c3aed" },
-  { title: "Nomad Coffee", tagline: "Abandoned Cart Recovery", image: work2, accent: "#0891b2" },
-  { title: "Peak Athletics", tagline: "Launch Campaign", image: work3, accent: "#d97706" },
-  { title: "Bloom & Co", tagline: "Loyalty Automation", image: work1, accent: "#db2777" },
-  { title: "Urban Threads", tagline: "Black Friday Sprint", image: work2, accent: "#4f46e5" },
-  { title: "Coastal Home", tagline: "Retention Overhaul", image: work3, accent: "#0d9488" }
+  { title: "E-Commerce Promotions", tagline: "Revenue & Retention", image: work1, accent: "#d97706" },
+  { title: "Newsletter Management", tagline: "Audience Loyalty", image: work2, accent: "#7c3aed" },
+  { title: "Analytics & Optimization", tagline: "A/B Testing & Insights", image: work3, accent: "#0891b2" }
 ] as const;
 
 export default function LatestWorks() {
