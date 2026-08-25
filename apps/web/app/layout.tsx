@@ -10,8 +10,8 @@ import "./globals.css";
 import { cn } from "shared/lib/utils";
 
 export const metadata: Metadata = {
-  title: "",
-  description: "",
+  title: "SharkScale",
+  description: "SharkScale — data-driven email marketing that maximizes opens, clicks, and sales.",
   icons: {
     icon: "/favicon.png"
   }
