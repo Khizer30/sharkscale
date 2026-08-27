@@ -2,9 +2,8 @@
 import work1 from "@shared/assets/work_1.webp";
 import work2 from "@shared/assets/work_2.webp";
 import work3 from "@shared/assets/work_3.webp";
-import gsap from "gsap";
 import Image, { type StaticImageData } from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 const TERTIARY = "#1b0a50";
 
@@ -23,46 +22,10 @@ const projects: Project[] = [
 
 export default function LatestWorks() {
   const [active, setActive] = useState<number | null>(null);
-  const listRef = useRef<HTMLUListElement>(null);
-  const floatRef = useRef<HTMLDivElement>(null);
-  const xTo = useRef<((value: number) => void) | null>(null);
-  const yTo = useRef<((value: number) => void) | null>(null);
-
-  useEffect(() => {
-    const float = floatRef.current;
-    if (!float) {
-      return;
-    }
-    xTo.current = gsap.quickTo(float, "x", { duration: 0.5, ease: "power3.out" });
-    yTo.current = gsap.quickTo(float, "y", { duration: 0.5, ease: "power3.out" });
-  }, []);
-
-  useEffect(() => {
-    const float = floatRef.current;
-    if (!float) {
-      return;
-    }
-    gsap.to(float, {
-      opacity: active === null ? 0 : 1,
-      scale: active === null ? 0.85 : 1,
-      duration: 0.4,
-      ease: "power3.out"
-    });
-  }, [active]);
-
-  const handleMove = (event: React.MouseEvent<HTMLUListElement>) => {
-    const list = listRef.current;
-    if (!list) {
-      return;
-    }
-    const rect = list.getBoundingClientRect();
-    xTo.current?.(event.clientX - rect.left);
-    yTo.current?.(event.clientY - rect.top);
-  };
 
   return (
     <section id="ourWork" data-nav-theme="light" style={{ background: "#ffffff", padding: "clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5rem)" }}>
-      <div style={{ margin: "0 auto", maxWidth: "72rem" }}>
+      <div style={{ margin: "0 auto", maxWidth: "80rem" }}>
         <div style={{ marginBottom: "clamp(2rem, 4vw, 3.5rem)" }}>
           <span
             style={{
@@ -90,115 +53,111 @@ export default function LatestWorks() {
           </h2>
         </div>
 
-        <ul
-          ref={listRef}
-          onMouseMove={handleMove}
-          onMouseLeave={() => setActive(null)}
-          style={{ listStyle: "none", margin: 0, padding: 0, position: "relative" }}
-        >
-          {/* Floating cursor-following preview */}
-          <div
-            ref={floatRef}
-            aria-hidden
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "clamp(260px, 26vw, 380px)",
-              aspectRatio: "4 / 3",
-              marginTop: "clamp(-140px, -13vw, -190px)",
-              marginLeft: "1.5rem",
-              borderRadius: "1rem",
-              overflow: "hidden",
-              opacity: 0,
-              pointerEvents: "none",
-              zIndex: 5,
-              boxShadow: "0 30px 70px -30px rgba(27,10,80,0.5)",
-              willChange: "transform, opacity"
-            }}
-          >
-            {projects.map((project, index) => (
-              <Image
-                key={index}
-                src={project.image}
-                alt=""
-                fill
-                sizes="380px"
-                style={{
-                  objectFit: "cover",
-                  opacity: index === active ? 1 : 0,
-                  transition: "opacity 0.3s ease"
-                }}
-              />
-            ))}
-          </div>
-
-          {projects.map((project, index) => {
-            const isActive = index === active;
-            return (
-              <li
-                key={project.title}
-                onMouseEnter={() => setActive(index)}
-                onFocus={() => setActive(index)}
-                style={{
-                  borderTop: "1px solid " + TERTIARY + "18",
-                  borderBottom: index === projects.length - 1 ? "1px solid " + TERTIARY + "18" : "none"
-                }}
-              >
-                <a
-                  href="#"
-                  tabIndex={0}
+        <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "clamp(2rem, 5vw, 5rem)", alignItems: "stretch" }}>
+          <ul onMouseLeave={() => setActive(null)} style={{ listStyle: "none", margin: 0, padding: 0 }}>
+            {projects.map((project, index) => {
+              const isActive = index === active;
+              return (
+                <li
+                  key={project.title}
+                  onMouseEnter={() => setActive(index)}
+                  onFocus={() => setActive(index)}
                   style={{
-                    display: "flex",
-                    alignItems: "baseline",
-                    gap: "clamp(1rem, 2vw, 2rem)",
-                    padding: "clamp(1.25rem, 2.5vw, 2rem) 0.5rem",
-                    textDecoration: "none",
-                    transition: "padding-left 0.4s ease, opacity 0.4s ease",
-                    paddingLeft: isActive ? "1.5rem" : "0.5rem",
-                    opacity: active === null || isActive ? 1 : 0.35
+                    borderTop: "1px solid " + TERTIARY + "18",
+                    borderBottom: index === projects.length - 1 ? "1px solid " + TERTIARY + "18" : "none"
                   }}
                 >
-                  <span
+                  <a
+                    href="#"
+                    tabIndex={0}
                     style={{
-                      fontSize: "0.8rem",
-                      fontWeight: 700,
-                      letterSpacing: "0.1em",
-                      color: project.accent,
-                      minWidth: "2rem"
+                      display: "flex",
+                      alignItems: "baseline",
+                      gap: "clamp(1rem, 2vw, 2rem)",
+                      padding: "clamp(1.25rem, 2.5vw, 2rem) 0.5rem",
+                      textDecoration: "none",
+                      transition: "padding-left 0.4s ease, opacity 0.4s ease",
+                      paddingLeft: isActive ? "1.5rem" : "0.5rem",
+                      opacity: active === null || isActive ? 1 : 0.35
                     }}
                   >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
                     <span
                       style={{
-                        fontSize: "clamp(1.6rem, 4vw, 3rem)",
-                        fontWeight: 800,
-                        lineHeight: 1,
-                        letterSpacing: "-0.03em",
-                        color: TERTIARY
+                        fontSize: "0.8rem",
+                        fontWeight: 700,
+                        letterSpacing: "0.1em",
+                        color: project.accent,
+                        minWidth: "2rem"
                       }}
                     >
-                      {project.title}
+                      {String(index + 1).padStart(2, "0")}
                     </span>
-                    <span
-                      style={{
-                        fontSize: "0.82rem",
-                        fontWeight: 600,
-                        letterSpacing: "0.14em",
-                        textTransform: "uppercase",
-                        color: TERTIARY + "80"
-                      }}
-                    >
-                      {project.tagline}
+                    <span style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
+                      <span
+                        style={{
+                          fontSize: "clamp(1.6rem, 4vw, 3rem)",
+                          fontWeight: 800,
+                          lineHeight: 1,
+                          letterSpacing: "-0.03em",
+                          color: TERTIARY
+                        }}
+                      >
+                        {project.title}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "0.82rem",
+                          fontWeight: 600,
+                          letterSpacing: "0.14em",
+                          textTransform: "uppercase",
+                          color: TERTIARY + "80"
+                        }}
+                      >
+                        {project.tagline}
+                      </span>
                     </span>
-                  </span>
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Preview area — empty by default, shows tilted image on hover */}
+          <div
+            aria-hidden
+            className="relative hidden md:block"
+            style={{
+              minHeight: "clamp(280px, 34vw, 460px)"
+            }}
+          >
+            {projects.map((project, index) => {
+              const isActive = index === active;
+              const tilt = index % 2 === 0 ? 6 : -6;
+              return (
+                <div
+                  key={project.title}
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    width: "clamp(280px, 30vw, 420px)",
+                    aspectRatio: "4 / 3",
+                    borderRadius: "1rem",
+                    overflow: "hidden",
+                    boxShadow: "0 30px 70px -30px rgba(27,10,80,0.5)",
+                    transformOrigin: "center",
+                    transform: "translate(-50%, -50%) rotate(" + (isActive ? tilt : tilt * 0.4) + "deg) scale(" + (isActive ? 1 : 0.9) + ")",
+                    opacity: isActive ? 1 : 0,
+                    transition: "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease",
+                    pointerEvents: "none"
+                  }}
+                >
+                  <Image src={project.image} alt="" fill sizes="420px" style={{ objectFit: "cover" }} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );
