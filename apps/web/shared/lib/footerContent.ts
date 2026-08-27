@@ -4,8 +4,7 @@ export const footerContent = {
     { label: "Services", href: "#services" },
     { label: "Our Work", href: "#ourWork" },
     { label: "Contact Us", href: "#contactUs" },
-    { label: "LinkedIn", href: "https://linkedin.com" },
-    { label: "GitHub", href: "https://github.com" }
+    { label: "LinkedIn", href: "https://linkedin.com" }
   ],
   legalLinks: [],
   address: "Islamabad, Pakistan",

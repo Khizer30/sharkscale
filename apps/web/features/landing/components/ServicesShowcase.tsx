@@ -202,7 +202,7 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
         <span
           style={{
             position: "absolute",
-            top: "clamp(2rem, 4vw, 3.5rem)",
+            top: "clamp(7rem, 10vw, 9rem)",
             left: "clamp(2rem, 5vw, 5rem)",
             fontFamily: "Inter Variable, sans-serif",
             fontSize: "0.78rem",
@@ -218,7 +218,7 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
         <span
           style={{
             position: "absolute",
-            top: "clamp(2rem, 4vw, 3.5rem)",
+            top: "clamp(7rem, 10vw, 9rem)",
             right: "clamp(2rem, 5vw, 5rem)",
             fontFamily: "Inter Variable, sans-serif",
             fontSize: "0.78rem",

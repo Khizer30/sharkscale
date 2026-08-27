@@ -56,7 +56,7 @@ export default function Hero() {
 
         <div className="relative z-10 flex max-w-4xl flex-col items-center gap-6 text-center">
           <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl lg:text-7xl">
-            Turning emails into <span className="bg-gradient-to-r from-amber-600 via-yellow-300 to-amber-200 bg-clip-text text-transparent">revenue</span>
+            Turning emails into <span className="bg-linear-to-r from-amber-600 via-yellow-300 to-amber-200 bg-clip-text text-transparent">revenue</span>
           </h1>
 
           <p className="max-w-2xl text-base text-tertiary-foreground/80 sm:text-lg">
