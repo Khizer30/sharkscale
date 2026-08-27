@@ -92,11 +92,11 @@ export default function Navbar() {
         }}
       >
         <div className="grid w-full grid-cols-[auto_1fr_auto] items-center px-6 h-full" style={{ gap: `${24 * gapScale}px` }}>
-          <Link href={homeHref} className="flex items-center flex-shrink-0">
+          <Link href={homeHref} className="flex items-center shrink-0">
             <Image src={logo} alt="SharkScale" priority draggable={false} className="w-auto" style={{ height: `${logoHeight}px` }} />
           </Link>
 
-          <ul className="hidden items-center justify-center lg:flex flex-shrink-0" style={{ gap: `${32 * gapScale}px` }}>
+          <ul className="hidden items-center justify-center lg:flex shrink-0" style={{ gap: `${32 * gapScale}px` }}>
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link href={link.href} className={linkClass}>
@@ -106,14 +106,14 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="flex items-center justify-end gap-3 flex-shrink-0">
+          <div className="flex items-center justify-end gap-3 shrink-0">
             <Link
               href={contactHref}
               className="hidden items-center gap-2.5 rounded-full py-1.5 pl-4 pr-1.5 text-sm font-semibold transition-colors hover:bg-primary hover:text-white lg:inline-flex"
               style={{ backgroundColor: `${accent}1A`, color: accent }}
             >
               <span style={{ display: scrollProgress > 0.7 ? "none" : "inline" }}>Book a Call</span>
-              <span className="flex size-7 items-center justify-center rounded-full flex-shrink-0" style={{ backgroundColor: `${accent}1F`, color: accent }}>
+              <span className="flex size-7 items-center justify-center rounded-full shrink-0" style={{ backgroundColor: `${accent}1F`, color: accent }}>
                 <ArrowRight className="size-3.5" />
               </span>
             </Link>
@@ -122,7 +122,7 @@ export default function Navbar() {
               type="button"
               aria-label="Open menu"
               onClick={() => setShowOverlay(true)}
-              className="flex size-10 items-center justify-center rounded-full transition-colors hover:bg-primary flex-shrink-0"
+              className="flex size-10 items-center justify-center rounded-full transition-colors hover:bg-primary shrink-0"
               style={{ backgroundColor: `${accent}1A` }}
             >
               <DotsToPlusIcon color={accent} />
