@@ -125,10 +125,11 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
       ref={containerRef}
       style={{
         position: "sticky",
-        top: index * 24,
+        top: 0,
         height: "100vh",
         overflow: "hidden",
-        clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)"
+        clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)",
+        zIndex: index + 1
       }}
     >
       <div
@@ -316,7 +317,7 @@ export default function ServicesShowcase() {
         Services
       </h1>
 
-      <div style={{ marginTop: "30%" }}>
+      <div style={{ marginTop: "-4rem" }}>
         {services.map((service, index) => (
           <ServiceSlide key={service.id} service={service} index={index} />
         ))}
