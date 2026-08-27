@@ -1,8 +1,8 @@
 "use client";
-import services1 from "@shared/assets/services_1.webp";
-import services2 from "@shared/assets/services_2.webp";
-import services3 from "@shared/assets/services_3.webp";
-import services4 from "@shared/assets/services_4.webp";
+import automationFlows from "@shared/assets/automationAndFlows.webp";
+import contentCreation from "@shared/assets/contentCreation.webp";
+import designTemplates from "@shared/assets/designAndTemplates.webp";
+import emailStrategy from "@shared/assets/emailStrategy.webp";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image, { type StaticImageData } from "next/image";
@@ -19,7 +19,7 @@ const services = [
   {
     id: "01",
     tag: "#service_01",
-    image: services1 as StaticImageData,
+    image: emailStrategy as StaticImageData,
     eyebrow: "Strategy",
     title: "Email Strategy",
     description: "We design data-driven campaigns that maximize opens, clicks, and sales.",
@@ -29,7 +29,7 @@ const services = [
   {
     id: "02",
     tag: "#service_02",
-    image: services2 as StaticImageData,
+    image: contentCreation as StaticImageData,
     eyebrow: "Creative",
     title: "Content Creation",
     description: "Compelling copy and visuals that resonate with your audience and drive action.",
@@ -39,7 +39,7 @@ const services = [
   {
     id: "03",
     tag: "#service_03",
-    image: services3 as StaticImageData,
+    image: designTemplates as StaticImageData,
     eyebrow: "Design",
     title: "Design & Templates",
     description: "Beautiful, on-brand email templates optimized for Klaviyo and conversions.",
@@ -49,7 +49,7 @@ const services = [
   {
     id: "04",
     tag: "#service_04",
-    image: services4 as StaticImageData,
+    image: automationFlows as StaticImageData,
     eyebrow: "Retention",
     title: "Automation & Flows",
     description: "Smart workflows that nurture leads, recover carts, and boost lifetime value.",
@@ -132,162 +132,205 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
         zIndex: index + 1
       }}
     >
+      {/* Blurry full-screen background image */}
       <div
         ref={bgRef}
         style={{
           position: "absolute",
           top: "-10%",
-          left: 0,
-          width: "100%",
+          left: "-5%",
+          width: "110%",
           height: "120%",
-          background: service.bg,
           zIndex: 0
         }}
-      />
+      >
+        <Image
+          src={service.image}
+          alt=""
+          fill
+          placeholder="blur"
+          aria-hidden
+          sizes="100vw"
+          style={{ objectFit: "cover", filter: "blur(14px) saturate(1.2)", transform: "scale(1.05)" }}
+        />
+      </div>
 
+      {/* Color tint + darken overlays for legibility */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: "radial-gradient(ellipse 80% 60% at 60% 40%, " + service.accent + "18 0%, transparent 65%)",
+          background: service.bg,
+          opacity: 0.72,
+          zIndex: 1
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse 70% 60% at 50% 45%, " + service.accent + "22 0%, transparent 65%)",
           zIndex: 1,
           pointerEvents: "none"
         }}
       />
 
-      <div
-        onMouseMove={handleTiltMove}
-        onMouseLeave={handleTiltLeave}
+      {/* Top corner labels */}
+      <span
         style={{
           position: "absolute",
-          top: "50%",
-          right: "clamp(2rem, 5vw, 5rem)",
-          transform: "translateY(-50%)",
-          width: "clamp(180px, 30vw, 360px)",
-          height: "clamp(180px, 30vw, 360px)",
-          perspective: "1000px",
-          zIndex: 2
+          top: "clamp(7rem, 10vw, 9rem)",
+          left: "clamp(2rem, 5vw, 5rem)",
+          zIndex: 4,
+          fontFamily: "Inter Variable, sans-serif",
+          fontSize: "0.78rem",
+          fontWeight: 600,
+          letterSpacing: "0.18em",
+          color: CREAM + "70",
+          textTransform: "uppercase"
         }}
       >
-        <div
-          ref={tiltRef}
-          style={{
-            position: "relative",
-            width: "100%",
-            height: "100%",
-            borderRadius: "1.25rem",
-            overflow: "hidden",
-            border: "1px solid " + service.accent + "40",
-            boxShadow: "0 30px 80px -20px " + service.accent + "55",
-            willChange: "transform"
-          }}
-        >
-          <Image src={service.image} alt={service.title} fill placeholder="blur" style={{ objectFit: "cover" }} sizes="(max-width: 768px) 30vw, 360px" />
-        </div>
-      </div>
+        {service.tag}
+      </span>
+      <span
+        style={{
+          position: "absolute",
+          top: "clamp(7rem, 10vw, 9rem)",
+          right: "clamp(2rem, 5vw, 5rem)",
+          zIndex: 4,
+          fontFamily: "Inter Variable, sans-serif",
+          fontSize: "0.78rem",
+          fontWeight: 600,
+          letterSpacing: "0.18em",
+          color: CREAM + "50",
+          textTransform: "uppercase"
+        }}
+      >
+        {service.id} / {String(services.length).padStart(2, "0")}
+      </span>
 
+      {/* Center stage: side details + thumbnail + overlaid title */}
       <div
+        className="grid items-center"
         style={{
           position: "relative",
           zIndex: 2,
           height: "100%",
+          gridTemplateColumns: "1fr min(78vw, 460px) 1fr",
+          maxWidth: "1440px",
+          margin: "0 auto",
+          padding: "0 clamp(1.5rem, 5vw, 5rem)"
+        }}
+      >
+        {/* Left detail — empty */}
+        <div className="hidden lg:block" />
+
+        {/* Center thumbnail with tilt */}
+        <div
+          onMouseMove={handleTiltMove}
+          onMouseLeave={handleTiltLeave}
+          style={{
+            position: "relative",
+            width: "100%",
+            aspectRatio: "1 / 1",
+            perspective: "1000px",
+            marginInline: "auto"
+          }}
+        >
+          <div
+            ref={tiltRef}
+            style={{
+              position: "relative",
+              width: "100%",
+              height: "100%",
+              borderRadius: "1.25rem",
+              overflow: "hidden",
+              border: "1px solid " + service.accent + "40",
+              boxShadow: "0 40px 90px -20px " + service.accent + "66",
+              willChange: "transform"
+            }}
+          >
+            <Image src={service.image} alt={service.title} fill placeholder="blur" style={{ objectFit: "cover" }} sizes="(max-width: 1024px) 78vw, 460px" />
+          </div>
+        </div>
+
+        {/* Right detail — empty */}
+        <div className="hidden lg:block" />
+      </div>
+
+      {/* Big service title overlaid across the middle */}
+      <h2
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 3,
+          width: "100%",
+          textAlign: "center",
+          fontFamily: "Inter Variable, sans-serif",
+          fontWeight: 800,
+          fontSize: "clamp(2.5rem, 8vw, 7rem)",
+          lineHeight: 0.9,
+          letterSpacing: "-0.04em",
+          textTransform: "uppercase",
+          color: WHITE,
+          margin: 0,
+          padding: "0 1rem",
+          pointerEvents: "none",
+          mixBlendMode: "overlay",
+          textShadow: "0 10px 40px rgba(0,0,0,0.35)"
+        }}
+      >
+        {service.title}
+      </h2>
+
+      {/* Mobile-only eyebrow + description below title */}
+      <div
+        className="lg:hidden"
+        style={{
+          position: "absolute",
+          bottom: "clamp(3rem, 8vw, 5rem)",
+          left: 0,
+          right: 0,
+          zIndex: 4,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-end",
-          padding: "clamp(2rem, 5vw, 5rem)",
-          paddingBottom: "clamp(3rem, 6vw, 6rem)",
-          pointerEvents: "none"
+          alignItems: "center",
+          gap: "1rem",
+          padding: "0 clamp(1.5rem, 6vw, 3rem)",
+          textAlign: "center"
         }}
       >
         <span
           style={{
-            position: "absolute",
-            top: "clamp(7rem, 10vw, 9rem)",
-            left: "clamp(2rem, 5vw, 5rem)",
+            display: "inline-flex",
+            padding: "0.3rem 0.9rem",
+            borderRadius: "9999px",
+            border: "1px solid " + service.accent + "45",
+            background: service.accent + "18",
             fontFamily: "Inter Variable, sans-serif",
-            fontSize: "0.78rem",
-            fontWeight: 600,
-            letterSpacing: "0.18em",
-            color: CREAM + "50",
-            textTransform: "uppercase"
+            fontSize: "0.72rem",
+            fontWeight: 700,
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: service.accent
           }}
         >
-          {service.tag}
+          {service.eyebrow}
         </span>
-
-        <span
+        <p
           style={{
-            position: "absolute",
-            top: "clamp(7rem, 10vw, 9rem)",
-            right: "clamp(2rem, 5vw, 5rem)",
             fontFamily: "Inter Variable, sans-serif",
-            fontSize: "0.78rem",
-            fontWeight: 600,
-            letterSpacing: "0.18em",
-            color: CREAM + "35",
-            textTransform: "uppercase"
+            fontSize: "clamp(0.9rem, 3.5vw, 1.05rem)",
+            lineHeight: 1.7,
+            color: CREAM + "80",
+            maxWidth: "28rem",
+            margin: 0
           }}
         >
-          {service.id} / {String(services.length).padStart(2, "0")}
-        </span>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: "56rem" }}>
-          <span
-            style={{
-              display: "inline-flex",
-              padding: "0.3rem 0.9rem",
-              borderRadius: "9999px",
-              border: "1px solid " + service.accent + "35",
-              background: service.accent + "12",
-              fontFamily: "Inter Variable, sans-serif",
-              fontSize: "0.72rem",
-              fontWeight: 700,
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color: service.accent,
-              width: "fit-content"
-            }}
-          >
-            {service.eyebrow}
-          </span>
-
-          <h2
-            style={{
-              fontFamily: "Inter Variable, sans-serif",
-              fontWeight: 800,
-              fontSize: "clamp(3rem, 9vw, 8rem)",
-              lineHeight: 0.9,
-              letterSpacing: "-0.04em",
-              color: WHITE,
-              margin: 0
-            }}
-          >
-            {service.title}
-          </h2>
-
-          <div
-            style={{
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              gap: "2rem",
-              flexWrap: "wrap"
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "Inter Variable, sans-serif",
-                fontSize: "clamp(0.9rem, 1.4vw, 1.15rem)",
-                lineHeight: 1.7,
-                color: CREAM + "70",
-                maxWidth: "36rem",
-                margin: 0
-              }}
-            >
-              {service.description}
-            </p>
-          </div>
-        </div>
+          {service.description}
+        </p>
       </div>
     </div>
   );
