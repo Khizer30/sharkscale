@@ -5,6 +5,7 @@ import designTemplates from "@shared/assets/designAndTemplates.webp";
 import emailStrategy from "@shared/assets/emailStrategy.webp";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useIsMobile from "@shared/hooks/useIsMobile";
 import Image, { type StaticImageData } from "next/image";
 import { useEffect, useRef } from "react";
 
@@ -64,6 +65,7 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const tiltRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const container = containerRef.current;
@@ -209,129 +211,162 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
         {service.id} / {String(services.length).padStart(2, "0")}
       </span>
 
-      {/* Center stage: side details + thumbnail + overlaid title */}
-      <div
-        className="grid items-center"
-        style={{
-          position: "relative",
-          zIndex: 2,
-          height: "100%",
-          gridTemplateColumns: "1fr min(78vw, 460px) 1fr",
-          maxWidth: "1440px",
-          margin: "0 auto",
-          padding: "0 clamp(1.5rem, 5vw, 5rem)"
-        }}
-      >
-        {/* Left detail — empty */}
-        <div className="hidden lg:block" />
-
-        {/* Center thumbnail with tilt */}
+      {isMobile ? (
+        /* Mobile: clean vertical stack — title above image, then description */
         <div
-          onMouseMove={handleTiltMove}
-          onMouseLeave={handleTiltLeave}
           style={{
             position: "relative",
-            width: "100%",
-            aspectRatio: "1 / 1",
-            perspective: "1000px",
-            marginInline: "auto"
+            zIndex: 2,
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "clamp(1.5rem, 6vw, 2.25rem)",
+            padding: "6rem clamp(1.5rem, 8vw, 3rem) clamp(2rem, 8vw, 3.5rem)",
+            textAlign: "center"
           }}
         >
+          <span
+            style={{
+              display: "inline-flex",
+              padding: "0.3rem 0.9rem",
+              borderRadius: "9999px",
+              border: "1px solid " + service.accent + "45",
+              background: service.accent + "18",
+              fontFamily: "Inter Variable, sans-serif",
+              fontSize: "0.72rem",
+              fontWeight: 700,
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: service.accent
+            }}
+          >
+            {service.eyebrow}
+          </span>
+
+          <h2
+            style={{
+              fontFamily: "Inter Variable, sans-serif",
+              fontWeight: 800,
+              fontSize: "clamp(2rem, 9vw, 3.25rem)",
+              lineHeight: 1,
+              letterSpacing: "-0.03em",
+              textTransform: "uppercase",
+              color: WHITE,
+              margin: 0,
+              textShadow: "0 10px 40px rgba(0,0,0,0.45)"
+            }}
+          >
+            {service.title}
+          </h2>
+
           <div
-            ref={tiltRef}
             style={{
               position: "relative",
-              width: "100%",
-              height: "100%",
+              width: "min(72vw, 320px)",
+              aspectRatio: "4 / 5",
               borderRadius: "1.25rem",
               overflow: "hidden",
               border: "1px solid " + service.accent + "40",
-              boxShadow: "0 40px 90px -20px " + service.accent + "66",
-              willChange: "transform"
+              boxShadow: "0 30px 70px -25px " + service.accent + "66"
             }}
           >
-            <Image src={service.image} alt={service.title} fill placeholder="blur" style={{ objectFit: "cover" }} sizes="(max-width: 1024px) 78vw, 460px" />
+            <Image src={service.image} alt={service.title} fill placeholder="blur" style={{ objectFit: "cover" }} sizes="(max-width: 1024px) 72vw, 320px" />
           </div>
+
+          <p
+            style={{
+              fontFamily: "Inter Variable, sans-serif",
+              fontSize: "clamp(0.9rem, 3.8vw, 1.05rem)",
+              lineHeight: 1.7,
+              color: CREAM + "cc",
+              maxWidth: "28rem",
+              margin: 0
+            }}
+          >
+            {service.description}
+          </p>
         </div>
+      ) : (
+        <>
+          {/* Center stage: side details + thumbnail + overlaid title */}
+          <div
+            className="grid items-center"
+            style={{
+              position: "relative",
+              zIndex: 2,
+              height: "100%",
+              gridTemplateColumns: "1fr min(78vw, 460px) 1fr",
+              maxWidth: "1440px",
+              margin: "0 auto",
+              padding: "0 clamp(1.5rem, 5vw, 5rem)"
+            }}
+          >
+            {/* Left detail — empty */}
+            <div className="hidden lg:block" />
 
-        {/* Right detail — empty */}
-        <div className="hidden lg:block" />
-      </div>
+            {/* Center thumbnail with tilt */}
+            <div
+              onMouseMove={handleTiltMove}
+              onMouseLeave={handleTiltLeave}
+              style={{
+                position: "relative",
+                width: "100%",
+                aspectRatio: "1 / 1",
+                perspective: "1000px",
+                marginInline: "auto"
+              }}
+            >
+              <div
+                ref={tiltRef}
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "1.25rem",
+                  overflow: "hidden",
+                  border: "1px solid " + service.accent + "40",
+                  boxShadow: "0 40px 90px -20px " + service.accent + "66",
+                  willChange: "transform"
+                }}
+              >
+                <Image src={service.image} alt={service.title} fill placeholder="blur" style={{ objectFit: "cover" }} sizes="(max-width: 1024px) 78vw, 460px" />
+              </div>
+            </div>
 
-      {/* Big service title overlaid across the middle */}
-      <h2
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 3,
-          width: "100%",
-          textAlign: "center",
-          fontFamily: "Inter Variable, sans-serif",
-          fontWeight: 800,
-          fontSize: "clamp(2.5rem, 8vw, 7rem)",
-          lineHeight: 0.9,
-          letterSpacing: "-0.04em",
-          textTransform: "uppercase",
-          color: WHITE,
-          margin: 0,
-          padding: "0 1rem",
-          pointerEvents: "none",
-          mixBlendMode: "overlay",
-          textShadow: "0 10px 40px rgba(0,0,0,0.35)"
-        }}
-      >
-        {service.title}
-      </h2>
+            {/* Right detail — empty */}
+            <div className="hidden lg:block" />
+          </div>
 
-      {/* Mobile-only eyebrow + description below title */}
-      <div
-        className="lg:hidden"
-        style={{
-          position: "absolute",
-          bottom: "clamp(3rem, 8vw, 5rem)",
-          left: 0,
-          right: 0,
-          zIndex: 4,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "1rem",
-          padding: "0 clamp(1.5rem, 6vw, 3rem)",
-          textAlign: "center"
-        }}
-      >
-        <span
-          style={{
-            display: "inline-flex",
-            padding: "0.3rem 0.9rem",
-            borderRadius: "9999px",
-            border: "1px solid " + service.accent + "45",
-            background: service.accent + "18",
-            fontFamily: "Inter Variable, sans-serif",
-            fontSize: "0.72rem",
-            fontWeight: 700,
-            letterSpacing: "0.22em",
-            textTransform: "uppercase",
-            color: service.accent
-          }}
-        >
-          {service.eyebrow}
-        </span>
-        <p
-          style={{
-            fontFamily: "Inter Variable, sans-serif",
-            fontSize: "clamp(0.9rem, 3.5vw, 1.05rem)",
-            lineHeight: 1.7,
-            color: CREAM + "80",
-            maxWidth: "28rem",
-            margin: 0
-          }}
-        >
-          {service.description}
-        </p>
-      </div>
+          {/* Big service title overlaid across the middle */}
+          <h2
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 3,
+              width: "100%",
+              textAlign: "center",
+              fontFamily: "Inter Variable, sans-serif",
+              fontWeight: 800,
+              fontSize: "clamp(2.5rem, 8vw, 7rem)",
+              lineHeight: 0.9,
+              letterSpacing: "-0.04em",
+              textTransform: "uppercase",
+              color: WHITE,
+              margin: 0,
+              padding: "0 1rem",
+              pointerEvents: "none",
+              mixBlendMode: "overlay",
+              textShadow: "0 10px 40px rgba(0,0,0,0.35)"
+            }}
+          >
+            {service.title}
+          </h2>
+        </>
+      )}
     </div>
   );
 }
