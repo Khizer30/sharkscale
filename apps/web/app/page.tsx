@@ -13,12 +13,12 @@ export default function Home() {
       <Navbar />
       <Hero />
       <ServicesShowcaseLazy />
-      <div aria-hidden style={{ height: "22rem", background: "linear-gradient(180deg, #341a7c 0%, #46266f 14%, #664272 28%, #895f76 42%, #ac817d 56%, #c9a48f 68%, #e0cdb4 82%, #efe7d8 93%, #f5f0e8 100%)" }} />
+      <div aria-hidden style={{ position: "relative", zIndex: 10, marginTop: "-8rem", height: "28rem", background: "linear-gradient(180deg, transparent 0%, #2b1470 18%, #46266f 30%, #664272 42%, #895f76 54%, #ac817d 64%, #c9a48f 74%, #e0cdb4 86%, #efe7d8 94%, #f5f0e8 100%)" }} />
       <TeamLazy />
       <ToolsLazy />
       <LatestWorksLazy />
       <BookACallLazy />
-      <div aria-hidden style={{ height: "16rem", background: "linear-gradient(180deg, #ffffff 0%, #efe9e0 20%, #d9c3b4 38%, #b48d86 54%, #7d5378 68%, #4a2a72 82%, #29135a 92%, #170941 100%)" }} />
+      <div aria-hidden style={{ marginBottom: "-6rem", paddingBottom: "6rem", height: "16rem", background: "linear-gradient(180deg, #ffffff 0%, #efe9e0 20%, #d9c3b4 38%, #b48d86 54%, #7d5378 68%, #45256a 82%, #2a1358 92%, #1e0f52 100%)" }} />
       <FooterLazy />
     </main>
   );
