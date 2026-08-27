@@ -36,9 +36,7 @@ export default function BookACall() {
       <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
 
       <h2 className="mb-3 text-center text-4xl font-extrabold uppercase tracking-tight sm:text-5xl lg:text-6xl">Book a Call</h2>
-      <p className="mb-8 max-w-lg text-center text-tertiary/70">
-        Schedule a consultation with our team to discuss how we can help scale your email revenue.
-      </p>
+      <p className="mb-8 max-w-lg text-center text-tertiary/70">Schedule a consultation with our team to discuss how we can help scale your email revenue.</p>
 
       <div className="w-full max-w-3xl">
         <div ref={widgetRef} style={{ minWidth: 320, height: 900 }} />
