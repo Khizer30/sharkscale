@@ -3,9 +3,9 @@ import automationFlows from "@shared/assets/automationAndFlows.webp";
 import contentCreation from "@shared/assets/contentCreation.webp";
 import designTemplates from "@shared/assets/designAndTemplates.webp";
 import emailStrategy from "@shared/assets/emailStrategy.webp";
+import useIsMobile from "@shared/hooks/useIsMobile";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import useIsMobile from "@shared/hooks/useIsMobile";
 import Image, { type StaticImageData } from "next/image";
 import { useEffect, useRef } from "react";
 
