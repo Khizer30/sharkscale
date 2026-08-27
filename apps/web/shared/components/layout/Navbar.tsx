@@ -78,9 +78,10 @@ export default function Navbar() {
         style={{
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
-          backgroundColor: isLight ? `${colors.white}B3` : "transparent",
-          boxShadow: isLight ? "0 8px 24px rgba(27, 10, 80, 0.08)" : "none",
-          transition: "background-color 0.3s ease, box-shadow 0.3s ease",
+          backgroundColor: isLight ? `${colors.white}B3` : "rgba(10, 10, 20, 0.55)",
+          boxShadow: isLight ? "0 8px 24px rgba(27, 10, 80, 0.08)" : "0 4px 24px rgba(0, 0, 0, 0.35)",
+          border: isLight ? "none" : "1px solid rgba(255, 255, 255, 0.08)",
+          transition: "background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
           left: `${horizontalInset}px`,
           right: `${horizontalInset}px`,
           width: `calc(100% - ${horizontalInset * 2}px)`,
