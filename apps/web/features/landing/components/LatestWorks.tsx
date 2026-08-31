@@ -2,8 +2,9 @@
 import work1 from "@shared/assets/work_1.webp";
 import work2 from "@shared/assets/work_2.webp";
 import work3 from "@shared/assets/work_3.webp";
+import { ArrowRight } from "lucide-react";
 import Image, { type StaticImageData } from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const TERTIARY = "#1b0a50";
 
@@ -22,6 +23,18 @@ const projects: Project[] = [
 
 export default function LatestWorks() {
   const [active, setActive] = useState<number | null>(null);
+  const [cardTop, setCardTop] = useState(0);
+  const previewRef = useRef<HTMLDivElement>(null);
+
+  const handleEnter = (index: number, event: React.SyntheticEvent<HTMLElement>) => {
+    setActive(index);
+    const preview = previewRef.current;
+    if (preview) {
+      const rowRect = event.currentTarget.getBoundingClientRect();
+      const previewRect = preview.getBoundingClientRect();
+      setCardTop(rowRect.top - previewRect.top + rowRect.height / 2);
+    }
+  };
 
   return (
     <section id="ourWork" data-nav-theme="light" style={{ background: "#ffffff", padding: "clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5rem)" }}>
@@ -60,27 +73,35 @@ export default function LatestWorks() {
               return (
                 <li
                   key={project.title}
-                  onMouseEnter={() => setActive(index)}
-                  onFocus={() => setActive(index)}
-                  style={{
-                    borderTop: "1px solid " + TERTIARY + "18",
-                    borderBottom: index === projects.length - 1 ? "1px solid " + TERTIARY + "18" : "none"
-                  }}
+                  onMouseEnter={(event) => handleEnter(index, event)}
+                  onFocus={(event) => handleEnter(index, event)}
                 >
                   <a
                     href="#"
                     tabIndex={0}
                     style={{
                       display: "flex",
-                      alignItems: "baseline",
-                      gap: "clamp(1rem, 2vw, 2rem)",
-                      padding: "clamp(1.25rem, 2.5vw, 2rem) 0.5rem",
+                      alignItems: "center",
+                      gap: "clamp(0.75rem, 1.5vw, 1.25rem)",
+                      padding: "clamp(1.5rem, 3vw, 2.5rem) 0.5rem",
                       textDecoration: "none",
                       transition: "padding-left 0.4s ease, opacity 0.4s ease",
-                      paddingLeft: isActive ? "1.5rem" : "0.5rem",
+                      paddingLeft: isActive ? "3rem" : "0.5rem",
                       opacity: active === null || isActive ? 1 : 0.35
                     }}
                   >
+                    <ArrowRight
+                      aria-hidden
+                      style={{
+                        width: "clamp(1.75rem, 3vw, 2.5rem)",
+                        height: "clamp(1.75rem, 3vw, 2.5rem)",
+                        flexShrink: 0,
+                        color: project.accent,
+                        opacity: isActive ? 1 : 0,
+                        transform: isActive ? "translateX(0)" : "translateX(-0.75rem)",
+                        transition: "transform 0.4s ease, opacity 0.4s ease"
+                      }}
+                    />
                     <span
                       style={{
                         fontSize: "0.8rem",
@@ -122,12 +143,13 @@ export default function LatestWorks() {
             })}
           </ul>
 
-          {/* Preview area — empty by default, shows tilted image on hover */}
+          {/* Preview area — empty by default, shows a card aligned to the hovered row */}
           <div
+            ref={previewRef}
             aria-hidden
             className="relative hidden md:block"
             style={{
-              minHeight: "clamp(280px, 34vw, 460px)"
+              minHeight: "clamp(340px, 40vw, 560px)"
             }}
           >
             {projects.map((project, index) => {
@@ -138,9 +160,9 @@ export default function LatestWorks() {
                   key={project.title}
                   style={{
                     position: "absolute",
-                    top: "50%",
+                    top: isActive ? cardTop + "px" : "50%",
                     left: "50%",
-                    width: "clamp(280px, 30vw, 420px)",
+                    width: "clamp(340px, 36vw, 520px)",
                     aspectRatio: "4 / 3",
                     borderRadius: "1rem",
                     overflow: "hidden",
@@ -148,11 +170,11 @@ export default function LatestWorks() {
                     transformOrigin: "center",
                     transform: "translate(-50%, -50%) rotate(" + (isActive ? tilt : tilt * 0.4) + "deg) scale(" + (isActive ? 1 : 0.9) + ")",
                     opacity: isActive ? 1 : 0,
-                    transition: "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease",
+                    transition: "top 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease",
                     pointerEvents: "none"
                   }}
                 >
-                  <Image src={project.image} alt="" fill sizes="420px" style={{ objectFit: "cover" }} />
+                  <Image src={project.image} alt="" fill sizes="520px" style={{ objectFit: "cover" }} />
                 </div>
               );
             })}
