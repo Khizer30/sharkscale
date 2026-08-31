@@ -33,15 +33,123 @@ type Tool = {
 };
 
 const tools: Tool[] = [
-  { name: "Klaviyo", src: klaviyo, x: 4, y: 8, w: "clamp(80px,8vw,128px)", h: "clamp(80px,8vw,128px)", seed: 0, mx: 3, my: 5, mw: "clamp(44px,13vw,64px)", mh: "clamp(44px,13vw,64px)" },
-  { name: "Shopify", src: shopify, x: 30, y: 3, w: "clamp(72px,7.5vw,120px)", h: "clamp(72px,7.5vw,120px)", seed: 1, mx: 42, my: 3, mw: "clamp(44px,13vw,64px)", mh: "clamp(44px,13vw,64px)" },
-  { name: "Mailchimp", src: mailchimp, x: 62, y: 5, w: "clamp(76px,8vw,124px)", h: "clamp(76px,8vw,124px)", seed: 2, mx: 78, my: 7, mw: "clamp(44px,13vw,64px)", mh: "clamp(44px,13vw,64px)" },
-  { name: "HubSpot", src: hubspot, x: 83, y: 10, w: "clamp(150px,16vw,240px)", h: "clamp(50px,5.3vw,80px)", seed: 3, mx: 5, my: 21, mw: "clamp(88px,24vw,120px)", mh: "clamp(30px,8vw,40px)" },
-  { name: "WooCommerce", src: wooCommerce, x: 78, y: 48, w: "clamp(150px,16vw,240px)", h: "clamp(50px,5.3vw,80px)", seed: 4, mx: 55, my: 20, mw: "clamp(88px,24vw,120px)", mh: "clamp(30px,8vw,40px)" },
-  { name: "Omnisend", src: omnisend, x: 79, y: 78, w: "clamp(150px,16vw,240px)", h: "clamp(50px,5.3vw,80px)", seed: 5, mx: 6, my: 78, mw: "clamp(88px,24vw,120px)", mh: "clamp(30px,8vw,40px)" },
-  { name: "Zapier", src: zapier, x: 54, y: 84, w: "clamp(150px,16vw,240px)", h: "clamp(50px,5.3vw,80px)", seed: 6, mx: 52, my: 82, mw: "clamp(88px,24vw,120px)", mh: "clamp(30px,8vw,40px)" },
-  { name: "Google Analytics", src: googleAnalytics, x: 22, y: 83, w: "clamp(130px,13vw,200px)", h: "clamp(65px,6.5vw,100px)", seed: 7, mx: 30, my: 50, mw: "clamp(76px,20vw,104px)", mh: "clamp(38px,10vw,52px)" },
-  { name: "Notion", src: notion, x: 3, y: 65, w: "clamp(72px,7.5vw,120px)", h: "clamp(72px,7.5vw,120px)", seed: 8, mx: 80, my: 58, mw: "clamp(44px,13vw,64px)", mh: "clamp(44px,13vw,64px)" }
+  {
+    name: "Klaviyo",
+    src: klaviyo,
+    x: 4,
+    y: 8,
+    w: "clamp(80px,8vw,128px)",
+    h: "clamp(80px,8vw,128px)",
+    seed: 0,
+    mx: 3,
+    my: 5,
+    mw: "clamp(44px,13vw,64px)",
+    mh: "clamp(44px,13vw,64px)"
+  },
+  {
+    name: "Shopify",
+    src: shopify,
+    x: 30,
+    y: 3,
+    w: "clamp(72px,7.5vw,120px)",
+    h: "clamp(72px,7.5vw,120px)",
+    seed: 1,
+    mx: 42,
+    my: 3,
+    mw: "clamp(44px,13vw,64px)",
+    mh: "clamp(44px,13vw,64px)"
+  },
+  {
+    name: "Mailchimp",
+    src: mailchimp,
+    x: 62,
+    y: 5,
+    w: "clamp(76px,8vw,124px)",
+    h: "clamp(76px,8vw,124px)",
+    seed: 2,
+    mx: 78,
+    my: 7,
+    mw: "clamp(44px,13vw,64px)",
+    mh: "clamp(44px,13vw,64px)"
+  },
+  {
+    name: "HubSpot",
+    src: hubspot,
+    x: 83,
+    y: 10,
+    w: "clamp(150px,16vw,240px)",
+    h: "clamp(50px,5.3vw,80px)",
+    seed: 3,
+    mx: 5,
+    my: 21,
+    mw: "clamp(88px,24vw,120px)",
+    mh: "clamp(30px,8vw,40px)"
+  },
+  {
+    name: "WooCommerce",
+    src: wooCommerce,
+    x: 78,
+    y: 48,
+    w: "clamp(150px,16vw,240px)",
+    h: "clamp(50px,5.3vw,80px)",
+    seed: 4,
+    mx: 55,
+    my: 20,
+    mw: "clamp(88px,24vw,120px)",
+    mh: "clamp(30px,8vw,40px)"
+  },
+  {
+    name: "Omnisend",
+    src: omnisend,
+    x: 79,
+    y: 78,
+    w: "clamp(150px,16vw,240px)",
+    h: "clamp(50px,5.3vw,80px)",
+    seed: 5,
+    mx: 6,
+    my: 78,
+    mw: "clamp(88px,24vw,120px)",
+    mh: "clamp(30px,8vw,40px)"
+  },
+  {
+    name: "Zapier",
+    src: zapier,
+    x: 54,
+    y: 84,
+    w: "clamp(150px,16vw,240px)",
+    h: "clamp(50px,5.3vw,80px)",
+    seed: 6,
+    mx: 52,
+    my: 82,
+    mw: "clamp(88px,24vw,120px)",
+    mh: "clamp(30px,8vw,40px)"
+  },
+  {
+    name: "Google Analytics",
+    src: googleAnalytics,
+    x: 22,
+    y: 83,
+    w: "clamp(130px,13vw,200px)",
+    h: "clamp(65px,6.5vw,100px)",
+    seed: 7,
+    mx: 30,
+    my: 50,
+    mw: "clamp(76px,20vw,104px)",
+    mh: "clamp(38px,10vw,52px)"
+  },
+  {
+    name: "Notion",
+    src: notion,
+    x: 3,
+    y: 65,
+    w: "clamp(72px,7.5vw,120px)",
+    h: "clamp(72px,7.5vw,120px)",
+    seed: 8,
+    mx: 80,
+    my: 58,
+    mw: "clamp(44px,13vw,64px)",
+    mh: "clamp(44px,13vw,64px)"
+  }
 ];
 
 function seededVal(seed: number, index: number): number {
@@ -88,6 +196,8 @@ export default function Tools() {
         });
       });
 
+      gsap.set([headingRef.current, paraRef.current], { y: 32, opacity: 0 });
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -107,11 +217,11 @@ export default function Tools() {
         stagger: { each: 0.06, from: "random" }
       });
 
-      tl.from(
+      tl.to(
         [headingRef.current, paraRef.current],
         {
-          y: 32,
-          opacity: 0,
+          y: 0,
+          opacity: 1,
           duration: 0.6,
           stagger: 0.15,
           ease: "power3.out"
@@ -196,10 +306,10 @@ export default function Tools() {
       {/* Center text */}
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
         <h2 ref={headingRef} className="text-4xl font-extrabold uppercase tracking-tight sm:text-5xl lg:text-6xl">
-          <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent">Tools We Work With</span>
+          <span className="bg-linear-to-r from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent">Tools We Work With</span>
         </h2>
         <p ref={paraRef} className="max-w-md text-lg text-tertiary/60 sm:text-xl">
-          We integrate seamlessly with the platforms that power your business.
+          We integrate with the platforms that power your business—helping brands boost client acquisition by up to 90%.
         </p>
       </div>
     </section>
