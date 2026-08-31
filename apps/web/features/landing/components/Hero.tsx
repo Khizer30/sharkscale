@@ -48,7 +48,7 @@ export default function Hero() {
           muted
           loop
           playsInline
-          className="pointer-events-none absolute top-1/2 right-0 w-[55%] max-w-2xl opacity-90 transition-transform duration-300 ease-out"
+          className="pointer-events-none absolute top-1/2 right-0 w-[55%] max-w-2xl opacity-90 transition-transform duration-300 ease-out mix-blend-screen"
           style={{ transform: `translate3d(${offset.x}px, calc(-50% + ${offset.y}px), 0)` }}
         >
           <source src="/flyingPaperPlane.webm" type="video/webm" />
