@@ -297,7 +297,7 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
               position: "relative",
               zIndex: 2,
               height: "100%",
-              gridTemplateColumns: "1fr min(78vw, 460px) 1fr",
+              gridTemplateColumns: "1fr min(80vw, 520px) 1fr",
               maxWidth: "1440px",
               margin: "0 auto",
               padding: "0 clamp(1.5rem, 5vw, 5rem)"
@@ -324,14 +324,14 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
                   position: "relative",
                   width: "100%",
                   height: "100%",
-                  borderRadius: "1.25rem",
+                  borderRadius: "0.375rem",
                   overflow: "hidden",
                   border: "1px solid " + service.accent + "40",
                   boxShadow: "0 40px 90px -20px " + service.accent + "66",
                   willChange: "transform"
                 }}
               >
-                <Image src={service.image} alt={service.title} fill placeholder="blur" style={{ objectFit: "cover" }} sizes="(max-width: 1024px) 78vw, 460px" />
+                <Image src={service.image} alt={service.title} fill placeholder="blur" style={{ objectFit: "cover" }} sizes="(max-width: 1024px) 80vw, 520px" />
               </div>
             </div>
 
@@ -359,8 +359,7 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
               margin: 0,
               padding: "0 1rem",
               pointerEvents: "none",
-              mixBlendMode: "overlay",
-              textShadow: "0 10px 40px rgba(0,0,0,0.35)"
+              textShadow: "0 4px 24px rgba(0,0,0,0.65), 0 2px 6px rgba(0,0,0,0.5)"
             }}
           >
             {service.title}
