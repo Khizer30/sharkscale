@@ -71,11 +71,7 @@ export default function LatestWorks() {
             {projects.map((project, index) => {
               const isActive = index === active;
               return (
-                <li
-                  key={project.title}
-                  onMouseEnter={(event) => handleEnter(index, event)}
-                  onFocus={(event) => handleEnter(index, event)}
-                >
+                <li key={project.title} onMouseEnter={(event) => handleEnter(index, event)} onFocus={(event) => handleEnter(index, event)}>
                   <a
                     href="#"
                     tabIndex={0}
