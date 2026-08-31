@@ -373,32 +373,43 @@ function ServiceSlide({ service, index }: { service: Service; index: number }) {
 export default function ServicesShowcase() {
   return (
     <section id="services" style={{ background: "#1b0a50" }}>
-      <h1
+      {/* Title acts as the first card in the sticky stack */}
+      <div
         style={{
-          position: "relative",
-          zIndex: 10,
-          fontFamily: "Inter Variable, sans-serif",
-          fontWeight: 800,
-          fontSize: "clamp(4rem, 14vw, 13rem)",
-          lineHeight: 1,
-          letterSpacing: "-0.04em",
-          textAlign: "center",
-          textTransform: "uppercase",
-          color: WHITE,
-          margin: 0,
-          padding: "clamp(1.5rem, 3vw, 2.5rem) 0",
-          pointerEvents: "none",
+          position: "sticky",
+          top: 0,
+          height: "45vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
+          clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)",
+          zIndex: 0,
           background: "#1b0a50"
         }}
       >
-        Services
-      </h1>
-
-      <div style={{ marginTop: "-4rem" }}>
-        {services.map((service, index) => (
-          <ServiceSlide key={service.id} service={service} index={index} />
-        ))}
+        <h1
+          style={{
+            fontFamily: "Inter Variable, sans-serif",
+            fontWeight: 800,
+            fontSize: "clamp(4rem, 14vw, 13rem)",
+            lineHeight: 1,
+            letterSpacing: "-0.04em",
+            textAlign: "center",
+            textTransform: "uppercase",
+            color: WHITE,
+            margin: 0,
+            padding: "0 1rem",
+            pointerEvents: "none"
+          }}
+        >
+          Services
+        </h1>
       </div>
+
+      {services.map((service, index) => (
+        <ServiceSlide key={service.id} service={service} index={index} />
+      ))}
     </section>
   );
 }
