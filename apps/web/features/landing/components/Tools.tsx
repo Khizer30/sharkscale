@@ -17,16 +17,31 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const tools: { name: string; src: StaticImageData; x: number; y: number; w: string; h: string; seed: number }[] = [
-  { name: "Klaviyo", src: klaviyo, x: 4, y: 8, w: "clamp(80px,8vw,128px)", h: "clamp(80px,8vw,128px)", seed: 0 },
-  { name: "Shopify", src: shopify, x: 30, y: 3, w: "clamp(72px,7.5vw,120px)", h: "clamp(72px,7.5vw,120px)", seed: 1 },
-  { name: "Mailchimp", src: mailchimp, x: 62, y: 5, w: "clamp(76px,8vw,124px)", h: "clamp(76px,8vw,124px)", seed: 2 },
-  { name: "HubSpot", src: hubspot, x: 83, y: 10, w: "clamp(150px,16vw,240px)", h: "clamp(50px,5.3vw,80px)", seed: 3 },
-  { name: "WooCommerce", src: wooCommerce, x: 78, y: 48, w: "clamp(150px,16vw,240px)", h: "clamp(50px,5.3vw,80px)", seed: 4 },
-  { name: "Omnisend", src: omnisend, x: 79, y: 78, w: "clamp(150px,16vw,240px)", h: "clamp(50px,5.3vw,80px)", seed: 5 },
-  { name: "Zapier", src: zapier, x: 54, y: 84, w: "clamp(150px,16vw,240px)", h: "clamp(50px,5.3vw,80px)", seed: 6 },
-  { name: "Google Analytics", src: googleAnalytics, x: 22, y: 83, w: "clamp(130px,13vw,200px)", h: "clamp(65px,6.5vw,100px)", seed: 7 },
-  { name: "Notion", src: notion, x: 3, y: 65, w: "clamp(72px,7.5vw,120px)", h: "clamp(72px,7.5vw,120px)", seed: 8 }
+type Tool = {
+  name: string;
+  src: StaticImageData;
+  x: number;
+  y: number;
+  w: string;
+  h: string;
+  seed: number;
+  // Mobile-specific placement/size so wide logos don't overflow narrow viewports.
+  mx: number;
+  my: number;
+  mw: string;
+  mh: string;
+};
+
+const tools: Tool[] = [
+  { name: "Klaviyo", src: klaviyo, x: 4, y: 8, w: "clamp(80px,8vw,128px)", h: "clamp(80px,8vw,128px)", seed: 0, mx: 3, my: 5, mw: "clamp(44px,13vw,64px)", mh: "clamp(44px,13vw,64px)" },
+  { name: "Shopify", src: shopify, x: 30, y: 3, w: "clamp(72px,7.5vw,120px)", h: "clamp(72px,7.5vw,120px)", seed: 1, mx: 42, my: 3, mw: "clamp(44px,13vw,64px)", mh: "clamp(44px,13vw,64px)" },
+  { name: "Mailchimp", src: mailchimp, x: 62, y: 5, w: "clamp(76px,8vw,124px)", h: "clamp(76px,8vw,124px)", seed: 2, mx: 78, my: 7, mw: "clamp(44px,13vw,64px)", mh: "clamp(44px,13vw,64px)" },
+  { name: "HubSpot", src: hubspot, x: 83, y: 10, w: "clamp(150px,16vw,240px)", h: "clamp(50px,5.3vw,80px)", seed: 3, mx: 5, my: 21, mw: "clamp(88px,24vw,120px)", mh: "clamp(30px,8vw,40px)" },
+  { name: "WooCommerce", src: wooCommerce, x: 78, y: 48, w: "clamp(150px,16vw,240px)", h: "clamp(50px,5.3vw,80px)", seed: 4, mx: 55, my: 20, mw: "clamp(88px,24vw,120px)", mh: "clamp(30px,8vw,40px)" },
+  { name: "Omnisend", src: omnisend, x: 79, y: 78, w: "clamp(150px,16vw,240px)", h: "clamp(50px,5.3vw,80px)", seed: 5, mx: 6, my: 78, mw: "clamp(88px,24vw,120px)", mh: "clamp(30px,8vw,40px)" },
+  { name: "Zapier", src: zapier, x: 54, y: 84, w: "clamp(150px,16vw,240px)", h: "clamp(50px,5.3vw,80px)", seed: 6, mx: 52, my: 82, mw: "clamp(88px,24vw,120px)", mh: "clamp(30px,8vw,40px)" },
+  { name: "Google Analytics", src: googleAnalytics, x: 22, y: 83, w: "clamp(130px,13vw,200px)", h: "clamp(65px,6.5vw,100px)", seed: 7, mx: 30, my: 50, mw: "clamp(76px,20vw,104px)", mh: "clamp(38px,10vw,52px)" },
+  { name: "Notion", src: notion, x: 3, y: 65, w: "clamp(72px,7.5vw,120px)", h: "clamp(72px,7.5vw,120px)", seed: 8, mx: 80, my: 58, mw: "clamp(44px,13vw,64px)", mh: "clamp(44px,13vw,64px)" }
 ];
 
 function seededVal(seed: number, index: number): number {
@@ -130,6 +145,20 @@ export default function Tools() {
           25%      { transform: translate(-3px,-5px) rotate(1deg); }
           75%      { transform: translate(4px,3px) rotate(-1.5deg); }
         }
+        .tools-item {
+          left: var(--x);
+          top: var(--y);
+          width: var(--w);
+          height: var(--h);
+        }
+        @media (max-width: 640px) {
+          .tools-item {
+            left: var(--mx);
+            top: var(--my);
+            width: var(--mw);
+            height: var(--mh);
+          }
+        }
       `}</style>
 
       {/* Scattered icons — absolutely positioned */}
@@ -140,14 +169,20 @@ export default function Tools() {
             ref={(el) => {
               itemRefs.current[index] = el;
             }}
-            className="absolute"
-            style={{
-              left: `${tool.x}%`,
-              top: `${tool.y}%`,
-              width: tool.w,
-              height: tool.h,
-              willChange: "transform"
-            }}
+            className="tools-item absolute"
+            style={
+              {
+                "--x": `${tool.x}%`,
+                "--y": `${tool.y}%`,
+                "--w": tool.w,
+                "--h": tool.h,
+                "--mx": `${tool.mx}%`,
+                "--my": `${tool.my}%`,
+                "--mw": tool.mw,
+                "--mh": tool.mh,
+                willChange: "transform"
+              } as React.CSSProperties
+            }
           >
             <div style={floatStyle(tool.seed)} className="size-full">
               <div className="flex size-full items-center justify-center p-3">
