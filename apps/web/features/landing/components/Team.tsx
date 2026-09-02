@@ -1,39 +1,24 @@
 "use client";
+import fatimah from "@shared/assets/fatimah.webp";
+import shazaib from "@shared/assets/shazaib.webp";
+import yasir from "@shared/assets/yasir.webp";
+import zarlish from "@shared/assets/zarlish.webp";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { useEffect, useRef } from "react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const IK_BASE = "https://ik.imagekit.io/isclzlt7q/humaan-v6-production/images/";
-const IK_PARAMS = "?tr=w-456,h-560,q-80";
-
-function ikImage(file: string): string {
-  return IK_BASE + file + IK_PARAMS;
-}
-
-type Member = { name: string; role: string; image: string };
+type Member = { name: string; role: string; image: StaticImageData };
 
 const members: Member[] = [
-  { name: "Teegan", role: "Front-end Developer", image: ikImage("teegan-898106_8W3C1qCTk.jpg") },
-  { name: "Sam", role: "Front-end Developer", image: ikImage("sam-694032_p55PEwgty.jpg") },
-  { name: "Jay", role: "Founder & CEO", image: ikImage("jay-694037_NiFRHfcts.jpg") },
-  { name: "Lee", role: "Technical Director", image: ikImage("lee-278426_0_RTv426f.jpg") },
-  { name: "Janmay", role: "Mobile Developer", image: ikImage("Janmay__1fgD4B2D.jpg") },
-  { name: "Niaal", role: "Agency Director", image: ikImage("niaal-694006_8enhClHjn.jpg") },
-  { name: "Jodie", role: "Production Manager", image: ikImage("jodie-119355524838181_WXzi0_nfE.jpg") },
-  { name: "Ross", role: "Back-end Developer", image: ikImage("ross-278438_TDeSH2knK.jpg") },
-  { name: "Matt", role: "Back-end Developer", image: ikImage("matt-1302546_fTHhuKGSQ.jpg") },
-  { name: "Dan", role: "Creative Director", image: ikImage("dan-694038_Rp6I5c4EF.jpg") },
-  { name: "DT", role: "Back-end Developer", image: ikImage("dt-694039_JjuR13QgW.jpg") },
-  { name: "Jess", role: "Designer", image: ikImage("ross-jess-289004_Cd807V1Pl.jpg") },
-  { name: "Dedy", role: "Back-end Developer", image: ikImage("dedy-278440_S0uv3Re5v.jpg") },
-  { name: "Jasmine", role: "Designer", image: ikImage("jasmine-292655_8C2hrOaCA.jpg") },
-  { name: "Paul", role: "Implementation Director", image: ikImage("paul-278430_k4jUEP3w_.jpg") },
-  { name: "Alistair", role: "SEO Specialist", image: ikImage("alistair-898108_cYfS_p1wQ.jpg") }
+  { name: "Shazaib", role: "Founder & CEO", image: shazaib },
+  { name: "Yasir", role: "Sales", image: yasir },
+  { name: "Zarlish", role: "Human Resources", image: zarlish },
+  { name: "Fatimah", role: "Human Resources", image: fatimah }
 ];
 
 const COLUMN_COUNT = 4;
@@ -161,7 +146,7 @@ export default function Team() {
         <p className="mt-4 text-lg text-tertiary/60">The people behind the campaigns that scale your brand.</p>
       </div>
 
-      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-4 pt-20 sm:pt-28 lg:grid-cols-4 lg:gap-6 lg:pt-36">
         {columns.map((column, columnIndex) => (
           <div
             key={columnIndex}
