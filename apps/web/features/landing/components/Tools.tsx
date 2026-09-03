@@ -280,6 +280,7 @@ export default function Tools() {
               itemRefs.current[index] = el;
             }}
             className="tools-item absolute"
+            data-cursor-text={tool.name}
             style={
               {
                 "--x": `${tool.x}%`,

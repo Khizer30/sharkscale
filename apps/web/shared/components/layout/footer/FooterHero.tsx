@@ -59,6 +59,7 @@ export default function FooterHero({ headingRef, linksRef }: FooterHeroProps) {
       <div ref={headingRef} style={{ display: "flex" }}>
         <Link
           href="#contactUs"
+          data-cursor-text="Contact"
           style={{
             display: "flex",
             alignItems: "flex-start",

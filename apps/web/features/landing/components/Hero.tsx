@@ -65,13 +65,15 @@ export default function Hero() {
           </p>
 
           <a
-            href="#contact"
+            href="#contactUs"
+            data-cursor-magnetic
+            data-cursor-text="Contact"
             className={cn(
               "group inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold",
               "bg-secondary text-secondary-foreground transition-colors hover:bg-secondary/90"
             )}
           >
-            Get started
+            Contact Us
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </a>
         </div>

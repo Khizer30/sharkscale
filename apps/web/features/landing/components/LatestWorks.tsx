@@ -72,9 +72,11 @@ export default function LatestWorks() {
               const isActive = index === active;
               return (
                 <li key={project.title} onMouseEnter={(event) => handleEnter(index, event)} onFocus={(event) => handleEnter(index, event)}>
-                  <a
-                    href="#"
+                  <div
+                    role="button"
                     tabIndex={0}
+                    data-cursor-text="View"
+                    onClick={(e) => e.preventDefault()}
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -133,7 +135,7 @@ export default function LatestWorks() {
                         {project.tagline}
                       </span>
                     </span>
-                  </a>
+                  </div>
                 </li>
               );
             })}

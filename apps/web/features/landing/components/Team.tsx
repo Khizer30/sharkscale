@@ -36,16 +36,21 @@ function buildColumns(): Member[][] {
 
 function TeamCard({ member, cardRef }: { member: Member; cardRef: (el: HTMLDivElement | null) => void }) {
   return (
-    <div ref={cardRef} className="relative overflow-hidden rounded-2xl" style={{ aspectRatio: "456 / 560", willChange: "transform, opacity" }}>
+    <div
+      ref={cardRef}
+      className="group relative overflow-hidden rounded-2xl"
+      style={{ aspectRatio: "456 / 560", willChange: "transform, opacity" }}
+    >
       <Image
         src={member.image}
         alt={member.name}
         fill
         draggable="false"
         sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw"
+        className="rounded-2xl transition-transform duration-500 ease-out group-hover:scale-95"
         style={{ objectFit: "cover" }}
       />
-      <div className="absolute inset-x-3 bottom-3 flex flex-col rounded-xl bg-white/90 px-4 py-2.5 backdrop-blur-sm">
+      <div className="absolute inset-x-3 bottom-3 flex flex-col rounded-xl bg-white/90 px-4 py-2.5 backdrop-blur-sm transition-transform duration-500 ease-out group-hover:translate-y-[-2px]">
         <span className="text-sm font-semibold text-tertiary sm:text-base">{member.name}</span>
         <span className="text-xs text-tertiary/60 sm:text-sm">{member.role}</span>
       </div>
