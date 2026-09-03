@@ -18,7 +18,7 @@ const members: Member[] = [
   { name: "Shazaib", role: "Founder & CEO", image: shazaib },
   { name: "Yasir", role: "Sales", image: yasir },
   { name: "Zarlish", role: "Human Resources", image: zarlish },
-  { name: "Fatimah", role: "Human Resources", image: fatimah }
+  { name: "Fatima", role: "Human Resources", image: fatimah }
 ];
 
 const COLUMN_COUNT = 4;
