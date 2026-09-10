@@ -67,6 +67,8 @@ const TABS = [
 
 const BAR_COLORS = ["#B9D2FF", "#A6C6FF", "#93BAFF", "#80AFFF", "#6DA3FF", "#5A97FF", "#478BFF", "#3B7CFF", "#2F6EFF", "#2863F5", "#2158EB", "#1A4DE0"];
 
+const MONTH_LABELS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 type Tab = (typeof TABS)[number];
 
 function Envelope({ className, stroke }: { className?: string; stroke: string }) {
@@ -138,7 +140,7 @@ function DashboardCard() {
           ))}
         </div>
 
-        <div className="flex h-55 flex-col px-5 pt-5 sm:h-80 sm:px-7">
+        <div className="flex h-55 flex-col px-5 pt-5 pb-4 sm:h-80 sm:px-7 sm:pb-6">
           <div className="mb-3 flex items-start justify-between">
             <p className="text-[15px] font-semibold text-[#12141F]">Attributed revenue</p>
             <p className="text-[12px] text-neutral-400">Last 12 months</p>
@@ -154,6 +156,16 @@ function DashboardCard() {
                   animationDelay: `${index * 40}ms`
                 }}
               />
+            ))}
+          </div>
+          <div className="mt-2 flex gap-2 sm:gap-3.5">
+            {tab.bars.map((_, index) => (
+              <span
+                key={`${tab.id}-label-${index}`}
+                className="flex-1 text-center text-[10px] font-medium text-neutral-400 sm:text-[11px]"
+              >
+                {MONTH_LABELS[index % MONTH_LABELS.length]}
+              </span>
             ))}
           </div>
         </div>
