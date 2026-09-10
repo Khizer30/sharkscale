@@ -7,7 +7,7 @@ import { navLinks } from "@shared/lib/navLinks";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 
 export default function Navbar() {
   const homeHref = navLinks.find((link) => link.label === "Home")?.href ?? "#";
@@ -15,9 +15,9 @@ export default function Navbar() {
 
   const [showOverlay, setShowOverlay] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isLight, setIsLight] = useState(false);
+  const [isLight, setIsLight] = useState(true);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let ticking = false;
 
     const update = () => {
