@@ -203,6 +203,40 @@ html.custom-cursor-active [contenteditable="true"] {
   }
 }
 
+@keyframes hero-phrase-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-highlight-draw {
+  from {
+    transform: scaleX(0);
+    opacity: 0.4;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes hero-highlight-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.85;
+    filter: brightness(1.08);
+  }
+}
+
 .hero-float {
   animation: hero-float 6.5s ease-in-out infinite;
 }
@@ -215,10 +249,24 @@ html.custom-cursor-active [contenteditable="true"] {
   animation: hero-glow 5.5s ease-in-out infinite;
 }
 
+.hero-phrase {
+  display: inline-block;
+  animation: hero-phrase-in 700ms cubic-bezier(0.22, 1, 0.36, 1) 180ms both;
+}
+
+.hero-highlight {
+  transform-origin: left center;
+  animation:
+    hero-highlight-draw 650ms cubic-bezier(0.22, 1, 0.36, 1) 520ms both,
+    hero-highlight-pulse 2.8s ease-in-out 1.2s infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-float,
   .hero-bar,
-  .hero-glow {
+  .hero-glow,
+  .hero-phrase,
+  .hero-highlight {
     animation: none;
   }
 }

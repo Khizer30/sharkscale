@@ -228,11 +228,14 @@ export default function Hero() {
         <h1 className="text-[2.6rem] leading-[1.05] font-extrabold tracking-[-0.045em] sm:text-6xl lg:text-[4.75rem]">
           <span style={{ color: HERO_NAVY }}>Run on revenue,</span>
           <br />
-          <span style={{ color: HERO_BLUE }}>
+          <span className="hero-phrase" style={{ color: HERO_BLUE }}>
             not{" "}
             <span className="relative inline-block">
               <span className="relative z-10">open</span>
-              <span aria-hidden className="absolute -inset-x-0.5 bottom-[0.1em] z-0 h-[0.2em] rounded-[1px] bg-[#FFD21F]" />
+              <span
+                aria-hidden
+                className="hero-highlight absolute -inset-x-0.5 bottom-[0.1em] z-0 h-[0.2em] rounded-[1px] bg-[#FFD21F]"
+              />
             </span>{" "}
             rates.
           </span>
