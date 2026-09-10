@@ -1,6 +1,7 @@
 import BookACallLazy from "@features/landing/components/BookACallLazy";
 import Hero from "@features/landing/components/Hero";
 import LatestWorksLazy from "@features/landing/components/LatestWorksLazy";
+import RevenueProofLazy from "@features/landing/components/RevenueProofLazy";
 import ServicesShowcaseLazy from "@features/landing/components/ServicesShowcaseLazy";
 import SocialProofLazy from "@features/landing/components/SocialProofLazy";
 import TeamLazy from "@features/landing/components/TeamLazy";
@@ -14,6 +15,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <SocialProofLazy />
+      <RevenueProofLazy />
       <ServicesShowcaseLazy />
       <div
         aria-hidden

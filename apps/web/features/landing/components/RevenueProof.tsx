@@ -1,0 +1,177 @@
+"use client";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+const CREAM = "#FDFBF0";
+const CARD = "#FEFDF8";
+const INK = "#12141F";
+const VIOLET = "#4A1AC9";
+
+const REPORT_STATS = [
+  { id: "attributed", label: "Attributed revenue", value: "$1,482,910" },
+  { id: "per-recipient", label: "Revenue per recipient", value: "$0.94" }
+] as const;
+
+const PRINCIPLES = [
+  {
+    id: "owned",
+    title: "Owned, not rented",
+    description: "No algorithm sits between you and the person who already bought."
+  },
+  {
+    id: "compounding",
+    title: "Compounding, not campaigns",
+    description: "Flows earn every day. The calendar adds to them, it does not replace them."
+  },
+  {
+    id: "attributed",
+    title: "Attributed, not assumed",
+    description: "Every number we report traces back to a send you approved."
+  }
+] as const;
+
+export default function RevenueProof() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const principleRefs = useRef<(HTMLLIElement | null)[]>([]);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) {
+      return;
+    }
+
+    const mm = gsap.matchMedia();
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const reveal = { trigger: section, start: "top 78%", once: true };
+
+      if (headingRef.current) {
+        gsap.from(headingRef.current, {
+          opacity: 0,
+          duration: 0.9,
+          ease: "power2.out",
+          scrollTrigger: reveal
+        });
+      }
+
+      if (cardRef.current) {
+        gsap.from(cardRef.current, {
+          scale: 0.88,
+          opacity: 0,
+          transformOrigin: "center center",
+          duration: 0.9,
+          delay: 0.12,
+          ease: "power3.out",
+          scrollTrigger: reveal
+        });
+      }
+
+      const principles = principleRefs.current.filter((el): el is HTMLLIElement => el !== null);
+      if (principles.length > 0) {
+        gsap.from(principles, {
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.24,
+          stagger: 0.12,
+          ease: "power2.out",
+          scrollTrigger: reveal
+        });
+      }
+    });
+
+    return () => mm.revert();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      data-nav-theme="light"
+      className="relative w-full overflow-hidden px-6 py-24 sm:px-10 sm:py-32"
+      style={{ backgroundColor: CREAM }}
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg, rgba(24,16,48,0.04) 1px, transparent 1px), linear-gradient(rgba(24,16,48,0.04) 1px, transparent 1px)",
+          backgroundSize: "156px 140px"
+        }}
+      />
+
+      <div className="relative z-10 mx-auto grid w-full max-w-260 items-center gap-14 lg:grid-cols-[0.85fr_1.3fr_0.85fr] lg:gap-12">
+        <div ref={headingRef}>
+          <p className="text-[10px] font-semibold tracking-[0.24em] uppercase" style={{ color: VIOLET }}>
+            One number that matters
+          </p>
+          <h2 className="mt-4 text-[2.4rem] leading-[1.05] font-extrabold tracking-[-0.045em] sm:text-[2.7rem]" style={{ color: INK }}>
+            Every send,
+            <br />
+            measured.
+          </h2>
+          <p className="mt-5 max-w-72 text-[13px] leading-relaxed text-neutral-500">
+            Flows, campaigns and segments all report into revenue per recipient. If a send cannot earn its place in the calendar, it does not get one.
+          </p>
+        </div>
+
+        <div
+          ref={cardRef}
+          className="flex min-h-84 flex-col rounded-[18px] border border-black/5 shadow-[0_28px_70px_-34px_rgba(28,16,60,0.4)]"
+          style={{ backgroundColor: CARD }}
+        >
+          <div className="flex items-center justify-between gap-4 border-b border-black/5 px-5 py-4">
+            <div className="flex items-center gap-2.5">
+              <span className="size-3.5 rounded-[5px]" style={{ backgroundColor: VIOLET }} />
+              <p className="text-[13px] font-semibold" style={{ color: INK }}>
+                Revenue report
+              </p>
+            </div>
+            <p className="text-[10px] font-medium tracking-[0.18em] text-neutral-400 uppercase">Last 12 months</p>
+          </div>
+
+          <div className="m-5 grid grid-cols-2 rounded-[12px] border border-black/5">
+            {REPORT_STATS.map((stat, index) => (
+              <div key={stat.id} className={index === 0 ? "border-r border-black/5 px-4 py-3.5" : "px-4 py-3.5"}>
+                <p className="text-[9px] font-medium tracking-[0.16em] text-neutral-400 uppercase">{stat.label}</p>
+                <p className="mt-1.5 text-[1.4rem] leading-none font-bold tracking-[-0.03em] tabular-nums" style={{ color: INK }}>
+                  {stat.value}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-auto border-t border-black/5 px-5 py-4">
+            <p className="text-[13px] font-semibold" style={{ color: INK }}>
+              Twelve months, same team
+            </p>
+          </div>
+        </div>
+
+        <ul className="flex flex-col gap-8">
+          {PRINCIPLES.map((principle, index) => (
+            <li
+              key={principle.id}
+              ref={(node) => {
+                principleRefs.current[index] = node;
+              }}
+              className="border-t border-black/10 pt-4"
+            >
+              <p className="text-[10px] font-medium tracking-[0.14em] text-neutral-400">{`0${index + 1}`}</p>
+              <h3 className="mt-3 text-[15px] font-bold tracking-[-0.02em]" style={{ color: INK }}>
+                {principle.title}
+              </h3>
+              <p className="mt-2 max-w-56 text-[12.5px] leading-relaxed text-neutral-500">{principle.description}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
