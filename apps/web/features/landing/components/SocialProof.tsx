@@ -1,4 +1,5 @@
 "use client";
+import BrandTicker from "@features/landing/components/BrandTicker";
 import { cn } from "@shared/lib/utils";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -42,8 +43,6 @@ const STATS = [
     highlight: true
   }
 ] as const;
-
-const BRANDS = ["Verta", "Oakfield", "Northwell", "Basil & Co", "Ridgeway", "Marlow", "Lumen"] as const;
 
 function prefersReducedMotion() {
   return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -135,19 +134,7 @@ export default function SocialProof() {
           ))}
         </div>
 
-        <p className="mt-12 text-center text-[11px] font-medium tracking-[0.22em] text-neutral-400 uppercase sm:mt-14">
-          Retention partner to 64 ecommerce brands
-        </p>
-
-        <div className="mt-6 overflow-hidden" style={{ maskImage: "linear-gradient(90deg, transparent, black 12%, black 88%, transparent)" }}>
-          <div className="brand-ticker-track flex w-max items-center gap-x-10 sm:gap-x-14">
-            {[...BRANDS, ...BRANDS].map((brand, index) => (
-              <span key={`${brand}-${index}`} className="shrink-0 text-[15px] font-semibold tracking-[-0.02em] text-neutral-400/90 sm:text-base">
-                {brand}
-              </span>
-            ))}
-          </div>
-        </div>
+        <BrandTicker label="Retention partner to 64 ecommerce brands" className="mt-12 sm:mt-14" />
       </div>
     </section>
   );

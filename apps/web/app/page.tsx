@@ -1,4 +1,5 @@
 import BookACallLazy from "@features/landing/components/BookACallLazy";
+import BrandTicker from "@features/landing/components/BrandTicker";
 import Hero from "@features/landing/components/Hero";
 import LatestWorksLazy from "@features/landing/components/LatestWorksLazy";
 import RevenueProofLazy from "@features/landing/components/RevenueProofLazy";
@@ -16,6 +17,9 @@ export default function Home() {
       <Hero />
       <SocialProofLazy />
       <RevenueProofLazy />
+      <section data-nav-theme="light" className="w-full bg-white py-8 sm:py-10">
+        <BrandTicker className="mx-auto w-full max-w-260 px-4 sm:px-6" />
+      </section>
       <ServicesShowcaseLazy />
       <div
         aria-hidden
