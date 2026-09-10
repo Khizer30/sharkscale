@@ -274,7 +274,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-8 w-full max-w-260 flex-1 px-4 sm:mt-16 sm:px-6">
+      <div className="relative z-10 mx-auto mt-8 w-full max-w-260 flex-1 px-4 pb-10 sm:mt-16 sm:px-6 sm:pb-20">
         <div className="translate-y-4 sm:translate-y-10">
           <DashboardCard />
         </div>

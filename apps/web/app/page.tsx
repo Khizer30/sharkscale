@@ -2,6 +2,7 @@ import BookACallLazy from "@features/landing/components/BookACallLazy";
 import Hero from "@features/landing/components/Hero";
 import LatestWorksLazy from "@features/landing/components/LatestWorksLazy";
 import ServicesShowcaseLazy from "@features/landing/components/ServicesShowcaseLazy";
+import SocialProofLazy from "@features/landing/components/SocialProofLazy";
 import TeamLazy from "@features/landing/components/TeamLazy";
 import ToolsLazy from "@features/landing/components/ToolsLazy";
 import FooterLazy from "@shared/components/layout/FooterLazy";
@@ -12,6 +13,7 @@ export default function Home() {
     <main className="relative">
       <Navbar />
       <Hero />
+      <SocialProofLazy />
       <ServicesShowcaseLazy />
       <div
         aria-hidden

@@ -172,6 +172,25 @@ html.custom-cursor-active [contenteditable="true"] {
   }
 }
 
+@keyframes brand-ticker-scroll {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.brand-ticker-track {
+  animation: brand-ticker-scroll 22s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-ticker-track {
+    animation: none;
+  }
+}
+
 @keyframes hero-float {
   0%,
   100% {
