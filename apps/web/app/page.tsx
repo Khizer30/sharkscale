@@ -7,6 +7,7 @@ import ServicesShowcaseLazy from "@features/landing/components/ServicesShowcaseL
 import SocialProofLazy from "@features/landing/components/SocialProofLazy";
 import TeamLazy from "@features/landing/components/TeamLazy";
 import ToolsLazy from "@features/landing/components/ToolsLazy";
+import WhatWeDoLazy from "@features/landing/components/WhatWeDoLazy";
 import FooterLazy from "@shared/components/layout/FooterLazy";
 import Navbar from "@shared/components/layout/Navbar";
 
@@ -20,6 +21,7 @@ export default function Home() {
       <section data-nav-theme="light" className="w-full bg-white py-8 sm:py-10">
         <BrandTicker className="mx-auto w-full max-w-260 px-4 sm:px-6" />
       </section>
+      <WhatWeDoLazy />
       <ServicesShowcaseLazy />
       <div
         aria-hidden

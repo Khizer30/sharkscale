@@ -185,8 +185,13 @@ html.custom-cursor-active [contenteditable="true"] {
   animation: brand-ticker-scroll 22s linear infinite;
 }
 
+.what-we-do-ticker {
+  animation: ticker-scroll 32s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .brand-ticker-track {
+  .brand-ticker-track,
+  .what-we-do-ticker {
     animation: none;
   }
 }
