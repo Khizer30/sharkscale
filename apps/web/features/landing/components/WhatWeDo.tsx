@@ -134,13 +134,11 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
           unoptimized
           sizes="(max-width: 767px) 100vw, 50vw"
           className={work.image.grayscale ? "object-cover grayscale" : "object-cover"}
+          draggable={false}
         />
       </div>
 
-      <div className="grid gap-5 px-6 pt-4 pb-8 sm:px-10 md:col-start-1 md:row-start-2 md:px-12 md:pb-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:gap-10 lg:px-14 lg:pb-12">
-        <p className="max-w-md text-[0.95rem] leading-relaxed sm:text-[1.02rem]" style={{ color: work.muted }}>
-          {work.description}
-        </p>
+      <div className="px-6 pt-4 pb-8 sm:px-10 md:col-start-1 md:row-start-2 md:px-12 md:pb-10 lg:px-14 lg:pb-12">
         <ul className="flex flex-col gap-1.5">
           {work.tags.map((tag) => (
             <li key={tag} className="text-[10px] font-semibold tracking-[0.16em] uppercase lg:whitespace-nowrap sm:text-[11px]" style={{ color: work.muted }}>
