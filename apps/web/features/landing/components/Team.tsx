@@ -46,9 +46,9 @@ function TeamCard({ member, cardRef }: { member: Member; cardRef: (el: HTMLDivEl
         className="rounded-2xl transition-transform duration-500 ease-out group-hover:scale-95"
         style={{ objectFit: "cover" }}
       />
-      <div className="absolute inset-x-3 bottom-3 flex flex-col rounded-xl bg-white/90 px-4 py-2.5 backdrop-blur-sm transition-transform duration-500 ease-out group-hover:translate-y-[-2px]">
-        <span className="text-sm font-semibold text-tertiary sm:text-base">{member.name}</span>
-        <span className="text-xs text-tertiary/60 sm:text-sm">{member.role}</span>
+      <div className="absolute inset-x-3 bottom-3 flex flex-col rounded-xl bg-white/90 px-4 py-2.5 backdrop-blur-sm transition-transform duration-500 ease-out group-hover:-translate-y-0.5">
+        <span className="text-sm font-semibold text-[#12141F] sm:text-base">{member.name}</span>
+        <span className="text-xs text-[#12141F]/60 sm:text-sm">{member.role}</span>
       </div>
     </div>
   );
@@ -142,9 +142,16 @@ export default function Team() {
       style={{ background: "linear-gradient(180deg, #f5f0e8 0%, #f5f0e8 82%, #ffffff 100%)" }}
     >
       <div ref={headingRef} className="mx-auto mb-16 max-w-3xl text-center">
-        <span className="text-xs font-bold uppercase tracking-[0.22em] text-tertiary/50">Our People</span>
-        <h2 className="mt-4 text-4xl font-extrabold uppercase tracking-tight text-tertiary sm:text-5xl lg:text-6xl">Meet the Team</h2>
-        <p className="mt-4 text-lg text-tertiary/60">The people behind the campaigns that scale your brand.</p>
+        <span
+          className="inline-block rounded-full border px-3.5 py-1.5 text-[12.5px] font-bold tracking-[0.02em]"
+          style={{ color: "#123CE8", borderColor: "#123CE859" }}
+        >
+          Our people
+        </span>
+        <h2 className="mt-4 text-[clamp(32px,4.4vw,62px)] leading-[1.04] font-bold tracking-[-0.04em] text-[#12141F]">Meet the team</h2>
+        <p className="mt-4 text-lg" style={{ color: "rgba(18,20,31,0.6)" }}>
+          The people behind the campaigns that scale your brand.
+        </p>
       </div>
 
       <div className="mx-auto grid max-w-6xl grid-cols-2 gap-4 pt-20 sm:pt-28 lg:grid-cols-4 lg:gap-6 lg:pt-36">
