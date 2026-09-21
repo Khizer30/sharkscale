@@ -1,5 +1,6 @@
 import BookACallLazy from "@features/landing/components/BookACallLazy";
 import BrandTicker from "@features/landing/components/BrandTicker";
+import FAQLazy from "@features/landing/components/FAQLazy";
 import Hero from "@features/landing/components/Hero";
 import OwnedChannelLazy from "@features/landing/components/OwnedChannelLazy";
 import PartnerBandLazy from "@features/landing/components/PartnerBandLazy";
@@ -28,6 +29,7 @@ export default function Home() {
       <ProcessLazy />
       <TeamLazy />
       <ToolsLazy />
+      <FAQLazy />
       <BookACallLazy />
       <FooterLazy />
     </main>
