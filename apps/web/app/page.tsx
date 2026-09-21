@@ -1,11 +1,13 @@
 import BookACallLazy from "@features/landing/components/BookACallLazy";
 import BrandTicker from "@features/landing/components/BrandTicker";
+import EmailEngineLazy from "@features/landing/components/EmailEngineLazy";
 import FAQLazy from "@features/landing/components/FAQLazy";
 import Hero from "@features/landing/components/Hero";
 import OwnedChannelLazy from "@features/landing/components/OwnedChannelLazy";
 import PartnerBandLazy from "@features/landing/components/PartnerBandLazy";
 import ProcessLazy from "@features/landing/components/ProcessLazy";
 import RevenueProofLazy from "@features/landing/components/RevenueProofLazy";
+import SelectedWorksLazy from "@features/landing/components/SelectedWorksLazy";
 import SocialProofLazy from "@features/landing/components/SocialProofLazy";
 import TeamLazy from "@features/landing/components/TeamLazy";
 import ToolsLazy from "@features/landing/components/ToolsLazy";
@@ -27,6 +29,8 @@ export default function Home() {
       <PartnerBandLazy />
       <OwnedChannelLazy />
       <ProcessLazy />
+      <SelectedWorksLazy />
+      <EmailEngineLazy />
       <TeamLazy />
       <ToolsLazy />
       <FAQLazy />

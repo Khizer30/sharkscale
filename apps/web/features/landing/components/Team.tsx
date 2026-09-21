@@ -135,12 +135,7 @@ export default function Team() {
   let cardIndex = 0;
 
   return (
-    <section
-      ref={sectionRef}
-      data-nav-theme="light"
-      className="relative overflow-hidden px-6 pt-24 pb-40 sm:px-10 lg:px-16 lg:pb-48"
-      style={{ background: "linear-gradient(180deg, #f5f0e8 0%, #f5f0e8 82%, #ffffff 100%)" }}
-    >
+    <section ref={sectionRef} data-nav-theme="light" className="relative overflow-hidden bg-white px-6 pt-24 pb-40 sm:px-10 lg:px-16 lg:pb-48">
       <div ref={headingRef} className="mx-auto mb-16 max-w-3xl text-center">
         <span
           className="inline-block rounded-full border px-3.5 py-1.5 text-[12.5px] font-bold tracking-[0.02em]"
