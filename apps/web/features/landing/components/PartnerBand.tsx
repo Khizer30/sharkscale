@@ -114,7 +114,7 @@ export default function PartnerBand() {
                 </div>
 
                 <div className="relative aspect-9/7 w-full">
-                  <Image src={PHONE_IMAGE} alt="" fill sizes="320px" className="object-cover" />
+                  <Image src={PHONE_IMAGE} alt="" fill sizes="320px" draggable={false} className="object-cover" />
                 </div>
 
                 <div className="flex flex-col gap-2.5 px-4.5 pt-4 pb-5.5">
@@ -138,9 +138,7 @@ export default function PartnerBand() {
           </div>
         </div>
       </section>
-
-      {/* Scalloped divider bridging the blue band into the next section. */}
-      <div className="flex h-7.5 justify-center overflow-hidden bg-white">
+      <div className="flex h-7.5 justify-center overflow-hidden" style={{ backgroundColor: "#F6F6F3" }}>
         {Array.from({ length: SCALLOP_COUNT }).map((_, index) => (
           <span key={index} className="-mt-6.75 h-13.5 w-13.5 flex-none rounded-full" style={{ backgroundColor: BAND_BLUE }} />
         ))}

@@ -2,6 +2,7 @@ import BookACallLazy from "@features/landing/components/BookACallLazy";
 import BrandTicker from "@features/landing/components/BrandTicker";
 import Hero from "@features/landing/components/Hero";
 import LatestWorksLazy from "@features/landing/components/LatestWorksLazy";
+import OwnedChannelLazy from "@features/landing/components/OwnedChannelLazy";
 import PartnerBandLazy from "@features/landing/components/PartnerBandLazy";
 import RevenueProofLazy from "@features/landing/components/RevenueProofLazy";
 import ServicesShowcaseLazy from "@features/landing/components/ServicesShowcaseLazy";
@@ -24,6 +25,7 @@ export default function Home() {
       </section>
       <WhatWeDoLazy />
       <PartnerBandLazy />
+      <OwnedChannelLazy />
       {/* <ServicesShowcaseLazy />
       <div
         aria-hidden
