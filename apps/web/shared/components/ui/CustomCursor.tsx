@@ -3,10 +3,7 @@ import { colors } from "@shared/constants/colors";
 import { useEffect, useRef, useState } from "react";
 
 function isTouch(): boolean {
-  return (
-    typeof window !== "undefined" &&
-    (window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window || navigator.maxTouchPoints > 0)
-  );
+  return typeof window !== "undefined" && (window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window || navigator.maxTouchPoints > 0);
 }
 
 export default function CustomCursor() {
@@ -43,9 +40,7 @@ export default function CustomCursor() {
       }
 
       // 1. Check if over form inputs or cursor-none elements
-      const isInput = Boolean(
-        target.closest("input, textarea, select, [contenteditable='true'], [data-cursor-none]")
-      );
+      const isInput = Boolean(target.closest("input, textarea, select, [contenteditable='true'], [data-cursor-none]"));
       if (isInput) {
         setIsVisible(false);
         return;
@@ -67,9 +62,7 @@ export default function CustomCursor() {
       magneticElement.current = magEl;
 
       // 4. Check for interactive clickables
-      const isInteractive = Boolean(
-        target.closest("a, button, [role='button'], input[type='submit'], [data-cursor-pointer]")
-      );
+      const isInteractive = Boolean(target.closest("a, button, [role='button'], input[type='submit'], [data-cursor-pointer]"));
       setIsHovered(isInteractive || Boolean(textEl) || Boolean(magEl));
     };
 
@@ -185,9 +178,7 @@ export default function CustomCursor() {
                 boxShadow: "0 8px 28px rgba(255, 210, 31, 0.35)"
               }}
             >
-              <span className="text-[11px] font-extrabold uppercase tracking-widest whitespace-nowrap">
-                {cursorText}
-              </span>
+              <span className="text-[11px] font-extrabold uppercase tracking-widest whitespace-nowrap">{cursorText}</span>
             </div>
           ) : (
             /* Sleek Follower Ring */
@@ -198,15 +189,9 @@ export default function CustomCursor() {
                 height: isHovered ? 44 : 28,
                 borderWidth: isHovered ? "2px" : "1.5px",
                 borderStyle: "solid",
-                borderColor: isHovered
-                  ? colors.secondary
-                  : "rgba(255, 210, 31, 0.4)",
-                backgroundColor: isHovered
-                  ? "rgba(255, 210, 31, 0.15)"
-                  : "transparent",
-                boxShadow: isHovered
-                  ? "0 0 20px rgba(255, 210, 31, 0.3)"
-                  : "none"
+                borderColor: isHovered ? colors.secondary : "rgba(255, 210, 31, 0.4)",
+                backgroundColor: isHovered ? "rgba(255, 210, 31, 0.15)" : "transparent",
+                boxShadow: isHovered ? "0 0 20px rgba(255, 210, 31, 0.3)" : "none"
               }}
             />
           )}

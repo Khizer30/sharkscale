@@ -7,8 +7,8 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const CREAM = "#FDFBF0";
-const CARD = "#FEFDF8";
+const CREAM = "#FFFFFF";
+const CARD = "#FFFFFF";
 const INK = "#12141F";
 const VIOLET = "#4A1AC9";
 
@@ -36,141 +36,138 @@ const PRINCIPLES = [
 ] as const;
 
 export default function RevenueProof() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const wrapperRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const cardInnerRef = useRef<HTMLDivElement>(null);
   const principleRefs = useRef<(HTMLLIElement | null)[]>([]);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) {
       return;
     }
 
     const mm = gsap.matchMedia();
 
+    // Card scale, card-content fade and the two text columns are all scrubbed
+    // off a single scroll-linked timeline (0 -> 1) while the section is pinned.
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const reveal = { trigger: section, start: "top 78%", once: true };
-
-      if (headingRef.current) {
-        gsap.from(headingRef.current, {
-          opacity: 0,
-          duration: 0.9,
-          ease: "power2.out",
-          scrollTrigger: reveal
-        });
-      }
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: true
+        }
+      });
 
       if (cardRef.current) {
-        gsap.from(cardRef.current, {
-          scale: 0.88,
-          opacity: 0,
-          transformOrigin: "center center",
-          duration: 0.9,
-          delay: 0.12,
-          ease: "power3.out",
-          scrollTrigger: reveal
-        });
+        tl.fromTo(cardRef.current, { scale: 0.34 }, { scale: 1, ease: "power2.inOut", duration: 0.6 }, 0);
+      }
+
+      if (cardInnerRef.current) {
+        tl.fromTo(cardInnerRef.current, { opacity: 0.12 }, { opacity: 1, ease: "none", duration: 0.42 }, 0.3);
+      }
+
+      if (headingRef.current) {
+        tl.fromTo(headingRef.current, { opacity: 0, y: 28 }, { opacity: 1, y: 0, ease: "none", duration: 0.43 }, 0.42);
       }
 
       const principles = principleRefs.current.filter((el): el is HTMLLIElement => el !== null);
-      if (principles.length > 0) {
-        gsap.from(principles, {
-          opacity: 0,
-          duration: 0.8,
-          delay: 0.24,
-          stagger: 0.12,
-          ease: "power2.out",
-          scrollTrigger: reveal
-        });
-      }
+      principles.forEach((el, index) => {
+        const start = 0.46 + index * 0.09;
+        const end = 0.86 + index * 0.05;
+        tl.fromTo(el, { opacity: 0, y: 26 }, { opacity: 1, y: 0, ease: "none", duration: end - start }, start);
+      });
+
+      // Pad the timeline so its total duration maps exactly to scroll progress 0-1.
+      tl.to({}, { duration: 0.01 }, 1);
     });
 
     return () => mm.revert();
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      data-nav-theme="light"
-      className="relative w-full overflow-hidden px-6 py-24 sm:px-10 sm:py-32"
-      style={{ backgroundColor: CREAM }}
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(90deg, rgba(24,16,48,0.04) 1px, transparent 1px), linear-gradient(rgba(24,16,48,0.04) 1px, transparent 1px)",
-          backgroundSize: "156px 140px"
-        }}
-      />
-
-      <div className="relative z-10 mx-auto grid w-full max-w-260 items-center gap-14 lg:grid-cols-[0.85fr_1.3fr_0.85fr] lg:gap-12">
-        <div ref={headingRef}>
-          <p className="text-[10px] font-semibold tracking-[0.24em] uppercase" style={{ color: VIOLET }}>
-            One number that matters
-          </p>
-          <h2 className="mt-4 text-[2.4rem] leading-[1.05] font-extrabold tracking-[-0.045em] sm:text-[2.7rem]" style={{ color: INK }}>
-            Every send,
-            <br />
-            measured.
-          </h2>
-          <p className="mt-5 max-w-72 text-[13px] leading-relaxed text-neutral-500">
-            Flows, campaigns and segments all report into revenue per recipient. If a send cannot earn its place in the calendar, it does not get one.
-          </p>
-        </div>
-
+    <section ref={wrapperRef} data-nav-theme="light" className="relative h-[250vh] w-full" style={{ backgroundColor: CREAM }}>
+      <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden px-6 sm:px-10">
         <div
-          ref={cardRef}
-          className="flex min-h-84 flex-col rounded-[18px] border border-black/5 shadow-[0_28px_70px_-34px_rgba(28,16,60,0.4)]"
-          style={{ backgroundColor: CARD }}
-        >
-          <div className="flex items-center justify-between gap-4 border-b border-black/5 px-5 py-4">
-            <div className="flex items-center gap-2.5">
-              <span className="size-3.5 rounded-[5px]" style={{ backgroundColor: VIOLET }} />
-              <p className="text-[13px] font-semibold" style={{ color: INK }}>
-                Revenue report
-              </p>
-            </div>
-            <p className="text-[10px] font-medium tracking-[0.18em] text-neutral-400 uppercase">Last 12 months</p>
-          </div>
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage: "linear-gradient(90deg, rgba(24,16,48,0.04) 1px, transparent 1px), linear-gradient(rgba(24,16,48,0.04) 1px, transparent 1px)",
+            backgroundSize: "156px 140px"
+          }}
+        />
 
-          <div className="m-5 grid grid-cols-2 rounded-[12px] border border-black/5">
-            {REPORT_STATS.map((stat, index) => (
-              <div key={stat.id} className={index === 0 ? "border-r border-black/5 px-4 py-3.5" : "px-4 py-3.5"}>
-                <p className="text-[9px] font-medium tracking-[0.16em] text-neutral-400 uppercase">{stat.label}</p>
-                <p className="mt-1.5 text-[1.4rem] leading-none font-bold tracking-[-0.03em] tabular-nums" style={{ color: INK }}>
-                  {stat.value}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-auto border-t border-black/5 px-5 py-4">
-            <p className="text-[13px] font-semibold" style={{ color: INK }}>
-              Twelve months, same team
+        <div className="relative z-10 mx-auto grid w-full max-w-260 items-center gap-14 lg:grid-cols-[0.85fr_1.3fr_0.85fr] lg:gap-12">
+          <div ref={headingRef}>
+            <p className="text-[10px] font-semibold tracking-[0.24em] uppercase" style={{ color: VIOLET }}>
+              One number that matters
+            </p>
+            <h2 className="mt-4 text-[2.4rem] leading-[1.05] font-extrabold tracking-[-0.045em] sm:text-[2.7rem]" style={{ color: INK }}>
+              Every send,
+              <br />
+              measured.
+            </h2>
+            <p className="mt-5 max-w-72 text-[13px] leading-relaxed text-neutral-500">
+              Flows, campaigns and segments all report into revenue per recipient. If a send cannot earn its place in the calendar, it does not get one.
             </p>
           </div>
-        </div>
 
-        <ul className="flex flex-col gap-8">
-          {PRINCIPLES.map((principle, index) => (
-            <li
-              key={principle.id}
-              ref={(node) => {
-                principleRefs.current[index] = node;
-              }}
-              className="border-t border-black/10 pt-4"
-            >
-              <p className="text-[10px] font-medium tracking-[0.14em] text-neutral-400">{`0${index + 1}`}</p>
-              <h3 className="mt-3 text-[15px] font-bold tracking-[-0.02em]" style={{ color: INK }}>
-                {principle.title}
-              </h3>
-              <p className="mt-2 max-w-56 text-[12.5px] leading-relaxed text-neutral-500">{principle.description}</p>
-            </li>
-          ))}
-        </ul>
+          <div
+            ref={cardRef}
+            className="flex min-h-84 flex-col rounded-[18px] border border-black/5 shadow-[0_28px_70px_-34px_rgba(28,16,60,0.4)]"
+            style={{ backgroundColor: CARD, transformOrigin: "center center" }}
+          >
+            <div ref={cardInnerRef} className="flex h-full flex-col">
+              <div className="flex items-center justify-between gap-4 border-b border-black/5 px-5 py-4">
+                <div className="flex items-center gap-2.5">
+                  <span className="size-3.5 rounded-[5px]" style={{ backgroundColor: VIOLET }} />
+                  <p className="text-[13px] font-semibold" style={{ color: INK }}>
+                    Revenue report
+                  </p>
+                </div>
+                <p className="text-[10px] font-medium tracking-[0.18em] text-neutral-400 uppercase">Last 12 months</p>
+              </div>
+
+              <div className="m-5 grid grid-cols-2 rounded-[12px] border border-black/5">
+                {REPORT_STATS.map((stat, index) => (
+                  <div key={stat.id} className={index === 0 ? "border-r border-black/5 px-4 py-3.5" : "px-4 py-3.5"}>
+                    <p className="text-[9px] font-medium tracking-[0.16em] text-neutral-400 uppercase">{stat.label}</p>
+                    <p className="mt-1.5 text-[1.4rem] leading-none font-bold tracking-[-0.03em] tabular-nums" style={{ color: INK }}>
+                      {stat.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-auto border-t border-black/5 px-5 py-4">
+                <p className="text-[13px] font-semibold" style={{ color: INK }}>
+                  Twelve months, same team
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <ul className="flex flex-col gap-8">
+            {PRINCIPLES.map((principle, index) => (
+              <li
+                key={principle.id}
+                ref={(node) => {
+                  principleRefs.current[index] = node;
+                }}
+                className="border-t border-black/10 pt-4"
+              >
+                <p className="text-[10px] font-medium tracking-[0.14em] text-neutral-400">{`0${index + 1}`}</p>
+                <h3 className="mt-3 text-[15px] font-bold tracking-[-0.02em]" style={{ color: INK }}>
+                  {principle.title}
+                </h3>
+                <p className="mt-2 max-w-56 text-[12.5px] leading-relaxed text-neutral-500">{principle.description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

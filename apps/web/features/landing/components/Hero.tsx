@@ -160,10 +160,7 @@ function DashboardCard() {
           </div>
           <div className="mt-2 flex gap-2 sm:gap-3.5">
             {tab.bars.map((_, index) => (
-              <span
-                key={`${tab.id}-label-${index}`}
-                className="flex-1 text-center text-[10px] font-medium text-neutral-400 sm:text-[11px]"
-              >
+              <span key={`${tab.id}-label-${index}`} className="flex-1 text-center text-[10px] font-medium text-neutral-400 sm:text-[11px]">
                 {MONTH_LABELS[index % MONTH_LABELS.length]}
               </span>
             ))}
@@ -244,10 +241,7 @@ export default function Hero() {
             not{" "}
             <span className="relative inline-block">
               <span className="relative z-10">open rates</span>
-              <span
-                aria-hidden
-                className="hero-highlight absolute -inset-x-0.5 bottom-[0.1em] z-0 h-[0.2em] rounded-[1px] bg-[#FFD21F]"
-              />
+              <span aria-hidden className="hero-highlight absolute -inset-x-0.5 bottom-[0.1em] z-0 h-[0.2em] rounded-[1px] bg-[#FFD21F]" />
             </span>
             .
           </span>
