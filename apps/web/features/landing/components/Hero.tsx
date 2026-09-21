@@ -101,25 +101,30 @@ function DashboardCard() {
       <div aria-hidden className="pointer-events-none absolute -left-24 top-24 size-72 rounded-full bg-[#2F5BFF]/25 blur-3xl" />
 
       <div className="relative overflow-hidden rounded-[22px] border border-black/5 bg-white shadow-[0_28px_80px_-24px_rgba(47,91,255,0.5),0_12px_40px_-20px_rgba(15,23,42,0.16)]">
-        <div className="flex items-center gap-1 overflow-x-auto border-b border-black/5 px-5 pt-4 scrollbar-none sm:px-7">
-          {TABS.map((item) => {
-            const isActive = item.id === activeId;
-            return (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => setActiveId(item.id)}
-                className={cn(
-                  "relative flex shrink-0 items-center gap-2 px-3 pb-3.5 text-[13px] font-medium transition-colors",
-                  isActive ? "text-[#2F5BFF]" : "text-neutral-400 hover:text-neutral-600"
-                )}
-              >
-                {isActive && <span className="size-3.5 rounded-lg bg-[#2F5BFF]" />}
-                {item.label}
-                {isActive && <span className="absolute inset-x-2 -bottom-px h-0.5 rounded-full bg-[#2F5BFF]" />}
-              </button>
-            );
-          })}
+        <div className="relative">
+          <div className="flex items-center gap-1 overflow-x-auto border-b border-black/5 px-5 pt-4 scrollbar-none sm:px-7">
+            {TABS.map((item) => {
+              const isActive = item.id === activeId;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setActiveId(item.id)}
+                  className={cn(
+                    "relative flex shrink-0 items-center gap-2 px-3 pb-3.5 text-[13px] font-medium transition-colors",
+                    isActive ? "text-[#2F5BFF]" : "text-neutral-400 hover:text-neutral-600"
+                  )}
+                >
+                  {isActive && <span className="size-3.5 rounded-lg bg-[#2F5BFF]" />}
+                  {item.label}
+                  {isActive && <span className="absolute inset-x-2 -bottom-px h-0.5 rounded-full bg-[#2F5BFF]" />}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* fades the tab bar's edge instead of an abrupt clip when it overflows on narrow screens */}
+          <div aria-hidden className="pointer-events-none absolute top-0 right-0 bottom-0 w-8 bg-linear-to-l from-white to-transparent sm:w-12" />
         </div>
 
         <div className="grid grid-cols-2 border-b border-black/5 sm:grid-cols-4">
@@ -233,7 +238,7 @@ export default function Hero() {
         <Sparkle className="size-4" />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center px-6 pt-28 text-center sm:pt-40">
+      <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center px-6 pt-36 text-center sm:pt-40">
         <h1 className="text-[2.6rem] leading-[1.05] font-extrabold tracking-[-0.045em] sm:text-6xl lg:text-[4.75rem]">
           <span style={{ color: HERO_NAVY }}>Run on revenue,</span>
           <br />
