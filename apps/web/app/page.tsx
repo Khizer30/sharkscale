@@ -2,6 +2,7 @@ import BookACallLazy from "@features/landing/components/BookACallLazy";
 import BrandTicker from "@features/landing/components/BrandTicker";
 import Hero from "@features/landing/components/Hero";
 import LatestWorksLazy from "@features/landing/components/LatestWorksLazy";
+import PartnerBandLazy from "@features/landing/components/PartnerBandLazy";
 import RevenueProofLazy from "@features/landing/components/RevenueProofLazy";
 import ServicesShowcaseLazy from "@features/landing/components/ServicesShowcaseLazy";
 import SocialProofLazy from "@features/landing/components/SocialProofLazy";
@@ -22,7 +23,8 @@ export default function Home() {
         <BrandTicker className="mx-auto w-full max-w-260 px-4 sm:px-6" />
       </section>
       <WhatWeDoLazy />
-      <ServicesShowcaseLazy />
+      <PartnerBandLazy />
+      {/* <ServicesShowcaseLazy />
       <div
         aria-hidden
         style={{
@@ -47,7 +49,7 @@ export default function Home() {
           background: "linear-gradient(180deg, #ffffff 0%, #efe9e0 20%, #d9c3b4 38%, #b48d86 54%, #7d5378 68%, #45256a 82%, #2a1358 92%, #1e0f52 100%)"
         }}
       />
-      <FooterLazy />
+      <FooterLazy /> */}
     </main>
   );
 }

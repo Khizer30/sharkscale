@@ -36,11 +36,7 @@ function buildColumns(): Member[][] {
 
 function TeamCard({ member, cardRef }: { member: Member; cardRef: (el: HTMLDivElement | null) => void }) {
   return (
-    <div
-      ref={cardRef}
-      className="group relative overflow-hidden rounded-2xl"
-      style={{ aspectRatio: "456 / 560", willChange: "transform, opacity" }}
-    >
+    <div ref={cardRef} className="group relative overflow-hidden rounded-2xl" style={{ aspectRatio: "456 / 560", willChange: "transform, opacity" }}>
       <Image
         src={member.image}
         alt={member.name}
