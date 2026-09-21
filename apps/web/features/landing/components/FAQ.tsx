@@ -8,13 +8,11 @@ const INK = "#12141F";
 const FAQS = [
   {
     question: "How quickly do you actually go live?",
-    answer:
-      "Most accounts are live within two weeks: audit and strategy in week one, first flows written, built and shipped in week two."
+    answer: "Most accounts are live within two weeks: audit and strategy in week one, first flows written, built and shipped in week two."
   },
   {
     question: "Do we need to be on Klaviyo?",
-    answer:
-      "We work primarily in Klaviyo, but we can also build inside Mailchimp or Omnisend if that's where your list already lives."
+    answer: "We work primarily in Klaviyo, but we can also build inside Mailchimp or Omnisend if that's where your list already lives."
   },
   {
     question: "What list size makes this worth it?",
@@ -23,8 +21,7 @@ const FAQS = [
   },
   {
     question: "Who writes and designs the emails?",
-    answer:
-      "Our in-house copywriters and designers handle every send, briefed by strategists who know your brand, your list and your data."
+    answer: "Our in-house copywriters and designers handle every send, briefed by strategists who know your brand, your list and your data."
   },
   {
     question: "How do you report on results?",
@@ -32,8 +29,7 @@ const FAQS = [
   },
   {
     question: "What does it cost and how long is the commitment?",
-    answer:
-      "Pricing depends on list size and scope, but most retainers run month-to-month with no long-term lock-in."
+    answer: "Pricing depends on list size and scope, but most retainers run month-to-month with no long-term lock-in."
   }
 ] as const;
 
@@ -51,10 +47,7 @@ export default function FAQ() {
           {FAQS.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <div
-                key={faq.question}
-                className={cn("border-t border-dashed border-black/15 transition-colors duration-300", isOpen && "border-t-[#FFD21F]")}
-              >
+              <div key={faq.question} className={cn("border-t border-dashed border-black/15 transition-colors duration-300", isOpen && "border-t-[#FFD21F]")}>
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
@@ -67,15 +60,9 @@ export default function FAQ() {
                   <span className="min-w-0 flex-1 text-[clamp(17px,1.8vw,23px)] font-semibold tracking-[-0.02em]" style={{ color: INK }}>
                     {faq.question}
                   </span>
-                  <span
-                    className="relative flex size-9.5 flex-none items-center justify-center text-white"
-                    style={{ backgroundColor: INK }}
-                  >
+                  <span className="relative flex size-9.5 flex-none items-center justify-center text-white" style={{ backgroundColor: INK }}>
                     <Plus
-                      className={cn(
-                        "size-4 transition-all duration-300 ease-out",
-                        isOpen ? "scale-0 rotate-90 opacity-0" : "scale-100 rotate-0 opacity-100"
-                      )}
+                      className={cn("size-4 transition-all duration-300 ease-out", isOpen ? "scale-0 rotate-90 opacity-0" : "scale-100 rotate-0 opacity-100")}
                     />
                     <Minus
                       className={cn(
