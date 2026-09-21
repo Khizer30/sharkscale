@@ -35,12 +35,12 @@ export default function FooterWordmark() {
   }, []);
 
   return (
-    <div ref={wrapperRef} className="relative mt-16 h-[max(160px,22vw)] overflow-hidden sm:mt-24">
+    <div ref={wrapperRef} className="@container relative mt-16 h-[max(160px,22cqw)] overflow-hidden sm:mt-24">
       <div
         ref={textRef}
         className="absolute right-0 bottom-[-0.13em] left-0 text-center leading-[1.02] font-black tracking-[-0.052em] whitespace-nowrap select-none"
         style={{
-          fontSize: "16.6vw",
+          fontSize: "16.6cqw",
           backgroundImage: "linear-gradient(180deg, #ffffff 0%, #cfd6f5 34%, #9fadd9 62%, #5f6ea8 84%, #3a4680 100%)",
           backgroundClip: "text",
           WebkitBackgroundClip: "text",

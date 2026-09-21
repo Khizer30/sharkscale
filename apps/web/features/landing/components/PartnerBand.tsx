@@ -89,7 +89,7 @@ export default function PartnerBand() {
                 Book a teardown →
               </a>
               <a
-                href="#services"
+                href="#process"
                 className="inline-flex items-center gap-2.5 rounded-[10px] px-6 py-3.5 text-[14.5px] font-bold"
                 style={{ backgroundColor: "rgba(255,255,255,0.16)", color: "#ffffff" }}
               >

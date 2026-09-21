@@ -266,7 +266,7 @@ export default function Hero() {
             <ChevronRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </a>
           <a
-            href="#ourWork"
+            href="#revenueProof"
             data-cursor-magnetic
             data-cursor-text="View"
             className={cn(

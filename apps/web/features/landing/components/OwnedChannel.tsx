@@ -102,7 +102,7 @@ export default function OwnedChannel() {
           </p>
 
           <a
-            href="#contactUs"
+            href="#revenueProof"
             className="mt-7 inline-flex items-center gap-2.5 rounded-[10px] px-6 py-3.5 text-[14.5px] font-bold text-white"
             style={{ backgroundColor: BLUE }}
           >

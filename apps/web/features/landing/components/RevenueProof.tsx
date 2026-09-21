@@ -89,7 +89,7 @@ export default function RevenueProof() {
   }, []);
 
   return (
-    <section ref={wrapperRef} data-nav-theme="light" className="relative h-[250vh] w-full" style={{ backgroundColor: CREAM }}>
+    <section ref={wrapperRef} id="revenueProof" data-nav-theme="light" className="relative h-[250vh] w-full" style={{ backgroundColor: CREAM }}>
       <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden px-6 sm:px-10">
         <div
           aria-hidden

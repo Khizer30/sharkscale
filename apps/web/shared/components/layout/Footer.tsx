@@ -83,11 +83,19 @@ function FooterLinkColumn({ title, links }: { title: string; links: { label: str
     <div>
       <div className="mb-5 font-mono text-[11px] tracking-[0.16em] text-white/50 uppercase">{title}</div>
       <div className="flex flex-col gap-2.5 text-lg font-medium">
-        {links.map((link) => (
-          <a key={link.label} href={link.href} className="text-white transition-colors hover:text-white/75">
-            {link.label}
-          </a>
-        ))}
+        {links.map((link) => {
+          const isExternal = /^https?:\/\//.test(link.href);
+          return (
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-white transition-colors hover:text-white/75"
+              {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              {link.label}
+            </a>
+          );
+        })}
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ export default function FooterNewsletter() {
 
   return (
     <div className="min-w-62.5">
-      <h2 className="text-[clamp(26px,2.9vw,40px)] leading-[1.05] font-bold tracking-[-0.035em] text-white">Get the playbook:</h2>
+      <h2 className="text-[clamp(26px,2.9vw,40px)] leading-[1.05] font-bold tracking-[-0.035em] text-white">Get the playbook</h2>
 
       <form onSubmit={handleSubmit} className="mt-8 flex max-w-105 items-center gap-0 border-b border-dashed border-white/35 pb-2">
         <input

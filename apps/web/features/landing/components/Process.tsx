@@ -129,7 +129,7 @@ export default function Process() {
   }, []);
 
   return (
-    <section className="w-full px-6 py-20 sm:px-10 sm:py-28" style={{ backgroundColor: BLUE, color: "#ffffff" }}>
+    <section id="process" className="w-full px-6 py-20 sm:px-10 sm:py-28" style={{ backgroundColor: BLUE, color: "#ffffff" }}>
       <div className="mx-auto grid w-full max-w-345 items-start gap-14 lg:grid-cols-2">
         <div className="flex flex-col justify-center py-5 lg:sticky lg:top-24 lg:h-[calc(100vh-6rem)] lg:min-h-120">
           <p className="text-[clamp(70px,9vw,150px)] leading-[0.82] font-extrabold tracking-[-0.06em]">
