@@ -47,7 +47,7 @@ const WORKS = [
     muted: "rgba(18,20,31,0.62)",
     navTheme: "light",
     image: {
-      src: unsplash("1419242902214-272b3f66ee7a"),
+      src: unsplash("1444703686981-a3abbc4d4fe3"),
       alt: "Starry night sky over a dark landscape",
       grayscale: false
     }
@@ -77,8 +77,8 @@ const WORKS = [
     muted: "rgba(255,255,255,0.7)",
     navTheme: "dark",
     image: {
-      src: unsplash("1449505278894-297fdb3edbc1"),
-      alt: "Brown leather boots on a wooden floor",
+      src: unsplash("1551288049-bebda4e38f71"),
+      alt: "Analytics dashboard displayed on a laptop screen",
       grayscale: false
     }
   }
