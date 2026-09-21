@@ -13,7 +13,6 @@ export default function CustomCursor() {
   const [touchDevice, setTouchDevice] = useState(true);
   const [cursorText, setCursorText] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [isLight, setIsLight] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -72,10 +71,6 @@ export default function CustomCursor() {
         target.closest("a, button, [role='button'], input[type='submit'], [data-cursor-pointer]")
       );
       setIsHovered(isInteractive || Boolean(textEl) || Boolean(magEl));
-
-      // 5. Check theme of section
-      const lightSection = target.closest<HTMLElement>('[data-nav-theme="light"]');
-      setIsLight(Boolean(lightSection));
     };
 
     const onMouseDown = () => setIsClicking(true);
@@ -144,7 +139,7 @@ export default function CustomCursor() {
   const isBadge = Boolean(cursorText);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[99999] overflow-hidden">
+    <div className="pointer-events-none fixed inset-0 z-99999 overflow-hidden">
       {/* Precision Center Dot */}
       <div
         ref={dotRef}
@@ -158,10 +153,8 @@ export default function CustomCursor() {
           style={{
             width: isHovered ? 4 : 6,
             height: isHovered ? 4 : 6,
-            backgroundColor: isLight ? colors.tertiary : colors.secondary,
-            boxShadow: isLight
-              ? "0 0 8px rgba(27, 10, 80, 0.4)"
-              : "0 0 10px rgba(255, 210, 31, 0.8)"
+            backgroundColor: colors.secondary,
+            boxShadow: "0 0 10px rgba(255, 210, 31, 0.8)"
           }}
         />
       </div>
@@ -186,12 +179,10 @@ export default function CustomCursor() {
             <div
               className="flex items-center rounded-full px-3.5 py-1.5 shadow-2xl backdrop-blur-md animate-in fade-in zoom-in-95 duration-200"
               style={{
-                backgroundColor: isLight ? colors.tertiary : colors.secondary,
-                color: isLight ? colors.white : colors.primary,
-                border: isLight ? "1px solid rgba(255, 255, 255, 0.2)" : "1px solid rgba(255, 210, 31, 0.4)",
-                boxShadow: isLight
-                  ? "0 8px 24px rgba(27, 10, 80, 0.25)"
-                  : "0 8px 28px rgba(255, 210, 31, 0.35)"
+                backgroundColor: colors.secondary,
+                color: colors.primary,
+                border: "1px solid rgba(255, 210, 31, 0.4)",
+                boxShadow: "0 8px 28px rgba(255, 210, 31, 0.35)"
               }}
             >
               <span className="text-[11px] font-extrabold uppercase tracking-widest whitespace-nowrap">
@@ -207,22 +198,14 @@ export default function CustomCursor() {
                 height: isHovered ? 44 : 28,
                 borderWidth: isHovered ? "2px" : "1.5px",
                 borderStyle: "solid",
-                borderColor: isLight
-                  ? isHovered
-                    ? colors.tertiary
-                    : "rgba(27, 10, 80, 0.3)"
-                  : isHovered
-                    ? colors.secondary
-                    : "rgba(255, 210, 31, 0.4)",
+                borderColor: isHovered
+                  ? colors.secondary
+                  : "rgba(255, 210, 31, 0.4)",
                 backgroundColor: isHovered
-                  ? isLight
-                    ? "rgba(27, 10, 80, 0.08)"
-                    : "rgba(255, 210, 31, 0.15)"
+                  ? "rgba(255, 210, 31, 0.15)"
                   : "transparent",
                 boxShadow: isHovered
-                  ? isLight
-                    ? "0 0 16px rgba(27, 10, 80, 0.15)"
-                    : "0 0 20px rgba(255, 210, 31, 0.3)"
+                  ? "0 0 20px rgba(255, 210, 31, 0.3)"
                   : "none"
               }}
             />

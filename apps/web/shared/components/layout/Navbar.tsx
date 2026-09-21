@@ -61,8 +61,8 @@ export default function Navbar() {
 
   const currentHeight = maxHeight - (maxHeight - minHeight) * scrollProgress;
   const horizontalInset = 16 + scrollProgress * 8;
-  const minLogoHeight = 36;
-  const maxLogoHeight = 56;
+  const minLogoHeight = 48;
+  const maxLogoHeight = 72;
   const logoHeight = maxLogoHeight - (maxLogoHeight - minLogoHeight) * scrollProgress;
   const gapScale = 1 - scrollProgress * 0.3;
 

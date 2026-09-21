@@ -243,13 +243,13 @@ export default function Hero() {
           <span className="hero-phrase" style={{ color: HERO_BLUE }}>
             not{" "}
             <span className="relative inline-block">
-              <span className="relative z-10">open</span>
+              <span className="relative z-10">open rates</span>
               <span
                 aria-hidden
                 className="hero-highlight absolute -inset-x-0.5 bottom-[0.1em] z-0 h-[0.2em] rounded-[1px] bg-[#FFD21F]"
               />
-            </span>{" "}
-            rates.
+            </span>
+            .
           </span>
         </h1>
 
