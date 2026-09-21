@@ -4,6 +4,7 @@ import Hero from "@features/landing/components/Hero";
 import LatestWorksLazy from "@features/landing/components/LatestWorksLazy";
 import OwnedChannelLazy from "@features/landing/components/OwnedChannelLazy";
 import PartnerBandLazy from "@features/landing/components/PartnerBandLazy";
+import ProcessLazy from "@features/landing/components/ProcessLazy";
 import RevenueProofLazy from "@features/landing/components/RevenueProofLazy";
 import ServicesShowcaseLazy from "@features/landing/components/ServicesShowcaseLazy";
 import SocialProofLazy from "@features/landing/components/SocialProofLazy";
@@ -26,6 +27,7 @@ export default function Home() {
       <WhatWeDoLazy />
       <PartnerBandLazy />
       <OwnedChannelLazy />
+      <ProcessLazy />
       {/* <ServicesShowcaseLazy />
       <div
         aria-hidden
