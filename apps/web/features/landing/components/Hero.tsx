@@ -205,7 +205,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="home" data-nav-theme="light" className="relative flex min-h-svh w-full flex-col overflow-hidden bg-[#FBFBFD] text-[#12141F]">
+    <section ref={sectionRef} id="home" data-nav-theme="light" className="relative flex min-h-svh w-full flex-col overflow-hidden bg-white text-[#12141F]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_85%_-10%,rgba(255,210,31,0.22)_0%,transparent_55%),radial-gradient(ellipse_70%_45%_at_10%_20%,rgba(47,91,255,0.06)_0%,transparent_60%),radial-gradient(ellipse_90%_40%_at_50%_100%,rgba(47,91,255,0.10)_0%,transparent_70%)]"
