@@ -64,13 +64,13 @@ export default function DotsToPlusIcon({ onClick, className, color = colors.whit
 
       <div ref={verticalDotsRef} className="absolute flex flex-col items-center gap-0.5 opacity-0" style={{ transform: "scale(0.5)" }}>
         {Array.from({ length: 5 }).map((_, i) => (
-          <span key={`v-${i}`} className="size-[3px] rounded-full" style={{ backgroundColor: color }} />
+          <span key={`v-${i}`} className="size-0.75 rounded-full" style={{ backgroundColor: color }} />
         ))}
       </div>
 
       <div ref={horizontalDotsRef} className="absolute flex items-center gap-0.5 opacity-0" style={{ transform: "scale(0.5)" }}>
         {Array.from({ length: 5 }).map((_, i) => (
-          <span key={`h-${i}`} className="size-[3px] rounded-full" style={{ backgroundColor: color }} />
+          <span key={`h-${i}`} className="size-0.75 rounded-full" style={{ backgroundColor: color }} />
         ))}
       </div>
     </div>

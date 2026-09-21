@@ -64,11 +64,11 @@ export default function NavOverlay({ onClose }: NavOverlayProps) {
 
   return (
     <>
-      <div ref={backdropRef} className="fixed inset-0 z-[998]" style={{ opacity: 0 }} onClick={handleClose} />
+      <div ref={backdropRef} className="fixed inset-0 z-998" style={{ opacity: 0 }} onClick={handleClose} />
 
       <div
         ref={cardRef}
-        className="fixed right-4 top-24 z-[999] w-72 max-w-[calc(100vw-2rem)] rounded-2xl p-5 shadow-2xl"
+        className="fixed right-4 top-24 z-999 w-72 max-w-[calc(100vw-2rem)] rounded-2xl p-5 shadow-2xl"
         style={{ backgroundColor: colors.white }}
       >
         <p className="mb-3 text-xs font-medium uppercase tracking-widest" style={{ color: `${colors.tertiary}80` }}>
