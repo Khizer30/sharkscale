@@ -168,6 +168,7 @@ export default function Tools() {
   const sectionRef = useRef<HTMLElement>(null);
   const layerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const badgeRef = useRef<HTMLSpanElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const paraRef = useRef<HTMLParagraphElement>(null);
 
@@ -196,7 +197,7 @@ export default function Tools() {
         });
       });
 
-      gsap.set([headingRef.current, paraRef.current], { y: 32, opacity: 0 });
+      gsap.set([badgeRef.current, headingRef.current, paraRef.current].filter(Boolean), { y: 32, opacity: 0 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -218,12 +219,12 @@ export default function Tools() {
       });
 
       tl.to(
-        [headingRef.current, paraRef.current],
+        [badgeRef.current, headingRef.current, paraRef.current].filter(Boolean),
         {
           y: 0,
           opacity: 1,
           duration: 0.6,
-          stagger: 0.15,
+          stagger: 0.12,
           ease: "power3.out"
         },
         "-=0.35"
@@ -305,11 +306,18 @@ export default function Tools() {
       </div>
 
       {/* Center text */}
-      <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
-        <h2 ref={headingRef} className="text-4xl font-extrabold uppercase tracking-tight sm:text-5xl lg:text-6xl">
-          <span className="bg-linear-to-r from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent">Tools We Work With</span>
+      <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+        <span
+          ref={badgeRef}
+          className="inline-block rounded-full border px-3.5 py-1.5 text-[12.5px] font-bold tracking-[0.02em]"
+          style={{ color: "#123CE8", borderColor: "#123CE859" }}
+        >
+          Integrations
+        </span>
+        <h2 ref={headingRef} className="mt-4 text-center text-[clamp(32px,4.4vw,62px)] leading-[1.04] font-extrabold uppercase tracking-tight">
+          <span className="bg-linear-to-r from-blue-600 via-indigo-600 to-blue-950 bg-clip-text text-transparent">Tools We Work With</span>
         </h2>
-        <p ref={paraRef} className="max-w-md text-lg text-tertiary/60 sm:text-xl">
+        <p ref={paraRef} className="mt-4 max-w-lg text-center text-[16.5px] leading-relaxed text-[#12141F]/70">
           We integrate with the platforms that power your business—helping brands boost client acquisition by up to 90%.
         </p>
       </div>
