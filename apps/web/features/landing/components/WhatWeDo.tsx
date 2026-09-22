@@ -116,7 +116,7 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
   return (
     <article
       data-nav-theme={work.navTheme === "light" ? "light" : undefined}
-      className="sticky top-0 grid h-dvh grid-rows-[auto_minmax(11rem,1fr)_auto] overflow-hidden rounded-t-[2.25rem] shadow-[0_-18px_50px_rgba(18,20,31,0.18)] md:grid-cols-2 md:grid-rows-[1fr_auto]"
+      className="sticky top-0 grid h-[75dvh] grid-rows-[auto_minmax(11rem,1fr)_auto] overflow-hidden rounded-t-[2.25rem] shadow-[0_-18px_50px_rgba(18,20,31,0.18)] md:grid-cols-2 md:grid-rows-[1fr_auto]"
       style={{ zIndex: index + 1, background: work.background, color: work.color }}
     >
       <h3
@@ -136,16 +136,6 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
           className={work.image.grayscale ? "object-cover grayscale" : "object-cover"}
           draggable={false}
         />
-      </div>
-
-      <div className="px-6 pt-4 pb-8 sm:px-10 md:col-start-1 md:row-start-2 md:px-12 md:pb-10 lg:px-14 lg:pb-12">
-        <ul className="flex flex-col gap-1.5">
-          {work.tags.map((tag) => (
-            <li key={tag} className="text-[10px] font-semibold tracking-[0.16em] uppercase lg:whitespace-nowrap sm:text-[11px]" style={{ color: work.muted }}>
-              {tag}
-            </li>
-          ))}
-        </ul>
       </div>
     </article>
   );

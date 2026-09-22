@@ -15,10 +15,10 @@ if (typeof window !== "undefined") {
 type Member = { name: string; role: string; image: StaticImageData };
 
 const members: Member[] = [
-  { name: "Shazaib", role: "Founder & CEO", image: shazaib },
-  { name: "Yasir", role: "Sales", image: yasir },
-  { name: "Zarlish", role: "Human Resources", image: zarlish },
-  { name: "Fatima", role: "Human Resources", image: fatimah }
+  { name: "Shahzaib Farooq", role: "Founder and CEO", image: shazaib },
+  { name: "Yasir Khalil", role: "Co-founder and Marketing Lead", image: yasir },
+  { name: "Zarlish Farooq", role: "Co-founder and Human Resource Lead", image: zarlish },
+  { name: "Fatima Ali", role: "Human Resource Executive", image: fatimah }
 ];
 
 const COLUMN_COUNT = 4;

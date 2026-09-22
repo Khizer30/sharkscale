@@ -62,26 +62,30 @@ export default function RevenueProof() {
         }
       });
 
+      // Everything below finishes by ~0.68 of scroll progress, leaving the
+      // remaining ~0.32 as a dwell period where the fully-revealed card sits
+      // still before the section unpins and scrolls away.
       if (cardRef.current) {
-        tl.fromTo(cardRef.current, { scale: 0.34 }, { scale: 1, ease: "power2.inOut", duration: 0.6 }, 0);
+        tl.fromTo(cardRef.current, { scale: 0.34 }, { scale: 1, ease: "power2.inOut", duration: 0.45 }, 0);
       }
 
       if (cardInnerRef.current) {
-        tl.fromTo(cardInnerRef.current, { opacity: 0.12 }, { opacity: 1, ease: "none", duration: 0.42 }, 0.3);
+        tl.fromTo(cardInnerRef.current, { opacity: 0.12 }, { opacity: 1, ease: "none", duration: 0.32 }, 0.22);
       }
 
       if (headingRef.current) {
-        tl.fromTo(headingRef.current, { opacity: 0, y: 28 }, { opacity: 1, y: 0, ease: "none", duration: 0.43 }, 0.42);
+        tl.fromTo(headingRef.current, { opacity: 0, y: 28 }, { opacity: 1, y: 0, ease: "none", duration: 0.32 }, 0.32);
       }
 
       const principles = principleRefs.current.filter((el): el is HTMLLIElement => el !== null);
       principles.forEach((el, index) => {
-        const start = 0.46 + index * 0.09;
-        const end = 0.86 + index * 0.05;
+        const start = 0.35 + index * 0.07;
+        const end = 0.6 + index * 0.04;
         tl.fromTo(el, { opacity: 0, y: 26 }, { opacity: 1, y: 0, ease: "none", duration: end - start }, start);
       });
 
-      // Pad the timeline so its total duration maps exactly to scroll progress 0-1.
+      // Pad the timeline so its total duration maps exactly to scroll progress 0-1,
+      // holding the fully-revealed state for the tail end of the scroll.
       tl.to({}, { duration: 0.01 }, 1);
     });
 
@@ -89,7 +93,7 @@ export default function RevenueProof() {
   }, []);
 
   return (
-    <section ref={wrapperRef} id="revenueProof" data-nav-theme="light" className="relative h-[250vh] w-full" style={{ backgroundColor: CREAM }}>
+    <section ref={wrapperRef} id="revenueProof" data-nav-theme="light" className="relative h-[190vh] w-full" style={{ backgroundColor: CREAM }}>
       <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden px-6 sm:px-10">
         <div
           aria-hidden
