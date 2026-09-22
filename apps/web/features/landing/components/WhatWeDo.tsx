@@ -1,3 +1,7 @@
+import campaignCalendarImage from "@shared/assets/campaignCalendar.avif";
+import designAndBuildImage from "@shared/assets/designAndBuild.avif";
+import flowArchitectureImage from "@shared/assets/flowArchitecture.avif";
+import testingAndReportingImage from "@shared/assets/testingAndReporting.avif";
 import Image from "next/image";
 
 const SURFACE = "#F3F4F8";
@@ -16,10 +20,6 @@ const FLOW_TICKER = [
   "Sunset flow"
 ] as const;
 
-function unsplash(id: string): string {
-  return `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1800&q=80`;
-}
-
 const WORKS = [
   {
     id: "flow",
@@ -32,8 +32,8 @@ const WORKS = [
     muted: "rgba(255,255,255,0.72)",
     navTheme: "dark",
     image: {
-      src: unsplash("1540959733332-eab4deabeeaf"),
-      alt: "Crowds moving through a night-time city crossing",
+      src: flowArchitectureImage,
+      alt: "Flow architecture diagram",
       grayscale: false
     }
   },
@@ -47,8 +47,8 @@ const WORKS = [
     muted: "rgba(18,20,31,0.62)",
     navTheme: "light",
     image: {
-      src: unsplash("1444703686981-a3abbc4d4fe3"),
-      alt: "Starry night sky over a dark landscape",
+      src: campaignCalendarImage,
+      alt: "Campaign calendar planning",
       grayscale: false
     }
   },
@@ -62,8 +62,8 @@ const WORKS = [
     muted: "rgba(255,255,255,0.7)",
     navTheme: "dark",
     image: {
-      src: unsplash("1501612780327-45045538702b"),
-      alt: "Band performing on a darkened concert stage",
+      src: designAndBuildImage,
+      alt: "Email design and template build",
       grayscale: true
     }
   },
@@ -77,8 +77,8 @@ const WORKS = [
     muted: "rgba(255,255,255,0.7)",
     navTheme: "dark",
     image: {
-      src: unsplash("1551288049-bebda4e38f71"),
-      alt: "Analytics dashboard displayed on a laptop screen",
+      src: testingAndReportingImage,
+      alt: "Testing and reporting analytics dashboard",
       grayscale: false
     }
   }
@@ -131,7 +131,7 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
           src={work.image.src}
           alt={work.image.alt}
           fill
-          unoptimized
+          priority
           sizes="(max-width: 767px) 100vw, 50vw"
           className={work.image.grayscale ? "object-cover grayscale" : "object-cover"}
           draggable={false}
