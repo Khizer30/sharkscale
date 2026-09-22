@@ -52,7 +52,11 @@ export default function RevenueProof() {
 
     // Card scale, card-content fade and the two text columns are all scrubbed
     // off a single scroll-linked timeline (0 -> 1) while the section is pinned.
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
+    // This pin+scrub treatment only runs at `lg` and up: below that the grid
+    // stacks vertically and is taller than one screen, so pinning it inside a
+    // fixed-height, overflow-hidden container would clip content top and
+    // bottom before the scrub could ever reveal it.
+    mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapper,
@@ -89,12 +93,38 @@ export default function RevenueProof() {
       tl.to({}, { duration: 0.01 }, 1);
     });
 
+    // Below `lg` the section is a normal, non-pinned block, so each piece
+    // simply fades in as it naturally scrolls into view instead of being
+    // scrubbed against a pin that no longer exists.
+    mm.add("(max-width: 1023.98px) and (prefers-reduced-motion: no-preference)", () => {
+      const principles = principleRefs.current.filter((el): el is HTMLLIElement => el !== null);
+      const targets: HTMLElement[] = [headingRef.current, cardRef.current, ...principles].filter(
+        (el): el is HTMLDivElement | HTMLLIElement => el !== null
+      );
+
+      gsap.set(targets, { opacity: 0, y: 24 });
+
+      targets.forEach((el) => {
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 88%",
+            once: true
+          }
+        });
+      });
+    });
+
     return () => mm.revert();
   }, []);
 
   return (
-    <section ref={wrapperRef} id="revenueProof" data-nav-theme="light" className="relative h-[190vh] w-full" style={{ backgroundColor: CREAM }}>
-      <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden px-6 sm:px-10">
+    <section ref={wrapperRef} id="revenueProof" data-nav-theme="light" className="relative w-full lg:h-[190vh]" style={{ backgroundColor: CREAM }}>
+      <div className="flex w-full items-center justify-center px-6 py-20 sm:px-10 lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden lg:py-0">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"

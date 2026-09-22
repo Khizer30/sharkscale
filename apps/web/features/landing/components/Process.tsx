@@ -174,7 +174,7 @@ export default function Process() {
               ref={(el) => {
                 phaseRefs.current[index] = el;
               }}
-              className={`relative min-h-[62vh] ${index === PHASES.length - 1 ? "pb-10" : "pb-16"}`}
+              className={`relative min-h-[38vh] ${index === PHASES.length - 1 ? "pb-6" : "pb-10"}`}
               style={{
                 opacity: 0.3,
                 transform: "translateY(22px)",

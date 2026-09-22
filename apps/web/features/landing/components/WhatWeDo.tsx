@@ -116,17 +116,17 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
   return (
     <article
       data-nav-theme={work.navTheme === "light" ? "light" : undefined}
-      className="sticky top-0 grid h-[75dvh] grid-rows-[auto_minmax(11rem,1fr)_auto] overflow-hidden rounded-t-[2.25rem] shadow-[0_-18px_50px_rgba(18,20,31,0.18)] md:grid-cols-2 md:grid-rows-[1fr_auto]"
+      className="sticky top-0 grid h-[75dvh] grid-rows-[auto_minmax(11rem,1fr)_auto] overflow-hidden shadow-[0_-18px_50px_rgba(18,20,31,0.18)] md:grid-cols-2 md:grid-rows-[1fr_auto]"
       style={{ zIndex: index + 1, background: work.background, color: work.color }}
     >
       <h3
-        className="self-start px-6 pt-20 font-extrabold tracking-[-0.045em] sm:px-10 md:col-start-1 md:row-start-1 md:px-12 md:pt-24 lg:px-14 lg:pt-28"
+        className="self-start px-6 pt-20 pb-6 font-extrabold tracking-[-0.045em] sm:px-10 sm:pb-8 md:col-start-1 md:row-start-1 md:px-12 md:pt-24 md:pb-0 lg:px-14 lg:pt-28"
         style={{ fontSize: "clamp(2.35rem, 6vw, 5.25rem)", lineHeight: 0.95, maxWidth: "14ch" }}
       >
         {work.title}
       </h3>
 
-      <div className="relative mx-5 min-h-0 overflow-hidden rounded-2xl bg-black/20 sm:mx-8 md:col-start-2 md:row-span-2 md:row-start-1 md:mx-0 md:rounded-none">
+      <div className="relative mx-5 mb-6 min-h-0 overflow-hidden rounded-2xl bg-black/20 sm:mx-8 sm:mb-8 md:col-start-2 md:row-span-2 md:row-start-1 md:mx-0 md:mb-0 md:rounded-none">
         <Image
           src={work.image.src}
           alt={work.image.alt}

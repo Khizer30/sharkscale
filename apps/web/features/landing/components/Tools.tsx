@@ -43,8 +43,8 @@ const tools: Tool[] = [
     seed: 0,
     mx: 3,
     my: 5,
-    mw: "clamp(44px,13vw,64px)",
-    mh: "clamp(44px,13vw,64px)"
+    mw: "clamp(60px,17vw,86px)",
+    mh: "clamp(60px,17vw,86px)"
   },
   {
     name: "Shopify",
@@ -56,8 +56,8 @@ const tools: Tool[] = [
     seed: 1,
     mx: 42,
     my: 3,
-    mw: "clamp(44px,13vw,64px)",
-    mh: "clamp(44px,13vw,64px)"
+    mw: "clamp(60px,17vw,86px)",
+    mh: "clamp(60px,17vw,86px)"
   },
   {
     name: "Mailchimp",
@@ -67,10 +67,10 @@ const tools: Tool[] = [
     w: "clamp(92px,9.5vw,144px)",
     h: "clamp(92px,9.5vw,144px)",
     seed: 2,
-    mx: 78,
+    mx: 72,
     my: 7,
-    mw: "clamp(44px,13vw,64px)",
-    mh: "clamp(44px,13vw,64px)"
+    mw: "clamp(60px,17vw,86px)",
+    mh: "clamp(60px,17vw,86px)"
   },
   {
     name: "HubSpot",
@@ -82,8 +82,8 @@ const tools: Tool[] = [
     seed: 3,
     mx: 5,
     my: 21,
-    mw: "clamp(88px,24vw,120px)",
-    mh: "clamp(30px,8vw,40px)"
+    mw: "clamp(112px,30vw,152px)",
+    mh: "clamp(38px,10vw,50px)"
   },
   {
     name: "WooCommerce",
@@ -95,8 +95,8 @@ const tools: Tool[] = [
     seed: 4,
     mx: 55,
     my: 20,
-    mw: "clamp(88px,24vw,120px)",
-    mh: "clamp(30px,8vw,40px)"
+    mw: "clamp(112px,30vw,152px)",
+    mh: "clamp(38px,10vw,50px)"
   },
   {
     name: "Omnisend",
@@ -108,8 +108,8 @@ const tools: Tool[] = [
     seed: 5,
     mx: 6,
     my: 78,
-    mw: "clamp(88px,24vw,120px)",
-    mh: "clamp(30px,8vw,40px)"
+    mw: "clamp(112px,30vw,152px)",
+    mh: "clamp(38px,10vw,50px)"
   },
   {
     name: "Zapier",
@@ -121,8 +121,8 @@ const tools: Tool[] = [
     seed: 6,
     mx: 52,
     my: 82,
-    mw: "clamp(88px,24vw,120px)",
-    mh: "clamp(30px,8vw,40px)"
+    mw: "clamp(112px,30vw,152px)",
+    mh: "clamp(38px,10vw,50px)"
   },
   {
     name: "Google Analytics",
@@ -134,8 +134,8 @@ const tools: Tool[] = [
     seed: 7,
     mx: 30,
     my: 50,
-    mw: "clamp(76px,20vw,104px)",
-    mh: "clamp(38px,10vw,52px)"
+    mw: "clamp(96px,26vw,132px)",
+    mh: "clamp(48px,13vw,66px)"
   },
   {
     name: "Notion",
@@ -145,10 +145,10 @@ const tools: Tool[] = [
     w: "clamp(88px,9vw,140px)",
     h: "clamp(88px,9vw,140px)",
     seed: 8,
-    mx: 80,
+    mx: 73,
     my: 58,
-    mw: "clamp(44px,13vw,64px)",
-    mh: "clamp(44px,13vw,64px)"
+    mw: "clamp(60px,17vw,86px)",
+    mh: "clamp(60px,17vw,86px)"
   }
 ];
 
