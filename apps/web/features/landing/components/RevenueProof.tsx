@@ -19,19 +19,19 @@ const REPORT_STATS = [
 
 const PRINCIPLES = [
   {
-    id: "owned",
-    title: "Owned, not rented",
-    description: "No algorithm sits between you and the person who already bought."
+    id: "traffic",
+    title: "More from existing traffic",
+    description: "Turn the customers you already paid to acquire into more revenue."
   },
   {
-    id: "compounding",
-    title: "Compounding, not campaigns",
-    description: "Flows earn every day. The calendar adds to them, it does not replace them."
+    id: "flows",
+    title: "Flows that keep earning",
+    description: "Automations generated €25,741 without depending on another campaign send."
   },
   {
-    id: "attributed",
-    title: "Attributed, not assumed",
-    description: "Every number we report traces back to a send you approved."
+    id: "retention",
+    title: "Retention that compounds",
+    description: "Better journeys bring customers back, increasing repeat purchases, AOV, and LTV over time."
   }
 ] as const;
 
@@ -95,12 +95,14 @@ export default function RevenueProof() {
               One number that matters
             </p>
             <h2 className="mt-4 text-[2.4rem] leading-[1.05] font-extrabold tracking-[-0.045em] sm:text-[2.7rem]" style={{ color: INK }}>
-              Every send,
+              36% of revenue.
               <br />
-              measured.
+              From email.
             </h2>
             <p className="mt-5 max-w-72 text-[13px] leading-relaxed text-neutral-500">
-              Flows, campaigns and segments all report into revenue per recipient. If a send cannot earn its place in the calendar, it does not get one.
+              In just 30 days, email generated{" "}
+              <span className="font-semibold text-[#12141F]">€35,294 in attributed revenue</span> for HerbellaVita. Not from more ad spend, but from better
+              flows, campaigns, segmentation, and retention.
             </p>
           </div>
 
@@ -113,8 +115,8 @@ export default function RevenueProof() {
               <div className="flex items-center justify-between gap-4 border-b border-black/5 px-5 py-4">
                 <div className="flex items-center gap-2.5">
                   <span className="size-3.5 rounded-[5px]" style={{ backgroundColor: VIOLET }} />
-                  <p className="text-[13px] font-semibold tracking-[0.06em] uppercase" style={{ color: INK }}>
-                    Herbellavita
+                  <p className="text-[13px] font-semibold" style={{ color: INK }}>
+                    HerbellaVita
                   </p>
                 </div>
                 <p className="text-[10px] font-medium tracking-[0.18em] text-neutral-400 uppercase">Last 30 days</p>
@@ -152,7 +154,15 @@ export default function RevenueProof() {
                 <h3 className="mt-3 text-[15px] font-bold tracking-[-0.02em]" style={{ color: INK }}>
                   {principle.title}
                 </h3>
-                <p className="mt-2 max-w-56 text-[12.5px] leading-relaxed text-neutral-500">{principle.description}</p>
+                <p className="mt-2 max-w-56 text-[12.5px] leading-relaxed text-neutral-500">
+                  {principle.id === "flows" ? (
+                    <>
+                      Automations generated <span className="font-semibold text-[#12141F]">€25,741</span> without depending on another campaign send.
+                    </>
+                  ) : (
+                    principle.description
+                  )}
+                </p>
               </li>
             ))}
           </ul>
