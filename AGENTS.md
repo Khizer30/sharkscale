@@ -70,4 +70,4 @@ pnpm --filter nestjs db:studio     # Launch Drizzle Studio
 
 - Never edit generated files directly (`drizzle/meta/`, build artifacts in `dist/`, `.next/`).
 - Enforce strict typing—do not introduce `any` or disable ESLint rules without explicit justification.
-- Before completing tasks, always run `pnpm typecheck` and `pnpm lint`.
+- Never run `pnpm lint`, `pnpm format`, or `pnpm build` after tasks given by the user to save time; only run them when explicitly instructed or when making and executing a comprehensive plan.

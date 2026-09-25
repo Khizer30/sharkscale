@@ -35,4 +35,4 @@ Run commands from root using `pnpm`:
 - **Backend Architecture**: Enforce DDD boundaries in `apps/api`. Keep controllers in `presentation/`, entities/interfaces in `domain/`, database models/repositories in `infrastructure/`, and business logic in `services/`.
 - **Frontend Architecture**: Keep feature-specific components, hooks, and types inside `apps/web/features/<feature>/`. Only place cross-cutting primitives in `apps/web/shared/`.
 - **Type Safety**: Strictly avoid `any`. Ensure all TypeScript checks pass (`pnpm typecheck`).
-- **Code Quality**: Ensure linting and formatting pass with zero errors (`pnpm lint`, `pnpm format`).
+- **Task Execution**: Never run `pnpm lint`, `pnpm format`, or `pnpm build` after tasks given by the user to save time; only run them when explicitly instructed or when making and executing a comprehensive plan.
