@@ -1,6 +1,14 @@
 "use client";
+import alia from "@shared/assets/alia.webp";
+import analytics from "@shared/assets/analytics.webp";
+import campaigns1 from "@shared/assets/campaigns_1.webp";
+import campaigns2 from "@shared/assets/campaigns_2.webp";
+import deliverability from "@shared/assets/deliverability.webp";
+import flows from "@shared/assets/flows.webp";
+import loop from "@shared/assets/loop.webp";
 import { cn } from "@shared/lib/utils";
-import { ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image, { type StaticImageData } from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const PARALLAX_STRENGTH = 16;
@@ -11,65 +19,43 @@ const TABS = [
   {
     id: "analytics",
     label: "Analytics",
-    stats: [
-      { label: "Contacted", value: "128,400" },
-      { label: "Opened", value: "61,930" },
-      { label: "Replied", value: "4,180" },
-      { label: "Placed order", value: "9,742" }
-    ],
-    bars: [18, 24, 30, 36, 48, 54, 58, 52, 66, 78, 90, 100]
+    images: [{ src: analytics, alt: "Business performance summary with total revenue and attributed revenue" }]
   },
   {
     id: "flows",
     label: "Flows",
-    stats: [
-      { label: "Active flows", value: "24" },
-      { label: "Enrolled", value: "86,210" },
-      { label: "Converted", value: "7,940" },
-      { label: "Flow revenue", value: "$412k" }
-    ],
-    bars: [28, 32, 30, 38, 44, 58, 62, 70, 68, 80, 88, 96]
+    images: [{ src: flows, alt: "Top performing flows, including welcome, checkout, and post-purchase series" }]
   },
   {
     id: "campaigns",
     label: "Campaigns",
-    stats: [
-      { label: "Sent", value: "42" },
-      { label: "Opened", value: "54,180" },
-      { label: "Clicked", value: "9,260" },
-      { label: "Campaign revenue", value: "$286k" }
-    ],
-    bars: [22, 26, 40, 34, 46, 42, 60, 55, 72, 76, 84, 92]
+    images: [
+      { src: campaigns1, alt: "Campaign results with a 47.91% open rate and €1,423 in revenue" },
+      { src: campaigns2, alt: "Campaign results with a 69.33% open rate and €1,641 in revenue" }
+    ]
   },
   {
-    id: "segments",
-    label: "Segments",
-    stats: [
-      { label: "Live segments", value: "18" },
-      { label: "In-market", value: "31,450" },
-      { label: "VIP", value: "4,920" },
-      { label: "Winback", value: "12,780" }
-    ],
-    bars: [16, 20, 26, 34, 32, 44, 50, 48, 60, 68, 74, 86]
+    id: "loop",
+    label: "Loop",
+    images: [{ src: loop, alt: "Cancellation save rate, saved revenue, and save-rate trend" }]
   },
   {
     id: "deliverability",
     label: "Deliverability",
-    stats: [
-      { label: "Inbox rate", value: "98.4%" },
-      { label: "Bounce", value: "0.6%" },
-      { label: "Spam", value: "0.08%" },
-      { label: "Unsub", value: "0.21%" }
-    ],
-    bars: [70, 74, 72, 78, 80, 84, 82, 86, 88, 90, 94, 97]
+    images: [{ src: deliverability, alt: "Deliverability score of 80 with inbox and complaint metrics" }]
+  },
+  {
+    id: "alia",
+    label: "Alia",
+    images: [{ src: alia, alt: "Popup design variant test comparing email submit rates" }]
   }
-] as const;
+] as const satisfies readonly {
+  id: string;
+  label: string;
+  images: readonly { src: StaticImageData; alt: string }[];
+}[];
 
-const BAR_COLORS = ["#B9D2FF", "#A6C6FF", "#93BAFF", "#80AFFF", "#6DA3FF", "#5A97FF", "#478BFF", "#3B7CFF", "#2F6EFF", "#2863F5", "#2158EB", "#1A4DE0"];
-
-const MONTH_LABELS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-type Tab = (typeof TABS)[number];
+type TabId = (typeof TABS)[number]["id"];
 
 function Envelope({ className, stroke }: { className?: string; stroke: string }) {
   return (
@@ -89,8 +75,35 @@ function Sparkle({ className }: { className?: string }) {
 }
 
 function DashboardCard() {
-  const [activeId, setActiveId] = useState<Tab["id"]>("analytics");
+  const [activeId, setActiveId] = useState<TabId>("analytics");
+  const [slide, setSlide] = useState(0);
   const tab = TABS.find((item) => item.id === activeId) ?? TABS[0];
+  const slideCount = tab.images.length;
+
+  useEffect(() => {
+    setSlide(0);
+  }, [activeId]);
+
+  useEffect(() => {
+    if (slideCount < 2) {
+      return;
+    }
+
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (media.matches) {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      setSlide((current) => (current + 1) % slideCount);
+    }, 4500);
+
+    return () => window.clearInterval(timer);
+  }, [activeId, slide, slideCount]);
+
+  function showSlide(next: number) {
+    setSlide((next + slideCount) % slideCount);
+  }
 
   return (
     <div className="relative mx-auto w-full max-w-245">
@@ -127,49 +140,53 @@ function DashboardCard() {
           <div aria-hidden className="pointer-events-none absolute top-0 right-0 bottom-0 w-8 bg-linear-to-l from-white to-transparent sm:w-12" />
         </div>
 
-        <div className="grid grid-cols-2 border-b border-black/5 sm:grid-cols-4">
-          {tab.stats.map((stat, index) => (
-            <div
-              key={stat.label}
-              className={cn(
-                "px-5 py-5 sm:px-7",
-                index % 2 === 0 && "border-r border-black/5",
-                index < 2 && "border-b border-black/5 sm:border-b-0",
-                index === 1 && "sm:border-r sm:border-black/5",
-                index === 2 && "border-b-0"
-              )}
-            >
-              <p className="text-[11px] font-medium tracking-[0.14em] text-neutral-400 uppercase">{stat.label}</p>
-              <p className="mt-2 text-[1.65rem] leading-none font-bold tracking-tight text-[#12141F] sm:text-[1.85rem]">{stat.value}</p>
-            </div>
+        <div className="relative aspect-[7/3] w-full" aria-roledescription={slideCount > 1 ? "carousel" : undefined}>
+          {tab.images.map((image, index) => (
+            <Image
+              key={image.alt}
+              src={image.src}
+              alt={image.alt}
+              fill
+              draggable={false}
+              priority={tab.id === "analytics" && index === 0}
+              aria-hidden={index === slide ? undefined : true}
+              className={cn("object-cover transition-opacity duration-500 motion-reduce:transition-none", index === slide ? "opacity-100" : "opacity-0")}
+              sizes="(max-width: 1024px) 100vw, 980px"
+            />
           ))}
-        </div>
 
-        <div className="flex h-55 flex-col px-5 pt-5 pb-4 sm:h-80 sm:px-7 sm:pb-6">
-          <div className="mb-3 flex items-start justify-between">
-            <p className="text-[15px] font-semibold text-[#12141F]">Attributed revenue</p>
-            <p className="text-[12px] text-neutral-400">Last 12 months</p>
-          </div>
-          <div key={tab.id} className="flex min-h-0 flex-1 items-end gap-2 sm:gap-3.5">
-            {tab.bars.map((height, index) => (
-              <div
-                key={`${tab.id}-${index}`}
-                className="hero-bar origin-bottom flex-1 rounded-t-[6px]"
-                style={{
-                  height: `${height}%`,
-                  backgroundColor: BAR_COLORS[index] ?? HERO_BLUE,
-                  animationDelay: `${index * 40}ms`
-                }}
-              />
-            ))}
-          </div>
-          <div className="mt-2 flex gap-2 sm:gap-3.5">
-            {tab.bars.map((_, index) => (
-              <span key={`${tab.id}-label-${index}`} className="flex-1 text-center text-[10px] font-medium text-neutral-400 sm:text-[11px]">
-                {MONTH_LABELS[index % MONTH_LABELS.length]}
-              </span>
-            ))}
-          </div>
+          {slideCount > 1 && (
+            <>
+              <button
+                type="button"
+                aria-label="Previous campaign"
+                onClick={() => showSlide(slide - 1)}
+                className="absolute top-1/2 left-3 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-black/10 bg-white/90 text-[#12141F] shadow-sm transition-colors hover:bg-white"
+              >
+                <ChevronLeft className="size-4" />
+              </button>
+              <button
+                type="button"
+                aria-label="Next campaign"
+                onClick={() => showSlide(slide + 1)}
+                className="absolute top-1/2 right-3 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-black/10 bg-white/90 text-[#12141F] shadow-sm transition-colors hover:bg-white"
+              >
+                <ChevronRight className="size-4" />
+              </button>
+              <div className="absolute inset-x-0 bottom-3 flex items-center justify-center gap-1.5">
+                {tab.images.map((image, index) => (
+                  <button
+                    key={image.alt}
+                    type="button"
+                    aria-label={`Show campaign ${index + 1}`}
+                    aria-current={index === slide ? "true" : undefined}
+                    onClick={() => setSlide(index)}
+                    className={cn("h-1.5 rounded-full transition-all", index === slide ? "w-5 bg-[#2F5BFF]" : "w-1.5 bg-[#12141F]/25 hover:bg-[#12141F]/40")}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
