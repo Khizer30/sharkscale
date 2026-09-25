@@ -71,8 +71,8 @@ export default function PartnerBand() {
               Ask us: how do we start?
             </span>
 
-            <h2 className="mt-5 max-w-[16ch] text-[clamp(30px,3.8vw,52px)] leading-[1.06] font-extrabold tracking-[-0.035em]">
-              Master of your list, partner to your team.
+            <h2 className="mt-5 max-w-[18ch] text-[clamp(30px,3.8vw,52px)] leading-[1.06] font-extrabold tracking-[-0.035em] uppercase">
+              Free 30-minute revenue audit
             </h2>
 
             <p className="mt-5 max-w-[46ch] text-[16.5px] leading-relaxed" style={{ color: "rgba(255,255,255,0.8)" }}>
