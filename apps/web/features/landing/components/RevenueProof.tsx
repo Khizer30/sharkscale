@@ -13,8 +13,8 @@ const INK = "#12141F";
 const VIOLET = "#4A1AC9";
 
 const REPORT_STATS = [
-  { id: "attributed", label: "Attributed revenue", value: "$1,482,910" },
-  { id: "per-recipient", label: "Revenue per recipient", value: "$0.94" }
+  { id: "attributed", label: "Attributed revenue", value: "€35,294" },
+  { id: "share", label: "% of total revenue", value: "36.58%" }
 ] as const;
 
 const PRINCIPLES = [
@@ -113,11 +113,11 @@ export default function RevenueProof() {
               <div className="flex items-center justify-between gap-4 border-b border-black/5 px-5 py-4">
                 <div className="flex items-center gap-2.5">
                   <span className="size-3.5 rounded-[5px]" style={{ backgroundColor: VIOLET }} />
-                  <p className="text-[13px] font-semibold" style={{ color: INK }}>
-                    Revenue report
+                  <p className="text-[13px] font-semibold tracking-[0.06em] uppercase" style={{ color: INK }}>
+                    Herbellavita
                   </p>
                 </div>
-                <p className="text-[10px] font-medium tracking-[0.18em] text-neutral-400 uppercase">Last 12 months</p>
+                <p className="text-[10px] font-medium tracking-[0.18em] text-neutral-400 uppercase">Last 30 days</p>
               </div>
 
               <div className="m-5 grid grid-cols-2 rounded-[12px] border border-black/5">
@@ -133,7 +133,7 @@ export default function RevenueProof() {
 
               <div className="mt-auto border-t border-black/5 px-5 py-4">
                 <p className="text-[13px] font-semibold" style={{ color: INK }}>
-                  Twelve months, same team
+                  One month, 36% of revenue from email.
                 </p>
               </div>
             </div>
