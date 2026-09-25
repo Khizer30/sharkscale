@@ -1,7 +1,7 @@
-import campaignCalendarImage from "@shared/assets/campaignCalendar.avif";
-import designAndBuildImage from "@shared/assets/designAndBuild.avif";
-import flowArchitectureImage from "@shared/assets/flowArchitecture.avif";
-import testingAndReportingImage from "@shared/assets/testingAndReporting.avif";
+import campaignCalendarImage from "@shared/assets/campaignCalendar.webp";
+import designAndBuildImage from "@shared/assets/designAndBuild.webp";
+import flowArchitectureImage from "@shared/assets/flowArchitecture.webp";
+import testingAndReportingImage from "@shared/assets/testingAndReporting.webp";
 import Image from "next/image";
 
 const SURFACE = "#F3F4F8";
