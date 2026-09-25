@@ -116,7 +116,7 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
   return (
     <article
       data-nav-theme={work.navTheme === "light" ? "light" : undefined}
-      className="sticky top-0 grid h-[75dvh] grid-rows-[auto_minmax(11rem,1fr)_auto] overflow-hidden shadow-[0_-18px_50px_rgba(18,20,31,0.18)] md:grid-cols-2 md:grid-rows-[1fr_auto]"
+      className="sticky top-0 grid h-[50dvh] grid-rows-[auto_minmax(11rem,1fr)_auto] overflow-hidden shadow-[0_-18px_50px_rgba(18,20,31,0.18)] md:grid-cols-2 md:grid-rows-[1fr_auto]"
       style={{ zIndex: index + 1, background: work.background, color: work.color }}
     >
       <h3

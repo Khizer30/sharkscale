@@ -39,7 +39,6 @@ export default function RevenueProof() {
   const wrapperRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const cardInnerRef = useRef<HTMLDivElement>(null);
   const principleRefs = useRef<(HTMLLIElement | null)[]>([]);
 
   useEffect(() => {
@@ -50,53 +49,9 @@ export default function RevenueProof() {
 
     const mm = gsap.matchMedia();
 
-    // Card scale, card-content fade and the two text columns are all scrubbed
-    // off a single scroll-linked timeline (0 -> 1) while the section is pinned.
-    // This pin+scrub treatment only runs at `lg` and up: below that the grid
-    // stacks vertically and is taller than one screen, so pinning it inside a
-    // fixed-height, overflow-hidden container would clip content top and
-    // bottom before the scrub could ever reveal it.
-    mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: wrapper,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: true
-        }
-      });
-
-      // Everything below finishes by ~0.68 of scroll progress, leaving the
-      // remaining ~0.32 as a dwell period where the fully-revealed card sits
-      // still before the section unpins and scrolls away.
-      if (cardRef.current) {
-        tl.fromTo(cardRef.current, { scale: 0.34 }, { scale: 1, ease: "power2.inOut", duration: 0.45 }, 0);
-      }
-
-      if (cardInnerRef.current) {
-        tl.fromTo(cardInnerRef.current, { opacity: 0.12 }, { opacity: 1, ease: "none", duration: 0.32 }, 0.22);
-      }
-
-      if (headingRef.current) {
-        tl.fromTo(headingRef.current, { opacity: 0, y: 28 }, { opacity: 1, y: 0, ease: "none", duration: 0.32 }, 0.32);
-      }
-
-      const principles = principleRefs.current.filter((el): el is HTMLLIElement => el !== null);
-      principles.forEach((el, index) => {
-        const start = 0.35 + index * 0.07;
-        const end = 0.6 + index * 0.04;
-        tl.fromTo(el, { opacity: 0, y: 26 }, { opacity: 1, y: 0, ease: "none", duration: end - start }, start);
-      });
-
-      // Pad the timeline so its total duration maps exactly to scroll progress 0-1,
-      // holding the fully-revealed state for the tail end of the scroll.
-      tl.to({}, { duration: 0.01 }, 1);
-    });
-
-    // Below `lg` the section is a normal, non-pinned block, so each piece
-    // simply fades in as it naturally scrolls into view instead of being
-    // scrubbed against a pin that no longer exists.
-    mm.add("(max-width: 1023.98px) and (prefers-reduced-motion: no-preference)", () => {
+    // Fade each piece in as it enters the viewport. The section is only as tall
+    // as its content, so this does not add a pinned scroll runway.
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
       const principles = principleRefs.current.filter((el): el is HTMLLIElement => el !== null);
       const targets: HTMLElement[] = [headingRef.current, cardRef.current, ...principles].filter(
         (el): el is HTMLDivElement | HTMLLIElement => el !== null
@@ -123,8 +78,8 @@ export default function RevenueProof() {
   }, []);
 
   return (
-    <section ref={wrapperRef} id="revenueProof" data-nav-theme="light" className="relative w-full lg:h-[190vh]" style={{ backgroundColor: CREAM }}>
-      <div className="flex w-full items-center justify-center px-6 py-20 sm:px-10 lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden lg:py-0">
+    <section ref={wrapperRef} id="revenueProof" data-nav-theme="light" className="relative w-full" style={{ backgroundColor: CREAM }}>
+      <div className="flex w-full items-center justify-center px-6 py-16 sm:px-10 lg:py-20">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
@@ -154,7 +109,7 @@ export default function RevenueProof() {
             className="flex min-h-84 flex-col rounded-[18px] border border-black/5 shadow-[0_28px_70px_-34px_rgba(28,16,60,0.4)]"
             style={{ backgroundColor: CARD, transformOrigin: "center center" }}
           >
-            <div ref={cardInnerRef} className="flex h-full flex-col">
+            <div className="flex h-full flex-col">
               <div className="flex items-center justify-between gap-4 border-b border-black/5 px-5 py-4">
                 <div className="flex items-center gap-2.5">
                   <span className="size-3.5 rounded-[5px]" style={{ backgroundColor: VIOLET }} />

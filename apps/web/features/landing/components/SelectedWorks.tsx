@@ -81,7 +81,7 @@ export default function SelectedWorks() {
       });
 
       if (headingRef.current) {
-        tl.fromTo(headingRef.current, { scale: 1, yPercent: -50 }, { scale: 0.4, yPercent: -84, ease: "none", duration: 0.52 }, 0.04);
+        tl.fromTo(headingRef.current, { scale: 1, y: 0 }, { scale: 0.4, y: -24, ease: "none", duration: 0.52, transformOrigin: "center top" }, 0.04);
         tl.fromTo(headingRef.current, { color: INK }, { color: WHITE, ease: "none", duration: 0.26 }, 0.34);
       }
 
@@ -108,18 +108,16 @@ export default function SelectedWorks() {
       <div ref={stickyRef} className="sticky top-0 h-screen w-full overflow-hidden">
         <div ref={bgRef} className="absolute inset-0" style={{ backgroundColor: INK }} />
 
-        <div
-          ref={headingRef}
-          className="absolute inset-x-0 top-1/2 px-6 text-center sm:px-10"
-          style={{ transform: "translate3d(0,-50%,0)", color: WHITE, willChange: "transform" }}
-        >
-          <h2 className="text-[12.4vw] leading-[0.9] font-black tracking-tighter uppercase motion-reduce:text-[6.5vw]">
-            Selected
-            <br />
-            works
-            <br />
-            (2021 &ndash; 2026)
-          </h2>
+        <div className="absolute inset-x-0 top-24 bottom-0 flex items-start justify-center px-6 pt-4 sm:top-28 sm:px-10 sm:pt-6">
+          <div ref={headingRef} className="w-full text-center" style={{ color: WHITE, willChange: "transform" }}>
+            <h2 className="text-[12.4vw] leading-[0.9] font-black tracking-tighter uppercase motion-reduce:text-[6.5vw]">
+              Selected
+              <br />
+              works
+              <br />
+              (2021 &ndash; 2026)
+            </h2>
+          </div>
         </div>
 
         <div className="absolute inset-x-0 bottom-0 grid grid-cols-3 items-end gap-2 px-4 pb-6 sm:gap-4 sm:px-8 sm:pb-8 md:grid-cols-[1fr_1fr_1.6fr]">
