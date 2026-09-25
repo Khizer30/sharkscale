@@ -239,22 +239,20 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center px-6 pt-36 text-center sm:pt-40">
-        <h1 className="text-[2.6rem] leading-[1.05] font-extrabold tracking-[-0.045em] sm:text-6xl lg:text-[4.75rem]">
-          <span style={{ color: HERO_NAVY }}>Run on revenue,</span>
-          <br />
+        <h1 className="text-[2.3rem] leading-[1.05] font-extrabold tracking-[-0.045em] sm:text-[3.35rem] lg:text-[4.1rem]">
+          <span style={{ color: HERO_NAVY }}>Extra </span>
           <span className="hero-phrase" style={{ color: HERO_BLUE }}>
-            not{" "}
             <span className="relative inline-block">
-              <span className="relative z-10">open rates</span>
+              <span className="relative z-10">30% Revenue</span>
               <span aria-hidden className="hero-highlight absolute -inset-x-0.5 bottom-[0.1em] z-0 h-[0.2em] rounded-[1px] bg-[#FFD21F]" />
             </span>
-            .
           </span>
+          <span style={{ color: HERO_NAVY }}> for Your Brand</span>
         </h1>
 
         <p className="mt-6 max-w-152 text-[15px] leading-relaxed text-neutral-500 sm:text-base">
-          SharkScale builds and runs the Klaviyo flows, campaigns and segmentation that turn a dormant list into 30–40% of monthly store revenue. No guessing
-          which send paid for itself.
+          We turn email and SMS into a serious revenue channel. From high-converting flows and campaigns to smarter segmentation, retention, and personalization,
+          we help increase repeat purchases, AOV, and LTV, so you make more from the traffic and customers you already have, without relying on more ad spend.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
