@@ -1,6 +1,11 @@
 "use client";
+import emailTemplate1 from "@shared/assets/emailTemplate_1.webp";
+import emailTemplate2 from "@shared/assets/emailTemplate_2.webp";
+import emailTemplate3 from "@shared/assets/emailTemplate_3.webp";
+import { cn } from "@shared/lib/utils";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image, { type StaticImageData } from "next/image";
 import { useEffect, useRef } from "react";
 
 if (typeof window !== "undefined") {
@@ -10,30 +15,30 @@ if (typeof window !== "undefined") {
 const SURFACE = "#F6F6F3";
 const INK = "#0A1033";
 const BLUE = "#123CE8";
-const GOLD = "#FFD400";
-const LIGHT_BLUE = "#8FB6FF";
 
-const FLOWS = [
-  { label: "Welcome", count: 6 },
-  { label: "Abandoned cart", count: 4 },
-  { label: "Browse abandon", count: 3 },
-  { label: "Post-purchase", count: 5 },
-  { label: "Winback", count: 3 },
-  { label: "Replenishment", count: 2 }
-] as const;
+const SCROLL_DURATION_S = 52;
 
-const SENDS = [
-  { id: "welcome-1", dot: BLUE, name: "Welcome 1", subject: "Start here — no discount needed", revenue: "$41.2k" },
-  { id: "cart-2", dot: GOLD, name: "Cart 2", subject: "You left something behind ✱", revenue: "$33.8k" },
-  { id: "replenish", dot: BLUE, name: "Replenish", subject: "Your restock is due in 4 days", revenue: "$26.9k" },
-  { id: "browse-1", dot: LIGHT_BLUE, name: "Browse 1", subject: "Still thinking it over?", revenue: "$18.4k" },
-  { id: "vip-tier", dot: GOLD, name: "VIP tier", subject: "The one thing our VIPs know", revenue: "$15.1k" },
-  { id: "winback", dot: BLUE, name: "Winback", subject: "It has been a while", revenue: "$11.6k" },
-  { id: "post-purchase", dot: LIGHT_BLUE, name: "Post-purchase", subject: "How Ella uses hers", revenue: "$9.8k" },
-  { id: "welcome-2", dot: BLUE, name: "Welcome 2", subject: "The 3-step routine, simplified", revenue: "$8.4k" },
-  { id: "cart-3", dot: GOLD, name: "Cart 3", subject: "Last chance on your basket", revenue: "$7.1k" },
-  { id: "sunset", dot: LIGHT_BLUE, name: "Sunset", subject: "Should we stop emailing you?", revenue: "$4.6k" }
-] as const;
+type ScrollDirection = "up" | "down";
+
+function ScrollingEmailColumn({ src, alt, direction }: { src: StaticImageData; alt: string; direction: ScrollDirection }) {
+  return (
+    <div
+      className="relative min-h-0 overflow-hidden rounded-[14px] bg-white/95 [mask-image:linear-gradient(to_bottom,transparent,black_6%,black_94%,transparent)]"
+    >
+      <div className={cn("flex flex-col gap-4 px-2 pt-2", direction === "up" ? "owned-scroll-up" : "owned-scroll-down")}>
+        {[0, 1].map((key) => (
+          <Image
+            key={key}
+            src={src}
+            alt={key === 0 ? alt : ""}
+            draggable={false}
+            className="h-auto w-full flex-none rounded-[10px] shadow-[0_12px_40px_-20px_rgba(10,16,51,0.45)]"
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function OwnedChannel() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -84,6 +89,29 @@ export default function OwnedChannel() {
       className="w-full overflow-hidden px-6 py-20 sm:px-10 sm:py-24"
       style={{ backgroundColor: SURFACE, color: INK }}
     >
+      <style>{`
+        @keyframes owned-scroll-up {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
+        }
+        @keyframes owned-scroll-down {
+          0% { transform: translateY(-50%); }
+          100% { transform: translateY(0); }
+        }
+        .owned-scroll-up {
+          animation: owned-scroll-up ${SCROLL_DURATION_S}s linear infinite;
+        }
+        .owned-scroll-down {
+          animation: owned-scroll-down ${SCROLL_DURATION_S}s linear infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .owned-scroll-up,
+          .owned-scroll-down {
+            animation: none;
+          }
+        }
+      `}</style>
+
       <div className="mx-auto w-full max-w-260">
         <div ref={headingRef}>
           <span
@@ -111,53 +139,13 @@ export default function OwnedChannel() {
           </a>
         </div>
 
-        <div ref={mockRef} className="mx-auto mt-14 w-full max-w-280">
-          <div className="rounded-[30px] p-3 shadow-[0_70px_130px_-60px_rgba(10,16,51,0.85)]" style={{ backgroundColor: INK }}>
-            <div className="grid min-h-[min(78vh,720px)] overflow-hidden rounded-[20px] bg-white sm:grid-cols-[minmax(0,270px)_minmax(0,1fr)]">
-              <div className="flex flex-col gap-5 border-b border-black/8 px-5.5 py-6.5 sm:border-r sm:border-b-0" style={{ backgroundColor: "#F7F8FB" }}>
-                <div className="flex items-center gap-2.5 text-[18px] font-extrabold tracking-tight">
-                  <span className="size-7 flex-none rounded-[9px]" style={{ backgroundColor: BLUE }} />
-                  Flows
-                </div>
-                <div className="flex flex-col gap-3.5 text-[16px]" style={{ color: "rgba(10,16,51,0.72)" }}>
-                  {FLOWS.map((flow) => (
-                    <span key={flow.label} className="flex justify-between gap-2.5">
-                      <span>{flow.label}</span>
-                      <span className="font-mono text-[13.5px]" style={{ color: "rgba(10,16,51,0.45)" }}>
-                        {flow.count}
-                      </span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="min-w-0">
-                <div className="flex items-center gap-4 border-b border-black/8 px-6.5 py-5 text-[15.5px]" style={{ color: "rgba(10,16,51,0.55)" }}>
-                  <span className="font-bold" style={{ color: INK }}>
-                    All sends
-                  </span>
-                  <span>Filter</span>
-                  <span>Sort</span>
-                  <span className="ml-auto font-bold" style={{ color: BLUE }}>
-                    + New flow
-                  </span>
-                </div>
-
-                {SENDS.map((send) => (
-                  <div key={send.id} className="flex min-w-0 items-center gap-4.5 border-b border-black/6 px-6.5 py-4.75">
-                    <span className="size-3 flex-none rounded-full" style={{ backgroundColor: send.dot }} />
-                    <span className="w-38 flex-none truncate text-[16px] font-bold">{send.name}</span>
-                    <span className="min-w-0 flex-1 truncate text-[16px]" style={{ color: "rgba(10,16,51,0.62)" }}>
-                      {send.subject}
-                    </span>
-                    <span className="flex-none font-mono text-[14px]" style={{ color: "rgba(10,16,51,0.5)" }}>
-                      {send.revenue}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+        <div
+          ref={mockRef}
+          className="mx-auto mt-14 grid h-[min(78vh,720px)] w-full max-w-280 grid-cols-3 gap-2.5 overflow-hidden sm:gap-4"
+        >
+          <ScrollingEmailColumn src={emailTemplate1} alt="Email creative example one" direction="up" />
+          <ScrollingEmailColumn src={emailTemplate2} alt="Email creative example two" direction="down" />
+          <ScrollingEmailColumn src={emailTemplate3} alt="Email creative example three" direction="up" />
         </div>
       </div>
     </section>
