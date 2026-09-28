@@ -4,15 +4,19 @@ import DotsToPlusIcon, { type DotsToPlusIconHandle } from "@shared/components/la
 import NavOverlay from "@shared/components/layout/NavOverlay";
 import { colors } from "@shared/constants/colors";
 import { navLinks } from "@shared/lib/navLinks";
-import { BOOK_SECTION_ID, handleSectionNavClick, navigateToSection } from "@shared/lib/scrollToSection";
+import {
+  BOOK_SECTION_ID,
+  HOME_SECTION_ID,
+  SECTION_LINK_HREF,
+  handleSectionNavClick,
+  navigateToSection
+} from "@shared/lib/scrollToSection";
 import { CalendarCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLayoutEffect, useRef, useState } from "react";
 
 export default function Navbar() {
-  const homeHref = navLinks.find((link) => link.label === "Home")?.href ?? "#";
-  const contactHref = `#${BOOK_SECTION_ID}`;
 
   const menuIconRef = useRef<DotsToPlusIconHandle>(null);
   const [showOverlay, setShowOverlay] = useState(false);
@@ -101,14 +105,14 @@ export default function Navbar() {
         }}
       >
         <div className="grid w-full grid-cols-[auto_1fr_auto] items-center px-6 h-full" style={{ gap: `${24 * gapScale}px` }}>
-          <Link href={homeHref} className="flex items-center shrink-0">
+          <Link href={SECTION_LINK_HREF} onClick={handleSectionNavClick(HOME_SECTION_ID)} className="flex items-center shrink-0">
             <Image src={logo} alt="SharkScale" priority draggable={false} className="w-auto" style={{ height: `${logoHeight}px` }} />
           </Link>
 
           <ul className="hidden items-center justify-center lg:flex shrink-0" style={{ gap: `${32 * gapScale}px` }}>
             {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className={linkClass}>
+              <li key={link.sectionId}>
+                <Link href={SECTION_LINK_HREF} onClick={handleSectionNavClick(link.sectionId)} className={linkClass}>
                   {link.label}
                 </Link>
               </li>
@@ -117,7 +121,7 @@ export default function Navbar() {
 
           <div className="flex items-center justify-end gap-3 shrink-0">
             <Link
-              href={contactHref}
+              href={SECTION_LINK_HREF}
               aria-label={scrollProgress > 0.7 ? "Book a call" : undefined}
               className="hidden items-center gap-2.5 rounded-full py-1.5 pl-4 pr-1.5 text-sm font-semibold transition-colors hover:bg-primary hover:text-white lg:inline-flex"
               style={{ backgroundColor: `${accent}1A`, color: accent }}

@@ -1,6 +1,12 @@
 import type { MouseEvent } from "react";
 
 export const BOOK_SECTION_ID = "book-a-call";
+export const HOME_SECTION_ID = "home";
+export const REVENUE_PROOF_SECTION_ID = "revenueProof";
+export const PROCESS_SECTION_ID = "process";
+
+/** Path-only URL (no hash) for in-page section links. */
+export const SECTION_LINK_HREF = "/";
 
 export function scrollToSection(sectionId: string): boolean {
   const el = document.getElementById(sectionId);
@@ -11,17 +17,22 @@ export function scrollToSection(sectionId: string): boolean {
   return true;
 }
 
-/** Scroll to a section id; retries while lazy chunks mount. Updates the URL hash. */
+export function clearSectionHashFromUrl(): void {
+  if (!window.location.hash) {
+    return;
+  }
+  const url = `${window.location.pathname}${window.location.search}`;
+  window.history.replaceState(null, "", url);
+}
+
+/** Scroll to a section id; retries while lazy chunks mount. Does not add a URL hash. */
 export function navigateToSection(sectionId: string): void {
-  const commitHash = () => {
-    const hash = `#${sectionId}`;
-    if (window.location.hash !== hash) {
-      window.history.pushState(null, "", hash);
-    }
+  const finish = () => {
+    clearSectionHashFromUrl();
   };
 
   if (scrollToSection(sectionId)) {
-    commitHash();
+    finish();
     return;
   }
 
@@ -30,7 +41,7 @@ export function navigateToSection(sectionId: string): void {
 
   const tick = () => {
     if (scrollToSection(sectionId)) {
-      commitHash();
+      finish();
       return;
     }
     attempts += 1;

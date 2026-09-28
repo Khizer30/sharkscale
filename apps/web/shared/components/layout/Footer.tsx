@@ -5,7 +5,7 @@ import FooterNewsletter from "@shared/components/layout/footer/FooterNewsletter"
 import FooterWordmark from "@shared/components/layout/footer/FooterWordmark";
 import { colors } from "@shared/constants/colors";
 import { footerContent } from "@shared/lib/footerContent";
-import { handleSectionNavClick } from "@shared/lib/scrollToSection";
+import { HOME_SECTION_ID, SECTION_LINK_HREF, handleSectionNavClick } from "@shared/lib/scrollToSection";
 import { ArrowUp } from "lucide-react";
 import Image from "next/image";
 
@@ -39,7 +39,11 @@ export default function Footer() {
           <div className="flex justify-between gap-11">
             <FooterLinkColumn title="Get in touch" links={footerContent.connectLinks} />
 
-            <a href="#home" className="flex flex-col items-end gap-4 text-white/70 transition-colors hover:text-white">
+            <a
+              href={SECTION_LINK_HREF}
+              onClick={handleSectionNavClick(HOME_SECTION_ID)}
+              className="flex flex-col items-end gap-4 text-white/70 transition-colors hover:text-white"
+            >
               <span className="font-mono text-[11px] tracking-[0.16em] whitespace-nowrap uppercase">Back to top</span>
               <span className="flex size-11 items-center justify-center border border-white/28 bg-white/8">
                 <ArrowUp className="size-4" />
@@ -79,20 +83,37 @@ export default function Footer() {
   );
 }
 
-function FooterLinkColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+function FooterLinkColumn({
+  title,
+  links
+}: {
+  title: string;
+  links: readonly ({ label: string; sectionId: string } | { label: string; href: string })[];
+}) {
   return (
     <div>
       <div className="mb-5 font-mono text-[11px] tracking-[0.16em] text-white/50 uppercase">{title}</div>
       <div className="flex flex-col gap-2.5 text-lg font-medium">
         {links.map((link) => {
+          if ("sectionId" in link) {
+            return (
+              <a
+                key={link.label}
+                href={SECTION_LINK_HREF}
+                onClick={handleSectionNavClick(link.sectionId)}
+                className="text-white transition-colors hover:text-white/75"
+              >
+                {link.label}
+              </a>
+            );
+          }
+
           const isExternal = /^https?:\/\//.test(link.href);
-          const hashMatch = /^#(.+)$/.exec(link.href);
           return (
             <a
               key={link.label}
               href={link.href}
               className="text-white transition-colors hover:text-white/75"
-              {...(hashMatch?.[1] ? { onClick: handleSectionNavClick(hashMatch[1]) } : {})}
               {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             >
               {link.label}

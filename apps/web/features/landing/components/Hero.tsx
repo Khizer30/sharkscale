@@ -7,7 +7,7 @@ import deliverability from "@shared/assets/deliverability.webp";
 import flows from "@shared/assets/flows.webp";
 import loop from "@shared/assets/loop.webp";
 import { cn } from "@shared/lib/utils";
-import { BOOK_SECTION_ID, handleSectionNavClick } from "@shared/lib/scrollToSection";
+import { BOOK_SECTION_ID, REVENUE_PROOF_SECTION_ID, SECTION_LINK_HREF, handleSectionNavClick } from "@shared/lib/scrollToSection";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image, { type StaticImageData } from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -294,7 +294,7 @@ export default function Hero() {
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <a
-            href={`#${BOOK_SECTION_ID}`}
+            href={SECTION_LINK_HREF}
             onClick={handleSectionNavClick(BOOK_SECTION_ID)}
             data-cursor-magnetic
             data-cursor-text="Book"
@@ -307,7 +307,8 @@ export default function Hero() {
             <ChevronRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </a>
           <a
-            href="#revenueProof"
+            href={SECTION_LINK_HREF}
+            onClick={handleSectionNavClick(REVENUE_PROOF_SECTION_ID)}
             data-cursor-magnetic
             data-cursor-text="View"
             className={cn(

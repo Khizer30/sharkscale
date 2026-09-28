@@ -2,6 +2,7 @@
 import RollingText from "@shared/components/layout/RollingText";
 import { colors } from "@shared/constants/colors";
 import { navLinks } from "@shared/lib/navLinks";
+import { SECTION_LINK_HREF, handleSectionNavClick } from "@shared/lib/scrollToSection";
 import gsap from "gsap";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -78,9 +79,12 @@ export default function NavOverlay({ onClose }: NavOverlayProps) {
         <nav className="flex flex-col gap-1">
           {navLinks.map((link) => (
             <Link
-              key={link.href}
-              href={link.href}
-              onClick={handleClose}
+              key={link.sectionId}
+              href={SECTION_LINK_HREF}
+              onClick={(event) => {
+                handleSectionNavClick(link.sectionId)(event);
+                handleClose();
+              }}
               className="group inline-flex w-fit py-1 text-2xl font-semibold tracking-tight"
               style={{ color: colors.tertiary }}
             >

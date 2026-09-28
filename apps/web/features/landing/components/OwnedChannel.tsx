@@ -6,6 +6,7 @@ import emailTemplates4 from "@shared/assets/emailTemplates_4.webp";
 import emailTemplates5 from "@shared/assets/emailTemplates_5.webp";
 import emailTemplates6 from "@shared/assets/emailTemplates_6.webp";
 import emailTemplates7 from "@shared/assets/emailTemplates_7.webp";
+import { REVENUE_PROOF_SECTION_ID, SECTION_LINK_HREF, handleSectionNavClick } from "@shared/lib/scrollToSection";
 import { cn } from "@shared/lib/utils";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -179,7 +180,8 @@ export default function OwnedChannel() {
           </p>
 
           <a
-            href="#revenueProof"
+            href={SECTION_LINK_HREF}
+            onClick={handleSectionNavClick(REVENUE_PROOF_SECTION_ID)}
             className="mt-7 inline-flex items-center gap-2.5 rounded-[10px] px-6 py-3.5 text-[14.5px] font-bold text-white"
             style={{ backgroundColor: BLUE }}
           >
