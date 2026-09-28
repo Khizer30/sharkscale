@@ -1,12 +1,44 @@
 "use client";
-import emailTemplate1 from "@shared/assets/emailTemplate_1.webp";
-import emailTemplate2 from "@shared/assets/emailTemplate_2.webp";
-import emailTemplate3 from "@shared/assets/emailTemplate_3.webp";
+import emailTemplates1 from "@shared/assets/emailTemplates_1.webp";
+import emailTemplates2 from "@shared/assets/emailTemplates_2.webp";
+import emailTemplates3 from "@shared/assets/emailTemplates_3.webp";
+import emailTemplates4 from "@shared/assets/emailTemplates_4.webp";
+import emailTemplates5 from "@shared/assets/emailTemplates_5.webp";
+import emailTemplates6 from "@shared/assets/emailTemplates_6.webp";
+import emailTemplates7 from "@shared/assets/emailTemplates_7.webp";
 import { cn } from "@shared/lib/utils";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image, { type StaticImageData } from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+type ScrollDirection = "up" | "down";
+
+const EMAIL_TEMPLATES: StaticImageData[] = [
+  emailTemplates1,
+  emailTemplates2,
+  emailTemplates3,
+  emailTemplates4,
+  emailTemplates5,
+  emailTemplates6,
+  emailTemplates7
+];
+
+const COLUMN_DIRECTIONS: ScrollDirection[] = ["up", "down", "up", "down"];
+
+function pickRandomTemplates(count: number): StaticImageData[] {
+  const pool = [...EMAIL_TEMPLATES];
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const current = pool[i];
+    const swap = pool[j];
+    if (current !== undefined && swap !== undefined) {
+      pool[i] = swap;
+      pool[j] = current;
+    }
+  }
+  return pool.slice(0, count);
+}
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -17,8 +49,6 @@ const INK = "#0A1033";
 const BLUE = "#123CE8";
 
 const SCROLL_DURATION_S = 52;
-
-type ScrollDirection = "up" | "down";
 
 function ScrollingEmailColumn({ src, alt, direction }: { src: StaticImageData; alt: string; direction: ScrollDirection }) {
   return (
@@ -44,6 +74,11 @@ export default function OwnedChannel() {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const mockRef = useRef<HTMLDivElement>(null);
+  const [columnImages, setColumnImages] = useState(() => EMAIL_TEMPLATES.slice(0, 4));
+
+  useEffect(() => {
+    setColumnImages(pickRandomTemplates(4));
+  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -141,11 +176,16 @@ export default function OwnedChannel() {
 
         <div
           ref={mockRef}
-          className="mx-auto mt-14 grid h-[min(78vh,720px)] w-full max-w-280 grid-cols-3 gap-2.5 overflow-hidden sm:gap-4"
+          className="mx-auto mt-14 grid h-[min(78vh,720px)] w-full max-w-280 grid-cols-2 gap-2.5 overflow-hidden sm:grid-cols-4 sm:gap-4"
         >
-          <ScrollingEmailColumn src={emailTemplate1} alt="Email creative example one" direction="up" />
-          <ScrollingEmailColumn src={emailTemplate2} alt="Email creative example two" direction="down" />
-          <ScrollingEmailColumn src={emailTemplate3} alt="Email creative example three" direction="up" />
+          {columnImages.map((src, index) => (
+            <ScrollingEmailColumn
+              key={src.src}
+              src={src}
+              alt={`Email creative example ${index + 1}`}
+              direction={COLUMN_DIRECTIONS[index] ?? "up"}
+            />
+          ))}
         </div>
       </div>
     </section>
