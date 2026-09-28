@@ -1,6 +1,6 @@
 "use client";
 import logo from "@shared/assets/logo.webp";
-import DotsToPlusIcon from "@shared/components/layout/DotsToPlusIcon";
+import DotsToPlusIcon, { type DotsToPlusIconHandle } from "@shared/components/layout/DotsToPlusIcon";
 import NavOverlay from "@shared/components/layout/NavOverlay";
 import { colors } from "@shared/constants/colors";
 import { navLinks } from "@shared/lib/navLinks";
@@ -8,12 +8,13 @@ import { BOOK_SECTION_ID, handleSectionNavClick, navigateToSection } from "@shar
 import { CalendarCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useLayoutEffect } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 export default function Navbar() {
   const homeHref = navLinks.find((link) => link.label === "Home")?.href ?? "#";
   const contactHref = `#${BOOK_SECTION_ID}`;
 
+  const menuIconRef = useRef<DotsToPlusIconHandle>(null);
   const [showOverlay, setShowOverlay] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isLight, setIsLight] = useState(true);
@@ -130,12 +131,22 @@ export default function Navbar() {
 
             <button
               type="button"
-              aria-label="Open menu"
-              onClick={() => setShowOverlay(true)}
+              aria-label={showOverlay ? "Close menu" : "Open menu"}
+              aria-expanded={showOverlay}
+              onClick={() => {
+                menuIconRef.current?.animateToPlus();
+                setShowOverlay(true);
+              }}
+              onMouseEnter={() => menuIconRef.current?.animateToPlus()}
+              onMouseLeave={() => {
+                if (!showOverlay) {
+                  menuIconRef.current?.animateToDots();
+                }
+              }}
               className="flex size-10 items-center justify-center rounded-full transition-colors hover:bg-primary shrink-0"
               style={{ backgroundColor: `${accent}1A` }}
             >
-              <DotsToPlusIcon color={accent} />
+              <DotsToPlusIcon ref={menuIconRef} color={accent} menuOpen={showOverlay} />
             </button>
           </div>
         </div>
