@@ -55,6 +55,15 @@ const TABS = [
   images: readonly { src: StaticImageData; alt: string }[];
 }[];
 
+const TAB_IMAGES = TABS.flatMap((item) =>
+  item.images.map((image, imageIndex) => ({
+    tabId: item.id,
+    imageIndex,
+    src: image.src,
+    alt: image.alt
+  }))
+);
+
 type TabId = (typeof TABS)[number]["id"];
 
 function Envelope({ className, stroke }: { className?: string; stroke: string }) {
@@ -141,19 +150,29 @@ function DashboardCard() {
         </div>
 
         <div className="relative aspect-[7/3] w-full" aria-roledescription={slideCount > 1 ? "carousel" : undefined}>
-          {tab.images.map((image, index) => (
-            <Image
-              key={image.alt}
-              src={image.src}
-              alt={image.alt}
-              fill
-              draggable={false}
-              priority={tab.id === "analytics" && index === 0}
-              aria-hidden={index === slide ? undefined : true}
-              className={cn("object-cover transition-opacity duration-500 motion-reduce:transition-none", index === slide ? "opacity-100" : "opacity-0")}
-              sizes="(max-width: 1024px) 100vw, 980px"
-            />
-          ))}
+          {TAB_IMAGES.map(({ tabId, imageIndex, src, alt }) => {
+            const isVisible = tabId === activeId && imageIndex === slide;
+            const isLcp = tabId === "analytics" && imageIndex === 0;
+
+            return (
+              <Image
+                key={`${tabId}-${alt}`}
+                src={src}
+                alt={isVisible ? alt : ""}
+                fill
+                draggable={false}
+                priority={isLcp}
+                loading={isLcp ? undefined : "eager"}
+                fetchPriority={isLcp ? "high" : "low"}
+                aria-hidden={isVisible ? undefined : true}
+                className={cn(
+                  "object-cover transition-opacity duration-500 motion-reduce:transition-none",
+                  isVisible ? "opacity-100" : "opacity-0"
+                )}
+                sizes="(max-width: 1024px) 100vw, 980px"
+              />
+            );
+          })}
 
           {slideCount > 1 && (
             <>
