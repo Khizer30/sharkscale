@@ -44,7 +44,7 @@ const WORKS = [
   }
 ] as const;
 
-export default function SelectedWorks() {
+export default function Reviews() {
   const wrapperRef = useRef<HTMLElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
@@ -104,19 +104,13 @@ export default function SelectedWorks() {
   }, []);
 
   return (
-    <section ref={wrapperRef} id="ourWork" className="relative h-[320vh] w-full">
+    <section ref={wrapperRef} id="reviews" className="relative h-[320vh] w-full">
       <div ref={stickyRef} className="sticky top-0 h-screen w-full overflow-hidden">
         <div ref={bgRef} className="absolute inset-0" style={{ backgroundColor: INK }} />
 
         <div className="absolute inset-x-0 top-24 bottom-0 flex items-start justify-center px-6 pt-4 sm:top-28 sm:px-10 sm:pt-6">
           <div ref={headingRef} className="w-full text-center" style={{ color: WHITE, willChange: "transform" }}>
-            <h2 className="text-[12.4vw] leading-[0.9] font-black tracking-tighter uppercase motion-reduce:text-[6.5vw]">
-              Selected
-              <br />
-              works
-              <br />
-              (2021 &ndash; 2026)
-            </h2>
+            <h2 className="text-[12.4vw] leading-[0.9] font-black tracking-tighter uppercase motion-reduce:text-[6.5vw]">Reviews</h2>
           </div>
         </div>
 

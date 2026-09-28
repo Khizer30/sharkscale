@@ -7,7 +7,7 @@ import OwnedChannelLazy from "@features/landing/components/OwnedChannelLazy";
 import PartnerBandLazy from "@features/landing/components/PartnerBandLazy";
 import ProcessLazy from "@features/landing/components/ProcessLazy";
 import RevenueProofLazy from "@features/landing/components/RevenueProofLazy";
-import SelectedWorksLazy from "@features/landing/components/SelectedWorksLazy";
+import ReviewsLazy from "@features/landing/components/ReviewsLazy";
 import SocialProofLazy from "@features/landing/components/SocialProofLazy";
 import TeamLazy from "@features/landing/components/TeamLazy";
 import ToolsLazy from "@features/landing/components/ToolsLazy";
@@ -29,7 +29,7 @@ export default function Home() {
       <PartnerBandLazy />
       <OwnedChannelLazy />
       <ProcessLazy />
-      <SelectedWorksLazy />
+      <ReviewsLazy />
       <EmailEngineLazy />
       <TeamLazy />
       <ToolsLazy />
