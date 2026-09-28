@@ -1,4 +1,14 @@
 "use client";
+import appstle from "@shared/assets/appstle.webp";
+import canva from "@shared/assets/canva.webp";
+import figma from "@shared/assets/figma.webp";
+import googleAnalytics from "@shared/assets/googleAnalytics.webp";
+import klaviyo from "@shared/assets/klaviyo.webp";
+import openAI from "@shared/assets/openAI.webp";
+import shopify from "@shared/assets/shopify.webp";
+import tripleWhale from "@shared/assets/tripleWhale.webp";
+import trustpilot from "@shared/assets/trustpilot.webp";
+import typeform from "@shared/assets/typeform.webp";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image, { StaticImageData } from "next/image";
@@ -20,10 +30,36 @@ type Tool = {
   my: number;
   mw: string;
   mh: string;
+  /** Square logos (e.g. Canva, Appstle) — assets are 1000×1000 with rounded corners. */
+  rounded?: boolean;
 };
 
-/** Add logos here (import from @shared/assets/…) when assets are ready. */
-const tools: Tool[] = [];
+const wide = {
+  w: "clamp(180px,19vw,280px)",
+  h: "clamp(60px,6.3vw,94px)",
+  mw: "clamp(128px,34vw,176px)",
+  mh: "clamp(44px,12vw,58px)"
+} as const;
+
+const square = {
+  w: "clamp(64px,6.5vw,96px)",
+  h: "clamp(64px,6.5vw,96px)",
+  mw: "clamp(48px,13vw,64px)",
+  mh: "clamp(48px,13vw,64px)"
+} as const;
+
+const tools: Tool[] = [
+  { name: "Klaviyo", src: klaviyo, x: 3, y: 7, seed: 0, mx: 2, my: 5, ...wide },
+  { name: "Shopify", src: shopify, x: 28, y: 2, seed: 1, mx: 52, my: 4, ...wide },
+  { name: "Canva", src: canva, x: 54, y: 4, seed: 2, mx: 40, my: 7, ...square, rounded: true },
+  { name: "OpenAI", src: openAI, x: 76, y: 7, seed: 3, mx: 54, my: 22, ...wide },
+  { name: "Figma", src: figma, x: 82, y: 24, seed: 4, mx: 4, my: 24, ...wide },
+  { name: "Google Analytics", src: googleAnalytics, x: 79, y: 44, seed: 5, mx: 52, my: 68, ...wide },
+  { name: "Triple Whale", src: tripleWhale, x: 74, y: 64, seed: 6, mx: 34, my: 86, ...wide },
+  { name: "Trustpilot", src: trustpilot, x: 50, y: 80, seed: 7, mx: 4, my: 86, ...wide },
+  { name: "Typeform", src: typeform, x: 20, y: 78, seed: 8, mx: 54, my: 84, ...wide },
+  { name: "Appstle", src: appstle, x: 2, y: 42, seed: 9, mx: 4, my: 68, ...square, rounded: true }
+];
 
 function seededVal(seed: number, index: number): number {
   const x = Math.sin(seed * 9301 + index * 49297 + 233) * 1000;
@@ -171,7 +207,12 @@ export default function Tools() {
           >
             <div style={floatStyle(tool.seed)} className="size-full">
               <div className="flex size-full items-center justify-center p-3">
-                <Image src={tool.src} alt={tool.name} className="size-full object-contain" draggable={false} />
+                <Image
+                  src={tool.src}
+                  alt={tool.name}
+                  className={`size-full object-contain ${tool.rounded ? "rounded-[14px]" : ""}`}
+                  draggable={false}
+                />
               </div>
             </div>
           </div>
