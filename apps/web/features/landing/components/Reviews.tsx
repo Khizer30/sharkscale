@@ -133,25 +133,35 @@ export default function Reviews() {
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
-    if (!wrapper) {
+    const sticky = stickyRef.current;
+    if (!wrapper || !sticky) {
       return;
     }
 
     const mm = gsap.matchMedia();
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
+      if (headingRef.current) {
+        gsap.set(headingRef.current, { scale: 1, y: 0, color: INK, transformOrigin: "center top" });
+      }
+      if (bgRef.current) {
+        gsap.set(bgRef.current, { backgroundColor: GOLD });
+      }
+      if (reviewsRef.current) {
+        gsap.set(reviewsRef.current, { opacity: 0, y: 72 });
+      }
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapper,
           start: "top top",
-          end: "bottom bottom",
-          scrub: true,
+          end: "+=72%",
+          pin: sticky,
+          scrub: 0.35,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
           onUpdate: (self) => {
-            const sticky = stickyRef.current;
-            if (!sticky) {
-              return;
-            }
-            if (self.progress < 0.46) {
+            if (self.progress < 0.55) {
               sticky.setAttribute("data-nav-theme", "light");
             } else {
               sticky.removeAttribute("data-nav-theme");
@@ -161,26 +171,48 @@ export default function Reviews() {
       });
 
       if (headingRef.current) {
-        tl.fromTo(headingRef.current, { scale: 1, y: 0 }, { scale: 0.4, y: -24, ease: "none", duration: 0.52, transformOrigin: "center top" }, 0.04);
-        tl.fromTo(headingRef.current, { color: INK }, { color: WHITE, ease: "none", duration: 0.26 }, 0.34);
+        tl.fromTo(
+          headingRef.current,
+          { scale: 1, y: 0 },
+          { scale: 0.4, y: -20, ease: "none", duration: 0.38, transformOrigin: "center top" },
+          0
+        );
+        tl.fromTo(headingRef.current, { color: INK }, { color: WHITE, ease: "none", duration: 0.2 }, 0.14);
       }
 
       if (bgRef.current) {
-        tl.fromTo(bgRef.current, { backgroundColor: GOLD }, { backgroundColor: INK, ease: "none", duration: 0.32 }, 0.3);
+        tl.fromTo(bgRef.current, { backgroundColor: GOLD }, { backgroundColor: INK, ease: "none", duration: 0.24 }, 0.1);
       }
 
       if (reviewsRef.current) {
-        tl.fromTo(reviewsRef.current, { opacity: 0, y: 110 }, { opacity: 1, y: 0, ease: "none", duration: 0.26 }, 0.44);
+        tl.fromTo(reviewsRef.current, { opacity: 0, y: 72 }, { opacity: 1, y: 0, ease: "none", duration: 0.22 }, 0.22);
       }
 
-      tl.to({}, { duration: 0.01 }, 1);
+      ScrollTrigger.refresh();
+
+      return () => {
+        tl.scrollTrigger?.kill();
+        tl.kill();
+      };
+    });
+
+    mm.add("(prefers-reduced-motion: reduce)", () => {
+      if (bgRef.current) {
+        gsap.set(bgRef.current, { backgroundColor: INK });
+      }
+      if (headingRef.current) {
+        gsap.set(headingRef.current, { color: WHITE, scale: 0.4, y: -20, transformOrigin: "center top" });
+      }
+      if (reviewsRef.current) {
+        gsap.set(reviewsRef.current, { opacity: 1, y: 0 });
+      }
     });
 
     return () => mm.revert();
   }, []);
 
   return (
-    <section ref={wrapperRef} id="reviews" className="relative h-[320vh] w-full">
+    <section ref={wrapperRef} id="reviews" className="relative w-full">
       <style>{`
         @keyframes reviews-scroll-up {
           0% { transform: translateY(0); }
@@ -196,19 +228,20 @@ export default function Reviews() {
         }
       `}</style>
 
-      <div ref={stickyRef} className="sticky top-0 h-screen w-full overflow-hidden">
-        <div ref={bgRef} className="absolute inset-0" style={{ backgroundColor: INK }} />
+      <div
+        ref={stickyRef}
+        className="flex h-screen w-full flex-col overflow-hidden px-4 pt-24 pb-6 sm:px-8 sm:pt-28 sm:pb-8"
+      >
+        <div ref={bgRef} className="absolute inset-0 -z-10" style={{ backgroundColor: GOLD }} />
 
-        <div className="absolute inset-x-0 top-24 bottom-0 flex items-start justify-center px-6 pt-4 sm:top-28 sm:px-10 sm:pt-6">
-          <div ref={headingRef} className="w-full text-center" style={{ color: WHITE, willChange: "transform" }}>
-            <h2 className="text-[12.4vw] leading-[0.9] font-black tracking-tighter uppercase motion-reduce:text-[6.5vw]">Reviews</h2>
-          </div>
+        <div ref={headingRef} className="w-full shrink-0 text-center" style={{ color: INK, willChange: "transform" }}>
+          <h2 className="text-[12.4vw] leading-[0.9] font-black tracking-tighter uppercase motion-reduce:text-[6.5vw]">Reviews</h2>
         </div>
 
         <div
           ref={reviewsRef}
           className={cn(
-            "absolute inset-x-0 bottom-0 grid h-[min(46vh,420px)] grid-cols-3 items-stretch gap-2 px-4 pb-6 sm:gap-4 sm:px-8 sm:pb-8"
+            "mt-5 grid min-h-0 flex-1 grid-cols-3 items-stretch gap-2 sm:mt-7 sm:gap-4"
           )}
           style={{ willChange: "transform, opacity" }}
         >
