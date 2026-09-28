@@ -1,5 +1,6 @@
 "use client";
 import { colors } from "@shared/constants/colors";
+import { BOOK_SECTION_ID, handleSectionNavClick } from "@shared/lib/scrollToSection";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -83,7 +84,8 @@ export default function PartnerBand() {
 
             <div className="mt-7 flex flex-wrap gap-3">
               <a
-                href="#contactUs"
+                href={`#${BOOK_SECTION_ID}`}
+                onClick={handleSectionNavClick(BOOK_SECTION_ID)}
                 className="inline-flex items-center gap-2.5 rounded-[10px] px-6 py-3.5 text-[14.5px] font-extrabold"
                 style={{ backgroundColor: colors.secondary, color: INK }}
               >

@@ -5,6 +5,7 @@ import FooterNewsletter from "@shared/components/layout/footer/FooterNewsletter"
 import FooterWordmark from "@shared/components/layout/footer/FooterWordmark";
 import { colors } from "@shared/constants/colors";
 import { footerContent } from "@shared/lib/footerContent";
+import { handleSectionNavClick } from "@shared/lib/scrollToSection";
 import { ArrowUp } from "lucide-react";
 import Image from "next/image";
 
@@ -85,11 +86,13 @@ function FooterLinkColumn({ title, links }: { title: string; links: { label: str
       <div className="flex flex-col gap-2.5 text-lg font-medium">
         {links.map((link) => {
           const isExternal = /^https?:\/\//.test(link.href);
+          const hashMatch = /^#(.+)$/.exec(link.href);
           return (
             <a
               key={link.label}
               href={link.href}
               className="text-white transition-colors hover:text-white/75"
+              {...(hashMatch?.[1] ? { onClick: handleSectionNavClick(hashMatch[1]) } : {})}
               {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             >
               {link.label}

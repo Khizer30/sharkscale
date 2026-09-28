@@ -34,6 +34,7 @@ export default function Home() {
       <TeamLazy />
       <ToolsLazy />
       <FAQLazy />
+      <div id="book-a-call" className="h-0 w-full scroll-mt-24" aria-hidden />
       <BookACallLazy />
       <FooterLazy />
     </main>

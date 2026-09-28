@@ -1,5 +1,6 @@
 "use client";
 import { colors } from "@shared/constants/colors";
+import { BOOK_SECTION_ID, handleSectionNavClick } from "@shared/lib/scrollToSection";
 
 export default function FooterCTA() {
   return (
@@ -34,7 +35,8 @@ export default function FooterCTA() {
           Your next 30% could already be in your list.
         </h2>
         <a
-          href="#contactUs"
+          href={`#${BOOK_SECTION_ID}`}
+          onClick={handleSectionNavClick(BOOK_SECTION_ID)}
           className="mt-8 inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 text-sm font-extrabold tracking-[0.06em] uppercase transition-transform hover:scale-105"
           style={{ backgroundColor: colors.secondary, color: colors.tertiary }}
         >

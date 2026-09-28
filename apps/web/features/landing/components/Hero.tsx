@@ -7,6 +7,7 @@ import deliverability from "@shared/assets/deliverability.webp";
 import flows from "@shared/assets/flows.webp";
 import loop from "@shared/assets/loop.webp";
 import { cn } from "@shared/lib/utils";
+import { BOOK_SECTION_ID, handleSectionNavClick } from "@shared/lib/scrollToSection";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image, { type StaticImageData } from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -293,7 +294,8 @@ export default function Hero() {
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <a
-            href="#contactUs"
+            href={`#${BOOK_SECTION_ID}`}
+            onClick={handleSectionNavClick(BOOK_SECTION_ID)}
             data-cursor-magnetic
             data-cursor-text="Book"
             className={cn(

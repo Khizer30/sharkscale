@@ -27,7 +27,7 @@ export default function BookACall() {
   }, []);
 
   return (
-    <section id="contactUs" data-nav-theme="light" className="flex flex-col items-center bg-white px-6 py-20 sm:px-10 sm:py-28">
+    <section data-nav-theme="light" className="flex flex-col items-center bg-white px-6 py-20 sm:px-10 sm:py-28">
       <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
 
       <span

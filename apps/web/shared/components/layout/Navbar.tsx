@@ -4,18 +4,26 @@ import DotsToPlusIcon from "@shared/components/layout/DotsToPlusIcon";
 import NavOverlay from "@shared/components/layout/NavOverlay";
 import { colors } from "@shared/constants/colors";
 import { navLinks } from "@shared/lib/navLinks";
-import { ArrowRight } from "lucide-react";
+import { BOOK_SECTION_ID, handleSectionNavClick, navigateToSection } from "@shared/lib/scrollToSection";
+import { CalendarCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useLayoutEffect } from "react";
 
 export default function Navbar() {
   const homeHref = navLinks.find((link) => link.label === "Home")?.href ?? "#";
-  const contactHref = "#contactUs";
+  const contactHref = `#${BOOK_SECTION_ID}`;
 
   const [showOverlay, setShowOverlay] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isLight, setIsLight] = useState(true);
+
+  useLayoutEffect(() => {
+    const hash = window.location.hash.replace(/^#/, "");
+    if (hash) {
+      navigateToSection(hash);
+    }
+  }, []);
 
   useLayoutEffect(() => {
     let ticking = false;
@@ -109,12 +117,14 @@ export default function Navbar() {
           <div className="flex items-center justify-end gap-3 shrink-0">
             <Link
               href={contactHref}
+              aria-label={scrollProgress > 0.7 ? "Book a call" : undefined}
               className="hidden items-center gap-2.5 rounded-full py-1.5 pl-4 pr-1.5 text-sm font-semibold transition-colors hover:bg-primary hover:text-white lg:inline-flex"
               style={{ backgroundColor: `${accent}1A`, color: accent }}
+              onClick={handleSectionNavClick(BOOK_SECTION_ID)}
             >
               <span style={{ display: scrollProgress > 0.7 ? "none" : "inline" }}>Book a Call</span>
               <span className="flex size-7 items-center justify-center rounded-full shrink-0" style={{ backgroundColor: `${accent}1F`, color: accent }}>
-                <ArrowRight className="size-3.5" />
+                <CalendarCheck className="size-3.5" strokeWidth={2.25} aria-hidden />
               </span>
             </Link>
 
