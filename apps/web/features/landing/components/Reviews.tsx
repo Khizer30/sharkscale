@@ -1,8 +1,8 @@
 "use client";
 import { colors } from "@shared/constants/colors";
+import { cn } from "@shared/lib/utils";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 if (typeof window !== "undefined") {
@@ -13,43 +13,123 @@ const GOLD = colors.secondary;
 const INK = colors.tertiary;
 const WHITE = colors.white;
 
-function unsplash(id: string): string {
-  return `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1600&q=80`;
+const SCROLL_DURATION_S = 52;
+
+type Review = {
+  id: string;
+  brand: string;
+  author: string;
+  quote: string;
+};
+
+const REVIEWS: Review[] = [
+  {
+    id: "herbellavita",
+    brand: "HerbellaVita",
+    author: "Laura M., Founder",
+    quote:
+      "We were getting sales, but email wasn’t doing enough. SharkScale rebuilt our flows, improved our campaigns, and started using our customer data properly. Now email drives 36%+ of our total revenue. We’re simply making more from the customers we already have."
+  },
+  {
+    id: "sleep-on",
+    brand: "Sleep-On",
+    author: "Marcus Hill, Founder",
+    quote:
+      "Our biggest problem was repeat purchases. People bought once, then we barely spoke to them again. SharkScale built the post-purchase, replenishment, and winback journeys we were missing. Email finally feels like a retention channel, not just another place to send discounts."
+  },
+  {
+    id: "xpand-laces",
+    brand: "XPAND Laces",
+    author: "Ryan Cooper, Co-Founder",
+    quote:
+      "We had a big customer list, but everyone was basically getting the same emails. SharkScale changed that. New customers, repeat buyers, VIPs, and inactive customers now get completely different journeys. The whole account feels smarter, and the numbers followed."
+  },
+  {
+    id: "omg-commerce",
+    brand: "OMG Commerce",
+    author: "Jason Miller, Founder",
+    quote:
+      "I didn’t want another agency sending pretty emails and calling it strategy. SharkScale actually looks at AOV, LTV, segments, flow performance, and revenue per recipient. We finally know what’s working, what isn’t, and what we should test next."
+  },
+  {
+    id: "noura-skin",
+    brand: "Noura Skin",
+    author: "Amelia Reed, Founder",
+    quote:
+      "We thought we needed more traffic. Turns out, we needed to do more with the traffic we already had. SharkScale found gaps across our welcome, cart, post-purchase, and winback flows. There was revenue sitting there, we just weren’t capturing it."
+  },
+  {
+    id: "mellow-labs",
+    brand: "Mellow Labs",
+    author: "Chris Bennett, Co-Founder",
+    quote:
+      "Our Klaviyo had become a mess after years of adding random flows and segments. SharkScale cleaned everything up and gave every email a purpose. Now we have a system we actually understand, and customers get messages that make sense for where they are."
+  },
+  {
+    id: "bare-theory",
+    brand: "Bare Theory",
+    author: "Sophie Grant, Founder",
+    quote:
+      "The designs were the first thing we noticed. They actually looked like our brand. But what impressed me more was the thinking behind them. Every campaign has an audience, an angle, and a reason to send. Nothing feels like filler anymore."
+  },
+  {
+    id: "sunday-supply",
+    brand: "Sunday Supply",
+    author: "Daniel Brooks, Founder",
+    quote:
+      "We were way too dependent on paid ads. SharkScale helped us focus on the second and third purchase instead of constantly chasing the first. Better segmentation and retention flows have made our existing customer base much more valuable."
+  },
+  {
+    id: "north-bloom",
+    brand: "North & Bloom",
+    author: "Emma Carter, Co-Founder",
+    quote:
+      "Before SharkScale, campaigns were basically: ‘What should we send this week?’ Now there’s an actual calendar built around customer behavior, products, segments, and business goals. It feels less like email marketing and more like a real growth channel."
+  }
+];
+
+const COLUMN_REVIEWS: Review[][] = [
+  [REVIEWS[0], REVIEWS[3], REVIEWS[6]].filter((r): r is Review => r !== undefined),
+  [REVIEWS[1], REVIEWS[4], REVIEWS[7]].filter((r): r is Review => r !== undefined),
+  [REVIEWS[2], REVIEWS[5], REVIEWS[8]].filter((r): r is Review => r !== undefined)
+];
+
+function ReviewCard({ review }: { review: Review }) {
+  return (
+    <article className="flex flex-none flex-col rounded-xl border border-white/12 bg-white/[0.06] p-4 backdrop-blur-sm sm:p-5">
+      <p className="text-[13px] font-bold tracking-[-0.02em] text-white sm:text-sm">
+        {review.brand}
+        <span className="font-normal text-white/45"> — </span>
+        <span className="font-semibold text-white/75">{review.author}</span>
+      </p>
+      <blockquote className="mt-3 text-[12.5px] leading-[1.55] text-white/82 sm:text-[13px]">&ldquo;{review.quote}&rdquo;</blockquote>
+    </article>
+  );
 }
 
-const WORKS = [
-  {
-    id: "lumen",
-    name: "Lumen",
-    year: "2026",
-    ratio: "1 / 1",
-    src: unsplash("1540959733332-eab4deabeeaf"),
-    alt: "Crowds moving through a night-time city crossing"
-  },
-  {
-    id: "verta",
-    name: "Verta",
-    year: "2025",
-    ratio: "1 / 1",
-    src: unsplash("1444703686981-a3abbc4d4fe3"),
-    alt: "Starry night sky over a dark landscape"
-  },
-  {
-    id: "oakfield",
-    name: "Oakfield",
-    year: "2025",
-    ratio: "16 / 10",
-    src: unsplash("1551288049-bebda4e38f71"),
-    alt: "Analytics dashboard displayed on a laptop screen"
-  }
-] as const;
+function ScrollingReviewColumn({ reviews, delayOffsetS }: { reviews: Review[]; delayOffsetS: number }) {
+  const loop = [...reviews, ...reviews];
+
+  return (
+    <div className="relative min-h-0 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]">
+      <div
+        className="reviews-scroll-up flex flex-col gap-3 sm:gap-4"
+        style={{ animationDelay: `${delayOffsetS}s` }}
+      >
+        {loop.map((review, index) => (
+          <ReviewCard key={`${review.id}-${index}`} review={review} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Reviews() {
   const wrapperRef = useRef<HTMLElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const reviewsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -89,14 +169,10 @@ export default function Reviews() {
         tl.fromTo(bgRef.current, { backgroundColor: GOLD }, { backgroundColor: INK, ease: "none", duration: 0.32 }, 0.3);
       }
 
-      const cards = cardRefs.current.filter((el): el is HTMLAnchorElement => el !== null);
-      cards.forEach((el, index) => {
-        const start = 0.44 + index * 0.05;
-        const end = 0.7 + index * 0.03;
-        tl.fromTo(el, { opacity: 0, y: 110 }, { opacity: 1, y: 0, ease: "none", duration: end - start }, start);
-      });
+      if (reviewsRef.current) {
+        tl.fromTo(reviewsRef.current, { opacity: 0, y: 110 }, { opacity: 1, y: 0, ease: "none", duration: 0.26 }, 0.44);
+      }
 
-      // Pad the timeline so its total duration maps exactly to scroll progress 0-1.
       tl.to({}, { duration: 0.01 }, 1);
     });
 
@@ -105,6 +181,21 @@ export default function Reviews() {
 
   return (
     <section ref={wrapperRef} id="reviews" className="relative h-[320vh] w-full">
+      <style>{`
+        @keyframes reviews-scroll-up {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
+        }
+        .reviews-scroll-up {
+          animation: reviews-scroll-up ${SCROLL_DURATION_S}s linear infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .reviews-scroll-up {
+            animation: none;
+          }
+        }
+      `}</style>
+
       <div ref={stickyRef} className="sticky top-0 h-screen w-full overflow-hidden">
         <div ref={bgRef} className="absolute inset-0" style={{ backgroundColor: INK }} />
 
@@ -114,39 +205,15 @@ export default function Reviews() {
           </div>
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 grid grid-cols-3 items-end gap-2 px-4 pb-6 sm:gap-4 sm:px-8 sm:pb-8 md:grid-cols-[1fr_1fr_1.6fr]">
-          {WORKS.map((work, index) => (
-            <a
-              key={work.id}
-              href="#contactUs"
-              ref={(node) => {
-                cardRefs.current[index] = node;
-              }}
-              className="group block"
-              style={{ willChange: "transform, opacity" }}
-            >
-              <div className="flex items-center justify-between gap-3 pb-2 text-[11px] font-semibold text-white sm:pb-3 sm:text-sm">
-                <span>{work.name}</span>
-                <span className="opacity-60">{work.year}</span>
-              </div>
-              <div className="relative overflow-hidden bg-black/60" style={{ aspectRatio: work.ratio }}>
-                <Image
-                  src={work.src}
-                  alt={work.alt}
-                  fill
-                  unoptimized
-                  draggable={false}
-                  sizes="(max-width: 767px) 33vw, 30vw"
-                  className="object-cover grayscale transition-all duration-700 ease-out group-hover:scale-[1.045] group-hover:grayscale-0"
-                />
-                <span
-                  className="pointer-events-none absolute inset-0 flex translate-y-3 items-center justify-center text-[clamp(1rem,3.2vw,3.4rem)] font-black tracking-[-0.03em] uppercase opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100"
-                  style={{ color: GOLD }}
-                >
-                  {work.name}
-                </span>
-              </div>
-            </a>
+        <div
+          ref={reviewsRef}
+          className={cn(
+            "absolute inset-x-0 bottom-0 grid h-[min(46vh,420px)] grid-cols-3 items-stretch gap-2 px-4 pb-6 sm:gap-4 sm:px-8 sm:pb-8"
+          )}
+          style={{ willChange: "transform, opacity" }}
+        >
+          {COLUMN_REVIEWS.map((columnReviews, index) => (
+            <ScrollingReviewColumn key={index} reviews={columnReviews} delayOffsetS={index * -17} />
           ))}
         </div>
       </div>
