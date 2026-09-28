@@ -1,5 +1,5 @@
-import { BOOK_SECTION_ID } from "@shared/lib/scrollToSection";
 import { navLinks } from "@shared/lib/navLinks";
+import { BOOK_SECTION_ID } from "@shared/lib/scrollToSection";
 
 export const footerContent = {
   navLinks,

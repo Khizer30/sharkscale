@@ -207,12 +207,7 @@ export default function Tools() {
           >
             <div style={floatStyle(tool.seed)} className="size-full">
               <div className="flex size-full items-center justify-center p-3">
-                <Image
-                  src={tool.src}
-                  alt={tool.name}
-                  className={`size-full object-contain ${tool.rounded ? "rounded-[14px]" : ""}`}
-                  draggable={false}
-                />
+                <Image src={tool.src} alt={tool.name} className={`size-full object-contain ${tool.rounded ? "rounded-[14px]" : ""}`} draggable={false} />
               </div>
             </div>
           </div>

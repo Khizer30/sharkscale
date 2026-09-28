@@ -4,20 +4,13 @@ import DotsToPlusIcon, { type DotsToPlusIconHandle } from "@shared/components/la
 import NavOverlay from "@shared/components/layout/NavOverlay";
 import { colors } from "@shared/constants/colors";
 import { navLinks } from "@shared/lib/navLinks";
-import {
-  BOOK_SECTION_ID,
-  HOME_SECTION_ID,
-  SECTION_LINK_HREF,
-  handleSectionNavClick,
-  navigateToSection
-} from "@shared/lib/scrollToSection";
+import { BOOK_SECTION_ID, HOME_SECTION_ID, SECTION_LINK_HREF, handleSectionNavClick, navigateToSection } from "@shared/lib/scrollToSection";
 import { CalendarCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLayoutEffect, useRef, useState } from "react";
 
 export default function Navbar() {
-
   const menuIconRef = useRef<DotsToPlusIconHandle>(null);
   const [showOverlay, setShowOverlay] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);

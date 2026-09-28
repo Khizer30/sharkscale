@@ -31,9 +31,7 @@ const DotsToPlusIcon = forwardRef<DotsToPlusIconHandle, DotsToPlusIconProps>(fun
   menuOpenRef.current = menuOpen;
 
   const animationTargets = () =>
-    [centerThreeDotsRef.current, verticalDotsRef.current, horizontalDotsRef.current].filter(
-      (el): el is HTMLDivElement => el !== null
-    );
+    [centerThreeDotsRef.current, verticalDotsRef.current, horizontalDotsRef.current].filter((el): el is HTMLDivElement => el !== null);
 
   const killAnimations = () => {
     gsap.killTweensOf(animationTargets());

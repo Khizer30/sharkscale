@@ -77,8 +77,8 @@ export default function PartnerBand() {
             </h2>
 
             <p className="mt-5 max-w-[46ch] text-[16.5px] leading-relaxed" style={{ color: "rgba(255,255,255,0.8)" }}>
-              We&apos;ll dig into your Klaviyo and show you where revenue is being left behind—from missing flows and weak campaigns to overlooked segments,
-              low repeat purchases, and retention gaps. You leave with{" "}
+              We&apos;ll dig into your Klaviyo and show you where revenue is being left behind—from missing flows and weak campaigns to overlooked segments, low
+              repeat purchases, and retention gaps. You leave with{" "}
               <span className="font-bold text-white">real opportunities, clear priorities, and an action plan.</span>
             </p>
 

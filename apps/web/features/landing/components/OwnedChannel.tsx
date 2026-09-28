@@ -63,9 +63,7 @@ function EmailTemplatePreload() {
 
 function ScrollingEmailColumn({ src, alt, direction }: { src: StaticImageData; alt: string; direction: ScrollDirection }) {
   return (
-    <div
-      className="relative min-h-0 overflow-hidden rounded-[14px] bg-white/95 [mask-image:linear-gradient(to_bottom,transparent,black_6%,black_94%,transparent)]"
-    >
+    <div className="relative min-h-0 overflow-hidden rounded-[14px] bg-white/95 [mask-image:linear-gradient(to_bottom,transparent,black_6%,black_94%,transparent)]">
       <div className={cn("flex flex-col gap-4 px-2 pt-2", direction === "up" ? "owned-scroll-up" : "owned-scroll-down")}>
         {[0, 1].map((key) => (
           <Image
@@ -170,9 +168,7 @@ export default function OwnedChannel() {
             Owned channel
           </span>
 
-          <h2 className="mt-6 max-w-[24ch] text-[clamp(32px,4.4vw,62px)] leading-[1.04] font-bold tracking-[-0.04em]">
-            Good enough to stop the scroll.
-          </h2>
+          <h2 className="mt-6 max-w-[24ch] text-[clamp(32px,4.4vw,62px)] leading-[1.04] font-bold tracking-[-0.04em]">Good enough to stop the scroll.</h2>
 
           <p className="mt-6 max-w-[62ch] text-[17px] leading-relaxed" style={{ color: "rgba(10,16,51,0.7)" }}>
             Every email is designed around your brand, your customer, and the action we want them to take. Strategy, copy, and design come together to create
@@ -189,17 +185,9 @@ export default function OwnedChannel() {
           </a>
         </div>
 
-        <div
-          ref={mockRef}
-          className="mx-auto mt-14 grid h-[min(78vh,720px)] w-full max-w-280 grid-cols-2 gap-2.5 overflow-hidden sm:grid-cols-4 sm:gap-4"
-        >
+        <div ref={mockRef} className="mx-auto mt-14 grid h-[min(78vh,720px)] w-full max-w-280 grid-cols-2 gap-2.5 overflow-hidden sm:grid-cols-4 sm:gap-4">
           {columnImages.map((src, index) => (
-            <ScrollingEmailColumn
-              key={src.src}
-              src={src}
-              alt={`Email creative example ${index + 1}`}
-              direction={COLUMN_DIRECTIONS[index] ?? "up"}
-            />
+            <ScrollingEmailColumn key={src.src} src={src} alt={`Email creative example ${index + 1}`} direction={COLUMN_DIRECTIONS[index] ?? "up"} />
           ))}
         </div>
       </div>

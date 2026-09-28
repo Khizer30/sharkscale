@@ -112,10 +112,7 @@ function ScrollingReviewColumn({ reviews, delayOffsetS }: { reviews: Review[]; d
 
   return (
     <div className="relative min-h-0 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]">
-      <div
-        className="reviews-scroll-up flex flex-col gap-3 sm:gap-4"
-        style={{ animationDelay: `${delayOffsetS}s` }}
-      >
+      <div className="reviews-scroll-up flex flex-col gap-3 sm:gap-4" style={{ animationDelay: `${delayOffsetS}s` }}>
         {loop.map((review, index) => (
           <ReviewCard key={`${review.id}-${index}`} review={review} />
         ))}
@@ -171,12 +168,7 @@ export default function Reviews() {
       });
 
       if (headingRef.current) {
-        tl.fromTo(
-          headingRef.current,
-          { scale: 1, y: 0 },
-          { scale: 0.4, y: -20, ease: "none", duration: 0.38, transformOrigin: "center top" },
-          0
-        );
+        tl.fromTo(headingRef.current, { scale: 1, y: 0 }, { scale: 0.4, y: -20, ease: "none", duration: 0.38, transformOrigin: "center top" }, 0);
         tl.fromTo(headingRef.current, { color: INK }, { color: WHITE, ease: "none", duration: 0.2 }, 0.14);
       }
 
@@ -228,10 +220,7 @@ export default function Reviews() {
         }
       `}</style>
 
-      <div
-        ref={stickyRef}
-        className="flex h-screen w-full flex-col overflow-hidden px-4 pt-24 pb-6 sm:px-8 sm:pt-28 sm:pb-8"
-      >
+      <div ref={stickyRef} className="flex h-screen w-full flex-col overflow-hidden px-4 pt-24 pb-6 sm:px-8 sm:pt-28 sm:pb-8">
         <div ref={bgRef} className="absolute inset-0 -z-10" style={{ backgroundColor: GOLD }} />
 
         <div ref={headingRef} className="w-full shrink-0 text-center" style={{ color: INK, willChange: "transform" }}>
@@ -240,9 +229,7 @@ export default function Reviews() {
 
         <div
           ref={reviewsRef}
-          className={cn(
-            "mt-5 grid min-h-0 flex-1 grid-cols-3 items-stretch gap-2 sm:mt-7 sm:gap-4"
-          )}
+          className={cn("mt-5 grid min-h-0 flex-1 grid-cols-3 items-stretch gap-2 sm:mt-7 sm:gap-4")}
           style={{ willChange: "transform, opacity" }}
         >
           {COLUMN_REVIEWS.map((columnReviews, index) => (

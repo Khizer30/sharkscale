@@ -31,9 +31,7 @@ export default function FooterCTA() {
       </div>
 
       <div className="mt-[clamp(90px,13vw,180px)] text-center">
-        <h2 className="text-[clamp(30px,4vw,56px)] leading-[1.1] font-bold tracking-[-0.035em] text-white">
-          Your next 30% could already be in your list.
-        </h2>
+        <h2 className="text-[clamp(30px,4vw,56px)] leading-[1.1] font-bold tracking-[-0.035em] text-white">Your next 30% could already be in your list.</h2>
         <a
           href={SECTION_LINK_HREF}
           onClick={handleSectionNavClick(BOOK_SECTION_ID)}

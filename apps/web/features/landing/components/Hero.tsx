@@ -6,8 +6,8 @@ import campaigns2 from "@shared/assets/campaigns_2.webp";
 import deliverability from "@shared/assets/deliverability.webp";
 import flows from "@shared/assets/flows.webp";
 import loop from "@shared/assets/loop.webp";
-import { cn } from "@shared/lib/utils";
 import { BOOK_SECTION_ID, REVENUE_PROOF_SECTION_ID, SECTION_LINK_HREF, handleSectionNavClick } from "@shared/lib/scrollToSection";
+import { cn } from "@shared/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image, { type StaticImageData } from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -166,10 +166,7 @@ function DashboardCard() {
                 loading={isLcp ? undefined : "eager"}
                 fetchPriority={isLcp ? "high" : "low"}
                 aria-hidden={isVisible ? undefined : true}
-                className={cn(
-                  "object-cover transition-opacity duration-500 motion-reduce:transition-none",
-                  isVisible ? "opacity-100" : "opacity-0"
-                )}
+                className={cn("object-cover transition-opacity duration-500 motion-reduce:transition-none", isVisible ? "opacity-100" : "opacity-0")}
                 sizes="(max-width: 1024px) 100vw, 980px"
               />
             );
@@ -288,8 +285,9 @@ export default function Hero() {
         </h1>
 
         <p className="mt-6 max-w-152 text-[15px] leading-relaxed text-neutral-500 sm:text-base">
-          We turn email and SMS into a serious revenue channel. From high-converting flows and campaigns to smarter segmentation, retention, and personalization,
-          we help increase repeat purchases, AOV, and LTV, so you make more from the traffic and customers you already have, without relying on more ad spend.
+          We turn email and SMS into a serious revenue channel. From high-converting flows and campaigns to smarter segmentation, retention, and
+          personalization, we help increase repeat purchases, AOV, and LTV, so you make more from the traffic and customers you already have, without relying on
+          more ad spend.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

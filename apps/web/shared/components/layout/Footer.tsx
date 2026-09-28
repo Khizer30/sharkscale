@@ -83,13 +83,7 @@ export default function Footer() {
   );
 }
 
-function FooterLinkColumn({
-  title,
-  links
-}: {
-  title: string;
-  links: readonly ({ label: string; sectionId: string } | { label: string; href: string })[];
-}) {
+function FooterLinkColumn({ title, links }: { title: string; links: readonly ({ label: string; sectionId: string } | { label: string; href: string })[] }) {
   return (
     <div>
       <div className="mb-5 font-mono text-[11px] tracking-[0.16em] text-white/50 uppercase">{title}</div>

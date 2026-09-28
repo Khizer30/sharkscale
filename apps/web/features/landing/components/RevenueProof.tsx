@@ -53,9 +53,7 @@ export default function RevenueProof() {
     // as its content, so this does not add a pinned scroll runway.
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const principles = principleRefs.current.filter((el): el is HTMLLIElement => el !== null);
-      const targets: HTMLElement[] = [headingRef.current, cardRef.current, ...principles].filter(
-        (el): el is HTMLDivElement | HTMLLIElement => el !== null
-      );
+      const targets: HTMLElement[] = [headingRef.current, cardRef.current, ...principles].filter((el): el is HTMLDivElement | HTMLLIElement => el !== null);
 
       gsap.set(targets, { opacity: 0, y: 24 });
 
@@ -100,9 +98,8 @@ export default function RevenueProof() {
               From email.
             </h2>
             <p className="mt-5 max-w-72 text-[13px] leading-relaxed text-neutral-500">
-              In just 30 days, email generated{" "}
-              <span className="font-semibold text-[#12141F]">€35,294 in attributed revenue</span> for HerbellaVita. Not from more ad spend, but from better
-              flows, campaigns, segmentation, and retention.
+              In just 30 days, email generated <span className="font-semibold text-[#12141F]">€35,294 in attributed revenue</span> for HerbellaVita. Not from
+              more ad spend, but from better flows, campaigns, segmentation, and retention.
             </p>
           </div>
 
