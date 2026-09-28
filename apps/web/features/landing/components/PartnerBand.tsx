@@ -68,16 +68,17 @@ export default function PartnerBand() {
               style={{ backgroundColor: "rgba(255,255,255,0.14)", color: "rgba(255,255,255,0.9)" }}
             >
               <span className="size-3.5 flex-none rounded-lg" style={{ backgroundColor: colors.secondary }} />
-              Ask us: how do we start?
+              FREE 30-MINUTE REVENUE AUDIT
             </span>
 
             <h2 className="mt-5 max-w-[18ch] text-[clamp(30px,3.8vw,52px)] leading-[1.06] font-extrabold tracking-[-0.035em] uppercase">
-              Free 30-minute revenue audit
+              30 minutes to unlock your next 30% in revenue.
             </h2>
 
             <p className="mt-5 max-w-[46ch] text-[16.5px] leading-relaxed" style={{ color: "rgba(255,255,255,0.8)" }}>
-              We work inside your Klaviyo account the way an in-house lead would. Every send still sounds like your brand, and every number lands in your
-              dashboard.
+              We&apos;ll dig into your Klaviyo and show you where revenue is being left behind—from missing flows and weak campaigns to overlooked segments,
+              low repeat purchases, and retention gaps. You leave with{" "}
+              <span className="font-bold text-white">real opportunities, clear priorities, and an action plan.</span>
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
@@ -86,14 +87,14 @@ export default function PartnerBand() {
                 className="inline-flex items-center gap-2.5 rounded-[10px] px-6 py-3.5 text-[14.5px] font-extrabold"
                 style={{ backgroundColor: colors.secondary, color: INK }}
               >
-                Book a teardown →
+                FIND MY 30% →
               </a>
               <a
                 href="#process"
                 className="inline-flex items-center gap-2.5 rounded-[10px] px-6 py-3.5 text-[14.5px] font-bold"
                 style={{ backgroundColor: "rgba(255,255,255,0.16)", color: "#ffffff" }}
               >
-                See the process
+                SEE WHAT WE AUDIT
               </a>
             </div>
           </div>
