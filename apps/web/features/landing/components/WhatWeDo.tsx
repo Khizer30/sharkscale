@@ -6,19 +6,6 @@ import Image from "next/image";
 
 const SURFACE = "#F3F4F8";
 const INK = "#12141F";
-const GOLD = "#FFD21F";
-
-const FLOW_TICKER = [
-  "Flow",
-  "Welcome series",
-  "Abandoned cart",
-  "Browse abandon",
-  "Post-purchase",
-  "Winback",
-  "Replenishment",
-  "VIP tier",
-  "Sunset flow"
-] as const;
 
 const WORKS = [
   {
@@ -86,32 +73,6 @@ const WORKS = [
 
 type Work = (typeof WORKS)[number];
 
-function TickerRow() {
-  return (
-    <div className="flex items-center gap-x-5 pr-10">
-      {FLOW_TICKER.map((item, index) => (
-        <span key={item} className="inline-flex items-center gap-x-5">
-          {index > 0 && <span aria-hidden className="size-1.5 shrink-0 rotate-45" style={{ background: GOLD }} />}
-          <span className="text-[11px] font-semibold tracking-[0.18em] text-[#8B90A0] uppercase">{item}</span>
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function FlowTicker() {
-  return (
-    <div className="overflow-hidden" style={{ maskImage: "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)" }}>
-      <div className="what-we-do-ticker flex w-max items-center">
-        <TickerRow />
-        <div aria-hidden>
-          <TickerRow />
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function WorkCard({ work, index }: { work: Work; index: number }) {
   return (
     <article
@@ -144,9 +105,8 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
 export default function WhatWeDo() {
   return (
     <section id="what-we-do" className="relative isolate" style={{ background: SURFACE }}>
-      <header data-nav-theme="light" className="relative z-0 flex min-h-[46svh] flex-col pt-28 pb-6 sm:min-h-[50svh] sm:pt-32">
-        <FlowTicker />
-        <div className="flex flex-1 items-center justify-center px-4 py-10 sm:py-12">
+      <header data-nav-theme="light" className="relative z-0 px-4 pt-24 pb-4 sm:pt-28 sm:pb-6">
+        <div className="flex items-center justify-center py-4 sm:py-6">
           <h2 className="text-center font-extrabold tracking-tighter text-[#111111]" style={{ fontSize: "clamp(3.25rem, 9vw, 6.75rem)", lineHeight: 0.95 }}>
             What we do
           </h2>

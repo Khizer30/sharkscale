@@ -50,6 +50,16 @@ const BLUE = "#123CE8";
 
 const SCROLL_DURATION_S = 52;
 
+function EmailTemplatePreload() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute size-0 overflow-hidden opacity-0">
+      {EMAIL_TEMPLATES.map((src) => (
+        <Image key={src.src} src={src} alt="" width={src.width} height={src.height} loading="eager" fetchPriority="low" />
+      ))}
+    </div>
+  );
+}
+
 function ScrollingEmailColumn({ src, alt, direction }: { src: StaticImageData; alt: string; direction: ScrollDirection }) {
   return (
     <div
@@ -62,6 +72,8 @@ function ScrollingEmailColumn({ src, alt, direction }: { src: StaticImageData; a
             src={src}
             alt={key === 0 ? alt : ""}
             draggable={false}
+            loading="eager"
+            fetchPriority="low"
             className="h-auto w-full flex-none rounded-[10px] shadow-[0_12px_40px_-20px_rgba(10,16,51,0.45)]"
           />
         ))}
@@ -121,9 +133,10 @@ export default function OwnedChannel() {
     <section
       ref={sectionRef}
       data-nav-theme="light"
-      className="w-full overflow-hidden px-6 py-20 sm:px-10 sm:py-24"
+      className="relative w-full overflow-hidden px-6 py-20 sm:px-10 sm:py-24"
       style={{ backgroundColor: SURFACE, color: INK }}
     >
+      <EmailTemplatePreload />
       <style>{`
         @keyframes owned-scroll-up {
           0% { transform: translateY(0); }
