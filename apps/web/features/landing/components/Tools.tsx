@@ -1,13 +1,4 @@
 "use client";
-import googleAnalytics from "@shared/assets/google_analytics.webp";
-import hubspot from "@shared/assets/hubspot.webp";
-import klaviyo from "@shared/assets/klaviyo.webp";
-import mailchimp from "@shared/assets/mailchimp.webp";
-import notion from "@shared/assets/notion.webp";
-import omnisend from "@shared/assets/omnisend.webp";
-import shopify from "@shared/assets/shopify.webp";
-import wooCommerce from "@shared/assets/woo_commerce.webp";
-import zapier from "@shared/assets/zapier.webp";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image, { StaticImageData } from "next/image";
@@ -25,132 +16,14 @@ type Tool = {
   w: string;
   h: string;
   seed: number;
-  // Mobile-specific placement/size so wide logos don't overflow narrow viewports.
   mx: number;
   my: number;
   mw: string;
   mh: string;
 };
 
-const tools: Tool[] = [
-  {
-    name: "Klaviyo",
-    src: klaviyo,
-    x: 4,
-    y: 8,
-    w: "clamp(96px,10vw,156px)",
-    h: "clamp(96px,10vw,156px)",
-    seed: 0,
-    mx: 3,
-    my: 5,
-    mw: "clamp(60px,17vw,86px)",
-    mh: "clamp(60px,17vw,86px)"
-  },
-  {
-    name: "Shopify",
-    src: shopify,
-    x: 30,
-    y: 3,
-    w: "clamp(72px,7.5vw,120px)",
-    h: "clamp(72px,7.5vw,120px)",
-    seed: 1,
-    mx: 42,
-    my: 3,
-    mw: "clamp(60px,17vw,86px)",
-    mh: "clamp(60px,17vw,86px)"
-  },
-  {
-    name: "Mailchimp",
-    src: mailchimp,
-    x: 62,
-    y: 5,
-    w: "clamp(92px,9.5vw,144px)",
-    h: "clamp(92px,9.5vw,144px)",
-    seed: 2,
-    mx: 72,
-    my: 7,
-    mw: "clamp(60px,17vw,86px)",
-    mh: "clamp(60px,17vw,86px)"
-  },
-  {
-    name: "HubSpot",
-    src: hubspot,
-    x: 83,
-    y: 10,
-    w: "clamp(150px,16vw,240px)",
-    h: "clamp(50px,5.3vw,80px)",
-    seed: 3,
-    mx: 5,
-    my: 21,
-    mw: "clamp(112px,30vw,152px)",
-    mh: "clamp(38px,10vw,50px)"
-  },
-  {
-    name: "WooCommerce",
-    src: wooCommerce,
-    x: 78,
-    y: 48,
-    w: "clamp(150px,16vw,240px)",
-    h: "clamp(50px,5.3vw,80px)",
-    seed: 4,
-    mx: 55,
-    my: 20,
-    mw: "clamp(112px,30vw,152px)",
-    mh: "clamp(38px,10vw,50px)"
-  },
-  {
-    name: "Omnisend",
-    src: omnisend,
-    x: 79,
-    y: 78,
-    w: "clamp(150px,16vw,240px)",
-    h: "clamp(50px,5.3vw,80px)",
-    seed: 5,
-    mx: 6,
-    my: 78,
-    mw: "clamp(112px,30vw,152px)",
-    mh: "clamp(38px,10vw,50px)"
-  },
-  {
-    name: "Zapier",
-    src: zapier,
-    x: 54,
-    y: 84,
-    w: "clamp(150px,16vw,240px)",
-    h: "clamp(50px,5.3vw,80px)",
-    seed: 6,
-    mx: 52,
-    my: 82,
-    mw: "clamp(112px,30vw,152px)",
-    mh: "clamp(38px,10vw,50px)"
-  },
-  {
-    name: "Google Analytics",
-    src: googleAnalytics,
-    x: 22,
-    y: 83,
-    w: "clamp(150px,15vw,224px)",
-    h: "clamp(75px,7.5vw,112px)",
-    seed: 7,
-    mx: 30,
-    my: 50,
-    mw: "clamp(96px,26vw,132px)",
-    mh: "clamp(48px,13vw,66px)"
-  },
-  {
-    name: "Notion",
-    src: notion,
-    x: 3,
-    y: 65,
-    w: "clamp(88px,9vw,140px)",
-    h: "clamp(88px,9vw,140px)",
-    seed: 8,
-    mx: 73,
-    my: 58,
-    mw: "clamp(60px,17vw,86px)",
-    mh: "clamp(60px,17vw,86px)"
-  }
-];
+/** Add logos here (import from @shared/assets/…) when assets are ready. */
+const tools: Tool[] = [];
 
 function seededVal(seed: number, index: number): number {
   const x = Math.sin(seed * 9301 + index * 49297 + 233) * 1000;
@@ -173,28 +46,13 @@ export default function Tools() {
 
   useEffect(() => {
     const section = sectionRef.current;
-    const layer = layerRef.current;
-    const items = itemRefs.current.filter((el): el is HTMLDivElement => el !== null);
-    if (!section || !layer || items.length === 0) {
+    if (!section) {
       return;
     }
 
     const ctx = gsap.context(() => {
-      const layerRect = layer.getBoundingClientRect();
-      const cx = layerRect.left + layerRect.width / 2;
-      const cy = layerRect.top + layerRect.height / 2;
-
-      // Start each icon collapsed at the center of the section.
-      items.forEach((el) => {
-        const r = el.getBoundingClientRect();
-        gsap.set(el, {
-          x: cx - (r.left + r.width / 2),
-          y: cy - (r.top + r.height / 2),
-          scale: 0,
-          opacity: 0,
-          rotate: gsap.utils.random(-45, 45)
-        });
-      });
+      const layer = layerRef.current;
+      const items = itemRefs.current.filter((el): el is HTMLDivElement => el !== null);
 
       gsap.set([badgeRef.current, headingRef.current].filter(Boolean), { y: 32, opacity: 0 });
 
@@ -206,16 +64,33 @@ export default function Tools() {
         }
       });
 
-      tl.to(items, {
-        x: 0,
-        y: 0,
-        scale: 1,
-        opacity: 1,
-        rotate: 0,
-        duration: 0.9,
-        ease: "back.out(1.4)",
-        stagger: { each: 0.06, from: "random" }
-      });
+      if (layer && items.length > 0) {
+        const layerRect = layer.getBoundingClientRect();
+        const cx = layerRect.left + layerRect.width / 2;
+        const cy = layerRect.top + layerRect.height / 2;
+
+        items.forEach((el) => {
+          const r = el.getBoundingClientRect();
+          gsap.set(el, {
+            x: cx - (r.left + r.width / 2),
+            y: cy - (r.top + r.height / 2),
+            scale: 0,
+            opacity: 0,
+            rotate: gsap.utils.random(-45, 45)
+          });
+        });
+
+        tl.to(items, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          rotate: 0,
+          duration: 0.9,
+          ease: "back.out(1.4)",
+          stagger: { each: 0.06, from: "random" }
+        });
+      }
 
       tl.to(
         [badgeRef.current, headingRef.current].filter(Boolean),
@@ -226,7 +101,7 @@ export default function Tools() {
           stagger: 0.12,
           ease: "power3.out"
         },
-        "-=0.35"
+        items.length > 0 ? "-=0.35" : 0
       );
     }, section);
 
@@ -271,7 +146,6 @@ export default function Tools() {
         }
       `}</style>
 
-      {/* Scattered icons — absolutely positioned */}
       <div ref={layerRef} className="absolute inset-0">
         {tools.map((tool, index) => (
           <div
@@ -304,7 +178,6 @@ export default function Tools() {
         ))}
       </div>
 
-      {/* Center text */}
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
         <span
           ref={badgeRef}
