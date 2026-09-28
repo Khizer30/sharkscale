@@ -143,7 +143,7 @@ function WorkCard({ work, index }: { work: Work; index: number }) {
 
 export default function WhatWeDo() {
   return (
-    <section id="services" className="relative isolate" style={{ background: SURFACE }}>
+    <section id="what-we-do" className="relative isolate" style={{ background: SURFACE }}>
       <header data-nav-theme="light" className="relative z-0 flex min-h-[46svh] flex-col pt-28 pb-6 sm:min-h-[50svh] sm:pt-32">
         <FlowTicker />
         <div className="flex flex-1 items-center justify-center px-4 py-10 sm:py-12">

@@ -1,7 +1,7 @@
 export const footerContent = {
   navLinks: [
     { label: "Home", href: "#home" },
-    { label: "Services", href: "#services" },
+    { label: "What We Do", href: "#what-we-do" },
     { label: "Reviews", href: "#reviews" }
   ],
   connectLinks: [{ label: "Contact Us", href: "#contactUs" }],

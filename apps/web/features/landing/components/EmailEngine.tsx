@@ -25,7 +25,7 @@ export default function EmailEngine() {
 
     const mm = gsap.matchMedia();
 
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
+    const addScrollTimeline = (fontFrom: string, fontTo: string) => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapper,
@@ -56,11 +56,19 @@ export default function EmailEngine() {
       }
 
       if (textRef.current) {
-        tl.fromTo(textRef.current, { fontSize: "3.1vw" }, { fontSize: "5.6vw", ease: "none", duration: 0.88 }, 0.02);
+        tl.fromTo(textRef.current, { fontSize: fontFrom }, { fontSize: fontTo, ease: "none", duration: 0.88 }, 0.02);
       }
 
       // Pad the timeline so its total duration maps exactly to scroll progress 0-1.
       tl.to({}, { duration: 0.01 }, 1);
+    };
+
+    mm.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => {
+      addScrollTimeline("4.5vw", "8vw");
+    });
+
+    mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+      addScrollTimeline("3.1vw", "5.6vw");
     });
 
     return () => mm.revert();
@@ -76,7 +84,7 @@ export default function EmailEngine() {
         >
           <h2
             ref={textRef}
-            className="max-w-[24ch] text-center text-[5.6vw] leading-[0.96] font-black tracking-tighter uppercase motion-reduce:text-[4vw]"
+            className="max-w-[24ch] text-center text-[8vw] leading-[0.96] font-black tracking-tighter uppercase md:text-[5.6vw] motion-reduce:text-[6.5vw] md:motion-reduce:text-[4vw]"
             style={{ color: INK }}
           >
             We turn first purchases into long-term revenue
