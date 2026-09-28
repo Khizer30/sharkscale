@@ -94,11 +94,12 @@ export default function OwnedChannel() {
           </span>
 
           <h2 className="mt-6 max-w-[24ch] text-[clamp(32px,4.4vw,62px)] leading-[1.04] font-bold tracking-[-0.04em]">
-            An inbox where your brand and your data work together
+            Good enough to stop the scroll.
           </h2>
 
           <p className="mt-6 max-w-[62ch] text-[17px] leading-relaxed" style={{ color: "rgba(10,16,51,0.7)" }}>
-            Every flow, campaign and segment reports into one view. We read the same numbers you do, so the calendar is argued with data instead of taste.
+            Every email is designed around your brand, your customer, and the action we want them to take. Strategy, copy, and design come together to create
+            emails people actually want to open, read, and shop.
           </p>
 
           <a
@@ -106,7 +107,7 @@ export default function OwnedChannel() {
             className="mt-7 inline-flex items-center gap-2.5 rounded-[10px] px-6 py-3.5 text-[14.5px] font-bold text-white"
             style={{ backgroundColor: BLUE }}
           >
-            Explore the numbers →
+            EXPLORE OUR CREATIVE →
           </a>
         </div>
 

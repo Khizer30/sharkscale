@@ -4,11 +4,8 @@ export const footerContent = {
     { label: "Services", href: "#services" },
     { label: "Our Work", href: "#ourWork" }
   ],
-  connectLinks: [
-    { label: "Contact Us", href: "#contactUs" },
-    { label: "LinkedIn", href: "https://linkedin.com" }
-  ],
+  connectLinks: [{ label: "Contact Us", href: "#contactUs" }],
   legalLinks: [] as { label: string; href: string }[],
-  tagline: "Full-stack product studio, building since 2021",
+  tagline: "Email & retention marketing, built to scale",
   copyright: `© ${new Date().getFullYear()} SharkScale. All rights reserved.`
 };

@@ -2,7 +2,6 @@
 import { colors } from "@shared/constants/colors";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 if (typeof window !== "undefined") {
@@ -12,14 +11,11 @@ if (typeof window !== "undefined") {
 const INK = colors.tertiary;
 const CARD = colors.white;
 
-const CARD_IMAGE = "https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=1200&q=80";
-
 export default function EmailEngine() {
   const wrapperRef = useRef<HTMLElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
-  const imageRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -63,10 +59,6 @@ export default function EmailEngine() {
         tl.fromTo(textRef.current, { fontSize: "3.1vw" }, { fontSize: "5.6vw", ease: "none", duration: 0.88 }, 0.02);
       }
 
-      if (imageRef.current) {
-        tl.fromTo(imageRef.current, { opacity: 0, scale: 0.24 }, { opacity: 1, scale: 1, ease: "none", duration: 0.46 }, 0.4);
-      }
-
       // Pad the timeline so its total duration maps exactly to scroll progress 0-1.
       tl.to({}, { duration: 0.01 }, 1);
     });
@@ -87,11 +79,7 @@ export default function EmailEngine() {
             className="max-w-[24ch] text-center text-[5.6vw] leading-[0.96] font-black tracking-tighter uppercase motion-reduce:text-[4vw]"
             style={{ color: INK }}
           >
-            We build the email{" "}
-            <span ref={imageRef} className="relative mx-[0.1em] inline-block h-[0.72em] w-[2.1em] align-[-0.02em]">
-              <Image src={CARD_IMAGE} alt="" fill unoptimized draggable={false} sizes="20vw" className="object-cover" />
-            </span>{" "}
-            engine your store runs on
+            We turn first purchases into long-term revenue
           </h2>
         </div>
       </div>

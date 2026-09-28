@@ -143,9 +143,9 @@ export default function Team() {
         >
           Our people
         </span>
-        <h2 className="mt-4 text-[clamp(32px,4.4vw,62px)] leading-[1.04] font-bold tracking-[-0.04em] text-[#12141F]">Meet the team</h2>
+        <h2 className="mt-4 text-[clamp(32px,4.4vw,62px)] leading-[1.04] font-bold tracking-[-0.04em] text-[#12141F]">Meet Your Retention Team</h2>
         <p className="mt-4 text-lg" style={{ color: "rgba(18,20,31,0.6)" }}>
-          The people behind the campaigns that scale your brand.
+          The sharks behind the emails that scale your brand.
         </p>
       </div>
 

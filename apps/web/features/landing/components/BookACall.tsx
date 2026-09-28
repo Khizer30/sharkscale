@@ -37,9 +37,11 @@ export default function BookACall() {
         Free teardown
       </span>
 
-      <h2 className="mt-4 text-center text-[clamp(32px,4.4vw,62px)] leading-[1.04] font-bold tracking-tight text-[#12141F]">Book a call</h2>
+      <h2 className="mt-4 text-center text-[clamp(32px,4.4vw,62px)] leading-[1.04] font-bold tracking-tight text-[#12141F]">
+        Let&apos;s Find the Money You&apos;re Missing
+      </h2>
       <p className="mt-4 max-w-lg text-center text-[16.5px] leading-relaxed text-[#12141F]/70">
-        Schedule a 30-minute teardown with our team to find where revenue is leaking in your flows.
+        Give us 30 minutes and your Klaviyo. We&apos;ll find the gaps, missed opportunities, and quick wins that could be costing your brand revenue.
       </p>
 
       <div className="mt-12 w-full max-w-3xl">

@@ -170,7 +170,6 @@ export default function Tools() {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const badgeRef = useRef<HTMLSpanElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const paraRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -197,7 +196,7 @@ export default function Tools() {
         });
       });
 
-      gsap.set([badgeRef.current, headingRef.current, paraRef.current].filter(Boolean), { y: 32, opacity: 0 });
+      gsap.set([badgeRef.current, headingRef.current].filter(Boolean), { y: 32, opacity: 0 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -219,7 +218,7 @@ export default function Tools() {
       });
 
       tl.to(
-        [badgeRef.current, headingRef.current, paraRef.current].filter(Boolean),
+        [badgeRef.current, headingRef.current].filter(Boolean),
         {
           y: 0,
           opacity: 1,
@@ -315,11 +314,12 @@ export default function Tools() {
           Integrations
         </span>
         <h2 ref={headingRef} className="mt-4 text-center text-[clamp(32px,4.4vw,62px)] leading-[1.04] font-extrabold uppercase tracking-tight">
-          <span className="bg-linear-to-r from-blue-600 via-indigo-600 to-blue-950 bg-clip-text text-transparent">Tools We Work With</span>
+          <span className="bg-linear-to-r from-blue-600 via-indigo-600 to-blue-950 bg-clip-text text-transparent">
+            The Tools Behind
+            <br />
+            the Growth
+          </span>
         </h2>
-        <p ref={paraRef} className="mt-4 max-w-lg text-center text-[16.5px] leading-relaxed text-[#12141F]/70">
-          We integrate with the platforms that power your business—helping brands boost client acquisition by up to 90%.
-        </p>
       </div>
     </section>
   );
