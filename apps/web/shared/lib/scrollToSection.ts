@@ -27,6 +27,12 @@ export function clearSectionHashFromUrl(): void {
 
 /** Scroll to a section id; retries while lazy chunks mount. Does not add a URL hash. */
 export function navigateToSection(sectionId: string): void {
+  // Sections live on the homepage, so from any other page go there first and let it scroll on load.
+  if (window.location.pathname !== SECTION_LINK_HREF) {
+    window.location.assign(`${SECTION_LINK_HREF}#${sectionId}`);
+    return;
+  }
+
   const finish = () => {
     clearSectionHashFromUrl();
   };

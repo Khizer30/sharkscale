@@ -1,6 +1,6 @@
 "use client";
 import { colors } from "@shared/constants/colors";
-import { navLinks } from "@shared/lib/navLinks";
+import { navLinks, pageLinks } from "@shared/lib/navLinks";
 import { SECTION_LINK_HREF, handleSectionNavClick } from "@shared/lib/scrollToSection";
 import gsap from "gsap";
 import Link from "next/link";
@@ -84,6 +84,17 @@ export default function NavOverlay({ onClose }: NavOverlayProps) {
                 handleSectionNavClick(link.sectionId)(event);
                 handleClose();
               }}
+              className="inline-flex w-fit py-1 text-2xl font-semibold tracking-tight transition-[color,transform,opacity] duration-200 ease-out hover:translate-x-0.5 hover:opacity-80 active:translate-x-1 active:opacity-70 motion-reduce:transform-none"
+              style={{ color: colors.tertiary }}
+            >
+              {link.label}
+            </Link>
+          ))}
+          {pageLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={handleClose}
               className="inline-flex w-fit py-1 text-2xl font-semibold tracking-tight transition-[color,transform,opacity] duration-200 ease-out hover:translate-x-0.5 hover:opacity-80 active:translate-x-1 active:opacity-70 motion-reduce:transform-none"
               style={{ color: colors.tertiary }}
             >

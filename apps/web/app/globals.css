@@ -264,3 +264,80 @@ html.custom-cursor-active [contenteditable="true"] {
     animation: none;
   }
 }
+
+/* ─── Blog editor (admin) ─────────────────────────────────────────────────── */
+.blog-editor .ProseMirror {
+  min-height: 26rem;
+  padding: 1.5rem clamp(1rem, 3vw, 1.75rem);
+  color: #12141f;
+  font-size: 1rem;
+  line-height: 1.75;
+  outline: none;
+}
+
+.blog-editor .ProseMirror > * + * {
+  margin-top: 1rem;
+}
+
+.blog-editor .ProseMirror :is(h1, h2, h3, h4) {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-top: 1.6rem;
+}
+
+.blog-editor .ProseMirror h1 {
+  font-size: 2.1rem;
+}
+
+.blog-editor .ProseMirror h2 {
+  font-size: 1.6rem;
+}
+
+.blog-editor .ProseMirror h3 {
+  font-size: 1.25rem;
+}
+
+.blog-editor .ProseMirror h4 {
+  font-size: 1.05rem;
+}
+
+.blog-editor .ProseMirror ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.blog-editor .ProseMirror ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+}
+
+.blog-editor .ProseMirror blockquote {
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--secondary);
+  border-radius: 0.5rem;
+  background: #f5f0e8;
+  font-weight: 600;
+}
+
+.blog-editor .ProseMirror a {
+  color: #2f5bff;
+  text-decoration: underline;
+}
+
+.blog-editor .ProseMirror img {
+  max-width: 100%;
+  border-radius: 0.75rem;
+}
+
+.blog-editor .ProseMirror img.ProseMirror-selectednode {
+  outline: 3px solid #2f5bff;
+}
+
+.blog-editor .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  color: rgb(0 0 0 / 35%);
+  pointer-events: none;
+}
