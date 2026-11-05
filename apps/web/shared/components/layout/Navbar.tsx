@@ -3,7 +3,7 @@ import logo from "@shared/assets/logo.webp";
 import DotsToPlusIcon, { type DotsToPlusIconHandle } from "@shared/components/layout/DotsToPlusIcon";
 import NavOverlay from "@shared/components/layout/NavOverlay";
 import { colors } from "@shared/constants/colors";
-import { navLinks } from "@shared/lib/navLinks";
+import { navLinks, pageLinks } from "@shared/lib/navLinks";
 import { BOOK_SECTION_ID, HOME_SECTION_ID, SECTION_LINK_HREF, handleSectionNavClick, navigateToSection } from "@shared/lib/scrollToSection";
 import { CalendarCheck } from "lucide-react";
 import Image from "next/image";
@@ -106,6 +106,13 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <li key={link.sectionId}>
                 <Link href={SECTION_LINK_HREF} onClick={handleSectionNavClick(link.sectionId)} className={linkClass}>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+            {pageLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className={linkClass}>
                   {link.label}
                 </Link>
               </li>
